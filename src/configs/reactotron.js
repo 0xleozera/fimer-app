@@ -18,7 +18,7 @@ console.log = (...args) => {
 Reactotron.clear();
 
 const reactotron = Reactotron.configure({ name: 'fimer' })
-  .useReactNative() // add all built-in react native plugins
+  .useReactNative()
   .use(sagaPlugin({}))
   .use(reactotronRedux())
   .connect();

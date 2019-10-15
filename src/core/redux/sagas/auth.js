@@ -3,7 +3,7 @@ import api from 'api';
 import { Alert } from 'react-native';
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
-import { Creators as AuthActions } from 'ducks/auth';
+import { Creators as AuthActions, Types as AuthTypes } from 'ducks/auth';
 
 import Navigator from 'routes/navigator';
 
@@ -57,6 +57,6 @@ export function setToken({ payload }) {
 
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
-  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
-  takeLatest('@auth/SIGN_OUT', signOut),
+  takeLatest(AuthTypes.SIGN_IN_REQUEST, signIn),
+  takeLatest(AuthTypes.SIGN_OUT, signOut),
 ]);

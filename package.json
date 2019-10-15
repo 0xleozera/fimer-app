@@ -40,8 +40,7 @@
     "react-test-renderer": "16.9.0",
     "reactotron-react-native": "^4.0.2",
     "reactotron-redux": "^3.1.2",
-    "reactotron-redux-saga": "^4.2.2",
-    "redux-devtools-extension": "^2.13.8"
+    "reactotron-redux-saga": "^4.2.2"
   },
   "jest": {
     "preset": "react-native"

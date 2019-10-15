@@ -10,7 +10,7 @@ export const { Creators, Types } = createActions({
 
 const INITIAL_STATE = {
   isLoading: false,
-  user: {},
+  user: null,
   token: '',
 };
 

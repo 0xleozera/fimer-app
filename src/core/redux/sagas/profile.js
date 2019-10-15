@@ -3,7 +3,10 @@ import api from 'api';
 import { Alert } from 'react-native';
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
-import { Creators as ProfileActions, Types as ProfileTypes } from 'ducks/user';
+import {
+  Creators as ProfileActions,
+  Types as ProfileTypes,
+} from 'ducks/profile';
 
 export function* show({ payload }) {
   try {

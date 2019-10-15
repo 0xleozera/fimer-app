@@ -1,18 +1,15 @@
-// import React from 'react';
-
 import {
   createAppContainer,
   createSwitchNavigator,
-  // createBottomTabNavigator,
-  // createStackNavigator,
+  createBottomTabNavigator,
 } from 'react-navigation';
 
-import SignIn from 'screens/SignIn';
-import SignUp from 'screens/SignUp';
+import SignIn from 'screens/sign-in';
+import SignUp from 'screens/sign-up';
 
-// import Home from 'screens/Home';
-// import Play from 'screens/Search';
-// import Profile from 'screens/Profile';
+import Home from 'screens/home';
+import Play from 'screens/play';
+import Profile from 'screens/profile';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -22,24 +19,24 @@ export default (isSigned = false) =>
           SignIn,
           SignUp,
         }),
-        //   App: createBottomTabNavigator(
-        //     {
-        //       Home,
-        //       Play,
-        //       Profile,
-        //     },
-        //     {
-        //       resetOnBlur: true,
-        //       tabBarOptions: {
-        //         keyboardHidesTabBar: true,
-        //         activeTintColor: '#fff',
-        //         inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
-        //         style: {
-        //           backgroundColor: '#8d41a8',
-        //         },
-        //       },
-        //     },
-        //   ),
+        App: createBottomTabNavigator(
+          {
+            Home,
+            Play,
+            Profile,
+          },
+          {
+            resetOnBlur: true,
+            tabBarOptions: {
+              keyboardHidesTabBar: true,
+              activeTintColor: '#fff',
+              inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
+              style: {
+                backgroundColor: '#000',
+              },
+            },
+          },
+        ),
       },
       {
         initialRouteName: isSigned ? 'App' : 'Sign',

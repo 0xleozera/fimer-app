@@ -6,7 +6,6 @@ import createRouter from 'routes';
 
 const App = () => {
   const authenticated = useSelector(state => state.auth.token);
-  console.log(authenticated);
 
   const Routes = createRouter(!!authenticated);
 

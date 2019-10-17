@@ -13,7 +13,8 @@ const DateField = ({ date, onChange, placeholder }) => {
   const minimumDate = new Date(1950, 0, 0);
   const currentDate = new Date();
   const currentDateIsEqualToDate =
-    currentDate.getFullYear() === date.getFullYear();
+    format(date, 'dd/MM/yyyy', { locale: pt }) ===
+    format(currentDate, 'dd/MM/yyyy', { locale: pt });
 
   const dateFormatted = useMemo(
     () => format(date, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
@@ -26,27 +27,31 @@ const DateField = ({ date, onChange, placeholder }) => {
   };
 
   return (
-    <Container>
-      <DateButton onPress={() => setOpened(!opened)}>
-        <Icon name="cake" color="rgba(255, 255, 255, 0.6)" size={20} />
-        <DateText isPlaceholder={false}>{dateFormatted}</DateText>
+    <>
+      <Container>
+        <DateButton onPress={() => setOpened(!opened)}>
+          <Icon name="cake" color="rgba(255, 255, 255, 0.6)" size={20} />
+          <DateText isPlaceholder={currentDateIsEqualToDate}>
+            {currentDateIsEqualToDate ? placeholder : dateFormatted}
+          </DateText>
+        </DateButton>
+      </Container>
 
-        {opened && (
-          <Picker>
-            <DatePicker
-              value={date}
-              onChange={handleDateChange}
-              minimumDate={minimumDate}
-              maximumDate={new Date()}
-              mode="date"
-              display="calendar"
-              is24Hour={true}
-              locale="pt-BR"
-            />
-          </Picker>
-        )}
-      </DateButton>
-    </Container>
+      {opened && (
+        <Picker>
+          <DatePicker
+            value={date}
+            onChange={handleDateChange}
+            minimumDate={minimumDate}
+            maximumDate={new Date()}
+            mode="date"
+            display="calendar"
+            is24Hour={true}
+            locale="pt-BR"
+          />
+        </Picker>
+      )}
+    </>
   );
 };
 

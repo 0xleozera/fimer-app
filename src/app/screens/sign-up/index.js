@@ -99,7 +99,7 @@ const SignUp = ({ navigation }) => {
           />
 
           <DateField
-            placeholder="Data de nascimento"
+            placeholder="Seu aniversário"
             date={birthDate}
             onChange={handleBirthDateChange}
           />

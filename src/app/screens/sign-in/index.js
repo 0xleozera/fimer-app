@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { Image } from 'react-native';
+
 import { useDispatch, useSelector } from 'react-redux';
-
-import logo from 'assets/logo.png';
-
-import { Background } from 'components';
 import { Creators as AuthActions } from 'ducks/auth';
 
+import logo from 'assets/logo.png';
+import { Background } from 'components';
 import {
   Container,
   Form,
@@ -16,7 +15,7 @@ import {
   SignLinkText,
 } from './styles';
 
-export default function SignIn({ navigation }) {
+const SignIn = ({ navigation }) => {
   const dispatch = useDispatch();
   const passwordRef = useRef();
 
@@ -69,4 +68,6 @@ export default function SignIn({ navigation }) {
       </Container>
     </Background>
   );
-}
+};
+
+export default SignIn;

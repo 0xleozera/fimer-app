@@ -1,14 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { Image } from 'react-native';
-import { useDispatch } from 'react-redux';
 
-import logo from 'assets/logo.png';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
-import { Background } from 'components';
+import { useSelector, useDispatch } from 'react-redux';
 import { Creators as SignUpActions } from 'ducks/sign-up';
 
-import { DateField } from 'components';
-
+import logo from 'assets/logo.png';
+import { Background, DateField } from 'components';
 import {
   Container,
   Form,
@@ -21,18 +21,34 @@ import {
 const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
 
+  const nicknameRef = useRef();
+  const genderRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
   const [name, setName] = useState('');
-  const [nickname, setNickName] = useState('');
+  const [nickname, setNickname] = useState('');
   const [gender, setGender] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [birthDate, setBirthDate] = useState(new Date());
 
+  const loadingSignUp = useSelector(state => state.signUp.isLoading);
+  const loadingSignIn = useSelector(state => state.auth.isLoading);
+
   const handleSubmit = () => {
-    dispatch(SignUpActions.signUpRequest(name, email, password));
+    const formattedBirthDate = format(birthDate, 'dd/MM/yyyy', { locale: pt });
+
+    dispatch(
+      SignUpActions.signUpRequest({
+        name,
+        nickname,
+        gender,
+        birthDate: formattedBirthDate,
+        email,
+        password,
+      }),
+    );
   };
 
   const handleBirthDateChange = date => {
@@ -53,7 +69,7 @@ const SignUp = ({ navigation }) => {
             autoCapitalize="none"
             placeholder="Nome completo"
             returnKeyType="next"
-            onSubmitEditing={() => emailRef.current.focus()}
+            onSubmitEditing={() => nicknameRef.current.focus()}
             value={name}
             onChangeText={setName}
           />
@@ -63,10 +79,11 @@ const SignUp = ({ navigation }) => {
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Apelido nos jogos"
+            ref={nicknameRef}
             returnKeyType="next"
-            onSubmitEditing={() => emailRef.current.focus()}
-            value={name}
-            onChangeText={setName}
+            onSubmitEditing={() => genderRef.current.focus()}
+            value={nickname}
+            onChangeText={setNickname}
           />
 
           <FormInput
@@ -74,10 +91,11 @@ const SignUp = ({ navigation }) => {
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Sexo"
+            ref={genderRef}
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
-            value={name}
-            onChangeText={setName}
+            value={gender}
+            onChangeText={setGender}
           />
 
           <DateField
@@ -110,7 +128,11 @@ const SignUp = ({ navigation }) => {
             onChangeText={setPassword}
           />
 
-          <SubmitButton onPress={handleSubmit}>Criar conta</SubmitButton>
+          <SubmitButton
+            loading={loadingSignUp || loadingSignIn}
+            onPress={handleSubmit}>
+            Criar conta
+          </SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignIn')}>

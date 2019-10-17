@@ -4,14 +4,11 @@ export const { Creators, Types } = createActions({
   signUpRequest: ['payload'],
   signUpSuccess: ['data'],
   signUpFailure: ['error'],
-
-  signOut: [],
 });
 
 const INITIAL_STATE = {
   isLoading: false,
   user: null,
-  token: '',
 };
 
 const signUpRequest = (state = INITIAL_STATE) => ({
@@ -21,8 +18,8 @@ const signUpRequest = (state = INITIAL_STATE) => ({
 
 const signUpSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
-  token: action.data.token,
-  user: action.data.user,
+  isLoading: false,
+  user: action.data,
 });
 
 const signUpFailure = (state = INITIAL_STATE, action) => ({

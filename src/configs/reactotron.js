@@ -1,26 +1,28 @@
 import Reactotron from 'reactotron-react-native';
 import { reactotronRedux } from 'reactotron-redux';
-import sagaPlugin from 'reactotron-redux-saga';
+import reactotronSaga from 'reactotron-redux-saga';
 
-const nativeLog = console.log;
+if (__DEV__) {
+  const nativeLog = console.log;
 
-console.log = (...args) => {
-  nativeLog.apply(null, args);
+  console.log = (...args) => {
+    nativeLog.apply(null, args);
 
-  Reactotron.display({
-    name: 'CONSOLE.LOG',
-    important: true,
-    value: args,
-    preview: args.length ? JSON.stringify(args) : args[0],
-  });
-};
+    Reactotron.display({
+      name: 'CONSOLE.LOG',
+      important: true,
+      value: args,
+      preview: args.length ? JSON.stringify(args) : args[0],
+    });
+  };
 
-Reactotron.clear();
+  const tron = Reactotron.configure({ name: 'Fimer' })
+    .useReactNative()
+    .use(reactotronRedux())
+    .use(reactotronSaga())
+    .connect();
 
-const reactotron = Reactotron.configure({ name: 'fimer' })
-  .useReactNative()
-  .use(sagaPlugin({}))
-  .use(reactotronRedux())
-  .connect();
+  tron.clear();
 
-export default reactotron;
+  console.tron = tron;
+}

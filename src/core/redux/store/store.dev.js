@@ -1,20 +1,14 @@
-import ReactotronConfig from 'configs/reactotron';
-import Reactotron from 'reactotron-react-native';
-
-import { applyMiddleware } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
 import reducers from 'ducks';
 import rootSaga from 'sagas';
 
-const composeEnhancers = composeWithDevTools({});
-
 const sagaMiddleware = createSagaMiddleware({
-  sagaMonitor: Reactotron.createSagaMonitor(),
+  sagaMonitor: console.tron.createSagaMonitor(),
 });
 
 const middlewares = [sagaMiddleware];
@@ -26,9 +20,12 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-const store = ReactotronConfig.createStore(
+const store = createStore(
   persistedReducer,
-  composeEnhancers(applyMiddleware(...middlewares)),
+  compose(
+    console.tron.createEnhancer(),
+    applyMiddleware(...middlewares),
+  ),
 );
 
 const persistor = persistStore(store);

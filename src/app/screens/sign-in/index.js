@@ -26,7 +26,7 @@ export default function SignIn({ navigation }) {
   const loading = useSelector(state => state.auth.isLoading);
 
   function handleSubmit() {
-    dispatch(AuthActions.signInRequest(email, password));
+    dispatch(AuthActions.signInRequest({ email, password }));
   }
 
   return (

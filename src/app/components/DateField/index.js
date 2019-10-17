@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { DatePickerIOS } from 'react-native';
+import DatePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -10,32 +10,38 @@ import { Container, DateButton, DateText, Picker } from './styles';
 const DateField = ({ date, onChange, placeholder }) => {
   const [opened, setOpened] = useState(false);
 
+  const minimumDate = new Date(1950, 0, 0);
   const currentDate = new Date();
   const currentDateIsEqualToDate =
-    currentDate.getUTCDate() === date.getUTCDate();
+    currentDate.getFullYear() === date.getFullYear();
 
   const dateFormatted = useMemo(
     () => format(date, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
     [date],
   );
 
+  const handleDateChange = (_, newDate) => {
+    onChange(newDate);
+    setOpened(false);
+  };
+
   return (
     <Container>
       <DateButton onPress={() => setOpened(!opened)}>
-        <Icon name="event" color="rgba(255, 255, 255, 0.6)" size={20} />
-        <DateText isPlaceholder={currentDateIsEqualToDate}>
-          {currentDateIsEqualToDate ? placeholder : dateFormatted}
-        </DateText>
+        <Icon name="cake" color="rgba(255, 255, 255, 0.6)" size={20} />
+        <DateText isPlaceholder={false}>{dateFormatted}</DateText>
 
         {opened && (
           <Picker>
-            <DatePickerIOS
-              date={date}
-              onDateChange={onChange}
-              minimumDate={currentDate}
-              minuteInterval={60}
-              locale="pt"
+            <DatePicker
+              value={date}
+              onChange={handleDateChange}
+              minimumDate={minimumDate}
+              maximumDate={new Date()}
               mode="date"
+              display="calendar"
+              is24Hour={true}
+              locale="pt-BR"
             />
           </Picker>
         )}

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import createRouter from 'routes';
+import Navigator from 'routes/navigator';
 
-const App = () => {
-  const authenticated = useSelector(state => state.auth.token);
+class App extends Component {
+  render() {
+    const { authenticated } = this.props;
+    const Routes = createRouter(!!authenticated);
 
-  const Routes = createRouter(!!authenticated);
+    return <Routes ref={Navigator.setNavigator} />;
+  }
+}
 
-  return <Routes />;
-};
+const mapStateToProps = ({ auth }) => ({
+  authenticated: !!auth.token,
+});
 
-export default App;
+export default connect(mapStateToProps)(App);

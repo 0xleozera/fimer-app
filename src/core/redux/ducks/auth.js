@@ -21,6 +21,7 @@ const signInRequest = (state = INITIAL_STATE) => ({
 
 const signInSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
+  loading: false,
   token: action.data.token,
   user: action.data.user,
 });

@@ -25,12 +25,20 @@ const SignUp = ({ navigation }) => {
   const passwordRef = useRef();
 
   const [name, setName] = useState('');
+  const [nickname, setNickName] = useState('');
+  const [gender, setGender] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [date, setDate] = useState(new Date());
+  const [birthDate, setBirthDate] = useState(new Date());
 
   const handleSubmit = () => {
     dispatch(SignUpActions.signUpRequest(name, email, password));
+  };
+
+  const handleBirthDateChange = date => {
+    const currentDate = date || birthDate;
+
+    setBirthDate(currentDate);
   };
 
   return (
@@ -74,8 +82,8 @@ const SignUp = ({ navigation }) => {
 
           <DateField
             placeholder="Data de nascimento"
-            date={date}
-            onChange={setDate}
+            date={birthDate}
+            onChange={handleBirthDateChange}
           />
 
           <FormInput

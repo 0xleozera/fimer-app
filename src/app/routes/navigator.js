@@ -1,7 +1,10 @@
 import { NavigationActions, StackActions } from 'react-navigation';
-import Container from '.';
 
-const _navigator = Container;
+let _navigator;
+
+const setNavigator = navigatorRef => {
+  _navigator = navigatorRef;
+};
 
 const getState = () => (_navigator ? _navigator.state : {});
 
@@ -27,6 +30,7 @@ const navigateReset = (routeName, params) => {
 };
 
 export default {
+  setNavigator,
   goBack,
   navigate,
   navigateReset,

@@ -5,22 +5,24 @@ export const Container = styled.View`
 `;
 
 export const DateButton = styled.TouchableOpacity`
-  padding: 0 15px;
+  padding: ${({ theme }) => `0 ${theme.padding.regular}px`};
   height: 46px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  background: ${({ theme }) => theme.colors.opacity.black};
+  border-radius: ${({ theme }) => theme.radius.small};
   flex-direction: row;
   align-items: center;
 `;
 
 export const DateText = styled.Text`
-  font-size: 14px;
-  color: ${({ isPlaceholder }) =>
-    isPlaceholder ? 'rgba(255,255,255, 0.8)' : '#fff'};
+  font-size: ${({ theme }) => theme.typography.h5};
+  color: ${({ isPlaceholder, theme }) =>
+    isPlaceholder
+      ? theme.colors.opacity.placeholder
+      : theme.colors.primary.contrast};
   margin-left: 10px;
 `;
 
 export const Picker = styled.View`
-  background: rgba(0, 0, 0, 0.1);
+  background: ${({ theme }) => theme.colors.opacity.black};
   margin-bottom: 10px;
 `;

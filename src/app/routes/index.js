@@ -83,7 +83,7 @@ export default (isSigned = false) =>
         ),
       },
       {
-        initialRouteName: 'App', //isSigned ? 'App' : 'Sign',
+        initialRouteName: 'Sign', //isSigned ? 'App' : 'Sign',
       },
     ),
   );

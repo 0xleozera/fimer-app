@@ -2,11 +2,19 @@ import React, { forwardRef } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 
+import { withTheme } from 'styled-components';
+
 import { Container, Input } from './styles';
 
-const TextField = ({ style, icon, ...rest }, ref) => (
+const TextField = ({ style, icon, theme, ...rest }, ref) => (
   <Container style={style}>
-    {icon && <Icon name={icon} size={20} color="rgba(255, 255, 255, 0.6)" />}
+    {icon && (
+      <Icon
+        name={icon}
+        size={theme.controls.icon.small}
+        color={theme.colors.opacity.white}
+      />
+    )}
     <Input {...rest} ref={ref} />
   </Container>
 );
@@ -21,4 +29,4 @@ TextField.defaultProps = {
   style: {},
 };
 
-export default forwardRef(TextField);
+export default withTheme(forwardRef(TextField));

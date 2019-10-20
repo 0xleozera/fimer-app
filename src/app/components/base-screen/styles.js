@@ -6,5 +6,5 @@ export const Container = styled.View`
 
 export const Safe = styled.SafeAreaView`
   flex: 1;
-  background: #32334d;
+  background: ${({ theme }) => theme.colors.primary.regular};
 `;

@@ -32,6 +32,6 @@ export const SignLink = styled.TouchableOpacity`
 
 export const SignLinkText = styled.Text`
   color: ${({ theme }) => theme.colors.primary.contrast};
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.fonts.bold};
   font-size: ${({ theme }) => theme.typography.h5};
 `;

@@ -1,28 +1,17 @@
-import fontLoader from 'utils/font-loader';
-
 const Theme = {
   colors: {
     primary: {
-      regular: '#00E54C',
+      regular: '#32334d',
+      dark: '#27273e',
       contrast: '#FFFFFF',
     },
     secondary: {
-      light: '#EBEBEB',
-      regular: '#8F8F8F',
-      dark: '#3A3A3A',
-      contrast: '#8F8F8F',
-    },
-    danger: {
-      light: '#FF9E7C',
-      regular: '#FF7849',
-      dark: '#FF5216',
+      regular: '#777799',
       contrast: '#FFFFFF',
     },
     accent: {
-      blue: '#453885',
-      red: '#E50023',
-      green: '#00E54C',
-      grey: '#F3F3F3',
+      light: '#9fa0fc',
+      regular: '#6e6eff',
       contrast: '#FFFFFF',
     },
   },
@@ -35,25 +24,27 @@ const Theme = {
     h6: 14,
   },
   fonts: {
-    light: fontLoader('Light'),
-    regular: fontLoader('Regular'),
-    medium: fontLoader('Medium'),
-    bold: fontLoader('Bold'),
+    light: 'Montserrat-Light',
+    regular: 'Montserrat-Regular',
+    medium: 'Montserrat-Medium',
+    bold: 'Montserrat-Bold',
   },
   radius: {
-    small: 12,
-    regular: 16,
-    large: 18,
+    small: 4,
+    regular: 6,
+    large: 8,
   },
   controls: {
-    height: 50,
-    borderWidth: 2,
-    iconSize: 30,
+    icon: {
+      small: 20,
+      regular: 30,
+    },
   },
   padding: {
-    small: 15,
+    small: 10,
     regular: 15,
     large: 25,
+    wide: 30,
   },
 };
 

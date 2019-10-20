@@ -5,6 +5,10 @@ import { BaseScreen } from 'components';
 
 const Home = () => (
   <BaseScreen>
+    <Text style={{ fontFamily: 'Montserrat-Bold', color: '#fff' }}>Home</Text>
+    <Text style={{ fontFamily: 'Montserrat-Regular', color: '#fff' }}>
+      Home
+    </Text>
     <Text style={{ color: '#fff' }}>Home</Text>
     <View
       style={{

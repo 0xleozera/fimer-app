@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
+
 import DatePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -53,6 +55,18 @@ const DateField = ({ date, onChange, placeholder }) => {
       )}
     </>
   );
+};
+
+DateField.propTypes = {
+  date: PropTypes.instanceOf(Date),
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+};
+
+DateField.defaultProps = {
+  date: new Date(),
+  onChange: () => {},
+  placeholder: '',
 };
 
 export default DateField;

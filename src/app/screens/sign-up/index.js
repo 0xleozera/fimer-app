@@ -7,7 +7,7 @@ import pt from 'date-fns/locale/pt';
 import { useSelector, useDispatch } from 'react-redux';
 import { Creators as SignUpActions } from 'ducks/sign-up';
 
-import logo from 'assets/logo.png';
+import logo from 'assets/images/brand/logo.png';
 import { Background, DateField } from 'components';
 import {
   Container,

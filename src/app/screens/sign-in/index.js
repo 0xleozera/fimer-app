@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as AuthActions } from 'ducks/auth';
 
-import logo from 'assets/logo.png';
+import logo from 'assets/images/brand/logo.png';
 import { Background } from 'components';
 import {
   Container,

@@ -1,26 +1,41 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { View, ScrollView, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { withTheme } from 'styled-components';
+import theme from 'configs/theme';
 
-import { StatusBar } from 'components';
-import { Container, Safe } from './styles';
+import { If } from 'components';
+import { Container } from './styles';
 
-const BaseScreen = ({ theme, children }) => (
+const BaseScreen = ({ children, statusBarBackground, barStyle, hasScroll }) => (
   <Container>
     <StatusBar
-      backgroundColor={theme.colors.primary.regular}
-      barStyle="light-content"
+      translucent
+      backgroundColor={statusBarBackground}
+      barStyle={barStyle}
     />
-    <Safe>
+
+    <If test={hasScroll}>
       <ScrollView>{children}</ScrollView>
-    </Safe>
+    </If>
+
+    <If test={!hasScroll}>
+      <View>{children}</View>
+    </If>
   </Container>
 );
 
 BaseScreen.propTypes = {
   children: PropTypes.node,
+  statusBarBackground: PropTypes.string,
+  barStyle: PropTypes.string,
+  hasScroll: PropTypes.bool,
 };
 
-export default withTheme(BaseScreen);
+BaseScreen.defaultProps = {
+  statusBarBackground: theme.colors.primary.regular,
+  barStyle: 'light-content',
+  hasScroll: true,
+};
+
+export default BaseScreen;

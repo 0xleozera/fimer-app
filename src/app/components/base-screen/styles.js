@@ -1,10 +1,12 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-`;
+import { Platform, StatusBar } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-export const Safe = styled.SafeAreaView`
+export const Container = styled.SafeAreaView`
   flex: 1;
+  padding-top: ${Platform.OS === 'ios'
+    ? getStatusBarHeight(true)
+    : StatusBar.currentHeight};
   background: ${({ theme }) => theme.colors.primary.regular};
 `;

@@ -2,14 +2,18 @@ import React, { useEffect } from 'react';
 import { AppState } from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
-import useTheme from 'hooks/use-theme';
+import { Provider, useSelector } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from 'store';
 
-import { useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+import themeConfig from 'configs/theme';
+import useTheme from 'hooks/use-theme';
 
 import createRouter from 'routes';
 import Navigator from 'routes/navigator';
 
-const App = () => {
+const Router = () => {
   const theme = useTheme();
   const authenticated = useSelector(state => state.auth.token);
   const Routes = createRouter(!!authenticated);
@@ -36,5 +40,15 @@ const App = () => {
 
   return <Routes ref={ref => Navigator.setNavigator(ref)} />;
 };
+
+const App = () => (
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <ThemeProvider theme={themeConfig}>
+        <Router />
+      </ThemeProvider>
+    </PersistGate>
+  </Provider>
+);
 
 export default App;

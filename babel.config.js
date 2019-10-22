@@ -13,6 +13,7 @@ module.exports = {
           configs: './src/configs',
           services: './src/core/services',
           api: './src/core/services/api',
+          hooks: './src/core/hooks',
           ducks: './src/core/redux/ducks',
           sagas: './src/core/redux/sagas',
           store: './src/core/redux/store',

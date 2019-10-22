@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { withTheme } from 'styled-components';
+import useTheme from 'hooks/use-theme';
 
 import DatePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
@@ -11,7 +11,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Container, DateButton, DateText, Picker } from './styles';
 
-const DateField = ({ date, onChange, placeholder, theme }) => {
+const DateField = ({ date, onChange, placeholder }) => {
+  const theme = useTheme();
+
   const [opened, setOpened] = useState(false);
 
   const minimumDate = new Date(1950, 0, 0);
@@ -75,4 +77,4 @@ DateField.defaultProps = {
   placeholder: '',
 };
 
-export default withTheme(DateField);
+export default DateField;

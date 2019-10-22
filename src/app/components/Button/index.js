@@ -2,11 +2,13 @@ import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { withTheme } from 'styled-components';
+import useTheme from 'hooks/use-theme';
 
 import { Container, Text } from './styles';
 
-const Button = ({ children, loading, theme, ...rest }) => {
+const Button = ({ children, loading, ...rest }) => {
+  const theme = useTheme();
+
   return (
     <Container {...rest}>
       {loading ? (
@@ -27,4 +29,4 @@ Button.defaultProps = {
   loading: false,
 };
 
-export default withTheme(Button);
+export default Button;

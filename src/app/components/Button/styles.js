@@ -2,12 +2,17 @@ import styled from 'styled-components';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled(RectButton)`
+  flex-direction: row;
   height: 46px;
-  background: ${({ theme }) => theme.colors.primary.dark};
+  background: ${({ background }) => background};
   border-radius: ${({ theme }) => theme.radius.small};
 
   align-items: center;
   justify-content: center;
+`;
+
+export const WrapperIcon = styled.View`
+  margin-right: 10;
 `;
 
 export const Text = styled.Text`

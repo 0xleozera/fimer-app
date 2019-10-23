@@ -4,7 +4,10 @@ import {
   createAppContainer,
   createSwitchNavigator,
   createBottomTabNavigator,
+  createStackNavigator,
 } from 'react-navigation';
+
+import theme from 'configs/theme';
 
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -60,7 +63,37 @@ export default (isSigned = false) =>
               },
             },
             Profile: {
-              screen: Profile,
+              screen: createStackNavigator({
+                ShowMyProfile: {
+                  screen: Profile,
+                  navigationOptions: {
+                    headerMode: 'none',
+                    headerTransparent: true,
+                  },
+                },
+                EditProfile: {
+                  screen: Chat,
+                  navigationOptions: {
+                    title: 'Editar Perfil',
+                    headerStyle: {
+                      backgroundColor: theme.colors.primary.dark,
+                      borderColor: theme.colors.primary.dark,
+                    },
+                    headerTintColor: theme.colors.primary.contrast,
+                  },
+                },
+                ShowProfile: {
+                  screen: Profile,
+                  navigationOptions: {
+                    title: 'Perfil',
+                    headerStyle: {
+                      backgroundColor: theme.colors.primary.dark,
+                      borderColor: theme.colors.primary.dark,
+                    },
+                    headerTintColor: theme.colors.primary.contrast,
+                  },
+                },
+              }),
               navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (
                   <IconMaterial name="person" size={30} color={tintColor} />

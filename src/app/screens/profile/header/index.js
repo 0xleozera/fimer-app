@@ -63,8 +63,8 @@ const Header = ({ data }) => {
   };
 
   const mappedFields = ([key, value]) => (
-    <If test={value}>
-      <Information key={key}>
+    <If key={key} test={!!value}>
+      <Information>
         <WrapperIcon>{getIcon(key)}</WrapperIcon>
         <Typography font="medium" type="secondary" color="regular">
           {value}

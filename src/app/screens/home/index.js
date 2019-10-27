@@ -1,11 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native';
 
-import { BaseScreen } from 'components';
+import { BaseScreen, Typography } from 'components';
 
 const Home = () => (
   <BaseScreen>
-    <Text>Home</Text>
+    <Typography>Home</Typography>
   </BaseScreen>
 );
 

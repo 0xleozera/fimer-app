@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+
+import { BaseScreen, Typography } from 'components';
 
 const Play = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Play</Text>
-  </View>
+  <BaseScreen>
+    <Typography>Play</Typography>
+  </BaseScreen>
 );
 
 export default Play;

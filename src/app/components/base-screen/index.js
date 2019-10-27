@@ -1,29 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, ScrollView, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
+
+import useNavigation from 'hooks/use-navigation';
 
 import theme from 'configs/theme';
 
 import { If } from 'components';
 import { Container } from './styles';
 
-const BaseScreen = ({ children, statusBarBackground, barStyle, hasScroll }) => (
-  <Container>
-    <StatusBar
-      translucent
-      backgroundColor={statusBarBackground}
-      barStyle={barStyle}
-    />
+const BaseScreen = ({ children, statusBarBackground, barStyle, hasScroll }) => {
+  const navigation = useNavigation();
 
-    <If test={hasScroll}>
-      <ScrollView>{children}</ScrollView>
-    </If>
+  useEffect(() => {
+    const setCurrentStatusBar = navigation.addListener('willFocus', () => {
+      StatusBar.setBackgroundColor(statusBarBackground);
+      StatusBar.setBarStyle(barStyle);
+    });
 
-    <If test={!hasScroll}>
-      <View>{children}</View>
-    </If>
-  </Container>
-);
+    return () => setCurrentStatusBar.remove();
+  }, [barStyle, navigation, statusBarBackground]);
+
+  return (
+    <Container>
+      <StatusBar
+        translucent
+        backgroundColor={statusBarBackground}
+        barStyle={barStyle}
+      />
+
+      <If test={hasScroll}>
+        <ScrollView>{children}</ScrollView>
+      </If>
+
+      <If test={!hasScroll}>
+        <View>{children}</View>
+      </If>
+    </Container>
+  );
+};
 
 BaseScreen.propTypes = {
   children: PropTypes.node,

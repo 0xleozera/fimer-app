@@ -23,8 +23,6 @@ const Header = ({ data }) => {
   const theme = useTheme();
   const navigation = useNavigation();
 
-  console.log(navigation);
-
   const parsedData = Object.entries(data);
 
   const getIcon = icon => {

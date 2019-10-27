@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar, Platform } from 'react-native';
 
 import {
   createAppContainer,
@@ -72,12 +73,16 @@ export default (isSigned = false) =>
                   },
                 },
                 EditProfile: {
-                  screen: Chat,
+                  screen: Profile,
                   navigationOptions: {
                     title: 'Editar Perfil',
                     headerStyle: {
                       backgroundColor: theme.colors.primary.dark,
                       borderColor: theme.colors.primary.dark,
+                      marginTop:
+                        Platform.OS === 'android'
+                          ? StatusBar.currentHeight
+                          : 'auto',
                     },
                     headerTintColor: theme.colors.primary.contrast,
                   },
@@ -89,6 +94,10 @@ export default (isSigned = false) =>
                     headerStyle: {
                       backgroundColor: theme.colors.primary.dark,
                       borderColor: theme.colors.primary.dark,
+                      marginTop:
+                        Platform.OS === 'android'
+                          ? StatusBar.currentHeight
+                          : 'auto',
                     },
                     headerTintColor: theme.colors.primary.contrast,
                   },

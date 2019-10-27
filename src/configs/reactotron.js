@@ -17,6 +17,7 @@ if (__DEV__) {
   };
 
   const tron = Reactotron.configure({ name: 'Fimer' })
+    .configure({ host: '192.168.0.102' })
     .useReactNative()
     .use(reactotronRedux())
     .use(reactotronSaga())

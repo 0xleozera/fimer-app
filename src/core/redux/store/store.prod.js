@@ -14,6 +14,7 @@ const middlewares = [sagaMiddleware];
 const persistConfig = {
   key: 'Fimer',
   storage: AsyncStorage,
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

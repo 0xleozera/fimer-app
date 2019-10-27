@@ -10,7 +10,7 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 0 30px;
+  padding: ${({ theme }) => `0 ${theme.padding.wide}px`};
 `;
 
 export const Form = styled.View`
@@ -31,7 +31,7 @@ export const SignLink = styled.TouchableOpacity`
 `;
 
 export const SignLinkText = styled.Text`
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
+  color: ${({ theme }) => theme.colors.primary.contrast};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${({ theme }) => theme.typography.h5};
 `;

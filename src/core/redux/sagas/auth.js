@@ -20,7 +20,7 @@ export function* signIn({ payload }) {
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
-    yield put(AuthActions.signInSuccess(token, user));
+    yield put(AuthActions.signInSuccess({ token, user }));
     Navigator.navigate('Home');
   } catch (err) {
     Alert.alert(

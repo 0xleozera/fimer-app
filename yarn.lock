@@ -5397,6 +5397,11 @@ react-native-linear-gradient@^2.5.6:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
+react-native-navigation-bar-color@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-navigation-bar-color/-/react-native-navigation-bar-color-1.0.0.tgz#04ff752a58049af93ceea9ccf266b8d3fbc6514a"
+  integrity sha512-djBE0zSp+JT65VeUm4UpIpr9DA9SpE9YTLwDAcqkWfB9JI8l3djSx+SmrIYfc7dUs216Y6qo2dr0qR3+M5qbOQ==
+
 react-native-safe-area-view@^0.14.1:
   version "0.14.8"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.8.tgz#ef33c46ff8164ae77acad48c3039ec9c34873e5b"
@@ -5410,6 +5415,11 @@ react-native-safe-area-view@^0.14.1:
   integrity sha512-tOxHGQUN83MTmQB4ghoQkibqOdGiX4JQEmeyEv96MKWO/x8T2PJv84ECUos9hD3blPRQwVwSpAid1PPPhrVEaw==
   dependencies:
     debounce "^1.2.0"
+
+react-native-status-bar-height@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-status-bar-height/-/react-native-status-bar-height-2.4.0.tgz#de8cee4bb733a196167210d2d0bc1fa10acba3e3"
+  integrity sha512-pWvZFlyIHiuxLugLioq97vXiaGSovFXEyxt76wQtbq0gxv4dGXMPqYow46UmpwOgeJpBhqL1E0EKxnfJRrFz5w==
 
 react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   version "1.4.1"

@@ -12,7 +12,19 @@ export const { Creators, Types } = createActions({
 
 const INITIAL_STATE = {
   isLoading: false,
-  user: null,
+  user: {
+    id: 0,
+    email: '',
+    name: '',
+    nickname: '',
+    birthDate: '',
+    region: '',
+    gender: '',
+    avatar: null,
+    games: [],
+    position: [],
+    rankings: [],
+  },
 };
 
 const getProfileRequest = (state = INITIAL_STATE) => ({

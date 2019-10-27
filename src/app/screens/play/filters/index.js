@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 
 import { Typography, Badge } from 'components';
 import { ContainerFilters, PositionFilterList } from './styles';

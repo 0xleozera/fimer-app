@@ -1,6 +1,7 @@
 import React from 'react';
 
 import useTheme from 'hooks/use-theme';
+import useNavigation from 'hooks/use-navigation';
 
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import IconAwesome from 'react-native-vector-icons/FontAwesome';
@@ -15,10 +16,15 @@ import {
   WrapperIcon,
   WrapperPlayButton,
   PlayButton,
+  ConfigButton,
 } from './styles';
 
 const Header = ({ data }) => {
   const theme = useTheme();
+  const navigation = useNavigation();
+
+  console.log(navigation);
+
   const parsedData = Object.entries(data);
 
   const getIcon = icon => {
@@ -81,8 +87,28 @@ const Header = ({ data }) => {
     return informations;
   };
 
+  const handleRedirectRoute = route => navigation.navigate(route);
+
   return (
     <ContainerUserInformations>
+      <If test={navigation.state.routeName === 'ShowMyProfile'}>
+        <ConfigButton isLeft onPress={() => console.log('Config triggered')}>
+          <IconMaterial
+            name="settings"
+            size={20}
+            color={theme.colors.primary.contrast}
+          />
+        </ConfigButton>
+
+        <ConfigButton onPress={() => handleRedirectRoute('EditProfile')}>
+          <IconMaterial
+            name="edit"
+            size={20}
+            color={theme.colors.primary.contrast}
+          />
+        </ConfigButton>
+      </If>
+
       <AvatarAndNickUser>
         <Avatar
           size={150}
@@ -94,15 +120,18 @@ const Header = ({ data }) => {
       </AvatarAndNickUser>
       <PositionInformationsAndActionButton>
         <WrapperInformations>{renderUserInformations()}</WrapperInformations>
-        <WrapperPlayButton>
-          <PlayButton
-            background={theme.colors.accent.regular}
-            loading={false}
-            onPress={() => {}}
-            hasIcon>
-            Jogar
-          </PlayButton>
-        </WrapperPlayButton>
+
+        <If test={navigation.state.routeName === 'ShowProfile'}>
+          <WrapperPlayButton>
+            <PlayButton
+              background={theme.colors.accent.regular}
+              loading={false}
+              onPress={() => {}}
+              hasIcon>
+              Jogar
+            </PlayButton>
+          </WrapperPlayButton>
+        </If>
       </PositionInformationsAndActionButton>
     </ContainerUserInformations>
   );

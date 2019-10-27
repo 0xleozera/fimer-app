@@ -1,9 +1,12 @@
 import styled from 'styled-components/native';
 
+import { RectButton } from 'react-native-gesture-handler';
+
 import { Button } from 'components';
 
 export const ContainerUserInformations = styled.View`
   flex: 1;
+  position: relative;
   background-color: ${({ theme }) => theme.colors.primary.dark};
   padding-horizontal: 20;
   padding-vertical: 20;
@@ -44,3 +47,18 @@ export const WrapperPlayButton = styled.View`
 `;
 
 export const PlayButton = styled(Button)``;
+
+export const ConfigButton = styled(RectButton)`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 40;
+  height: 40;
+  top: 20;
+  right: ${({ isLeft }) => (!isLeft ? 20 : 'auto')};
+  left: ${({ isLeft }) => (isLeft ? 20 : 'auto')};
+  background-color: ${({ theme }) => theme.colors.accent.regular};
+  border-radius: 20;
+  z-index: 1;
+`;

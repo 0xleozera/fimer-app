@@ -27,6 +27,7 @@ const Theme = {
     h4: 18,
     h5: 16,
     h6: 14,
+    h7: 12,
   },
   fonts: {
     light: 'Montserrat-Light',

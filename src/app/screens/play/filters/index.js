@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 import { Typography, Badge } from 'components';
 import { ContainerFilters, PositionFilterList } from './styles';
 
-const Filters = () => {
+const Filters = ({ openModal }) => {
   return (
     <ContainerFilters>
       <Typography font="bold" size="h4" color="contrast">
@@ -21,7 +21,9 @@ const Filters = () => {
             { name: 'REGIÃO' },
             { name: 'GÊNERO' },
           ]}
-          renderItem={({ item }) => <Badge label={item.name} />}
+          renderItem={({ item }) => (
+            <Badge onPress={() => openModal(true)} label={item.name} />
+          )}
         />
       </PositionFilterList>
     </ContainerFilters>

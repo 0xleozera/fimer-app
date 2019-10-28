@@ -5,6 +5,7 @@ import BaseScreen from './base-screen';
 import Button from './button';
 import DateField from './date-field';
 import If from './if';
+import Modal from './modal';
 import TextField from './text-field';
 import Typography from './typography';
 
@@ -16,6 +17,7 @@ export {
   Button,
   DateField,
   If,
+  Modal,
   TextField,
   Typography,
 };

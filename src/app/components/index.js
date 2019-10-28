@@ -6,6 +6,7 @@ import Button from './button';
 import DateField from './date-field';
 import If from './if';
 import Modal from './modal';
+import SelectItem from './select-item';
 import TextField from './text-field';
 import Typography from './typography';
 
@@ -18,6 +19,7 @@ export {
   DateField,
   If,
   Modal,
+  SelectItem,
   TextField,
   Typography,
 };

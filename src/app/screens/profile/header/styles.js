@@ -11,7 +11,7 @@ export const ContainerUserInformations = styled.View`
   padding-horizontal: 20;
   padding-vertical: 20;
   border-bottom-width: 0.3;
-  border-bottom-color: #000;
+  border-bottom-color: ${({ theme }) => theme.colors.opacity.border};
 `;
 
 export const AvatarAndNickUser = styled.View`

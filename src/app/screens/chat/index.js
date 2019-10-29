@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+
+import { BaseScreen, Typography } from 'components';
 
 const Chat = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Chat</Text>
-  </View>
+  <BaseScreen>
+    <Typography>Chat</Typography>
+  </BaseScreen>
 );
 
 export default Chat;

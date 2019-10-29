@@ -1,10 +1,29 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
 
-const Play = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Play</Text>
-  </View>
-);
+import useTheme from 'hooks/use-theme';
+
+import { BaseScreen } from 'components';
+
+import Filters from './filters';
+import FilterModal from './filter-modal';
+import Players from './players';
+
+const Play = () => {
+  const theme = useTheme();
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <BaseScreen statusBarBackground={theme.colors.primary.dark}>
+      <Filters openModal={value => setIsVisible(value)} />
+      <Players />
+      <FilterModal
+        isVisible={isVisible}
+        onSwipe={() => setIsVisible(false)}
+        onBackdropPress={() => setIsVisible(false)}
+      />
+    </BaseScreen>
+  );
+};
 
 export default Play;

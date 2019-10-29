@@ -14,8 +14,13 @@ const Theme = {
       regular: '#6e6eff',
       contrast: '#FFFFFF',
     },
+    actions: {
+      red: '#DA493A',
+      blue: '#4180FF',
+    },
     opacity: {
       black: 'rgba(0, 0, 0, 0.1)',
+      border: 'rgba(0, 0, 0, 0.3)',
       white: 'rgba(255, 255, 255, 0.6)',
       placeholder: 'rgba(255, 255, 255, 0.8)',
     },
@@ -27,6 +32,7 @@ const Theme = {
     h4: 18,
     h5: 16,
     h6: 14,
+    h7: 12,
   },
   fonts: {
     light: 'Montserrat-Light',

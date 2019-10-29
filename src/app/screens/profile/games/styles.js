@@ -13,7 +13,7 @@ export const CardGame = styled.View`
   height: 100;
   margin-bottom: 10;
   border-width: 0.3;
-  border-color: #000;
+  border-color: ${({ theme }) => theme.colors.opacity.border};
   border-radius: 4;
   background-color: ${({ theme }) => theme.colors.primary.dark};
 `;

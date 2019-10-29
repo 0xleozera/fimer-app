@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Creators as ProfileActions } from 'ducks/profile';
 
 import { BaseScreen } from 'components';
+
 import Header from './header';
 import Games from './games';
 

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 
 import useTheme from 'hooks/use-theme';
 
-import { BaseScreen, Typography } from 'components';
+import { BaseScreen } from 'components';
+
 import Filters from './filters';
 import FilterModal from './filter-modal';
+import Players from './players';
 
 const Play = () => {
   const theme = useTheme();
@@ -14,7 +16,7 @@ const Play = () => {
   return (
     <BaseScreen statusBarBackground={theme.colors.primary.dark}>
       <Filters openModal={value => setIsVisible(value)} />
-      <Typography>Play</Typography>
+      <Players />
       <FilterModal
         isVisible={isVisible}
         onSwipe={() => setIsVisible(false)}

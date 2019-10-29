@@ -6,6 +6,7 @@ import Button from './button';
 import DateField from './date-field';
 import If from './if';
 import Modal from './modal';
+import PlayActionButton from './play-action-button';
 import SelectItem from './select-item';
 import TextField from './text-field';
 import Typography from './typography';
@@ -19,6 +20,7 @@ export {
   DateField,
   If,
   Modal,
+  PlayActionButton,
   SelectItem,
   TextField,
   Typography,

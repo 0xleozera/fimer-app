@@ -25,7 +25,7 @@ const List = () => {
           { name: 'POSIÇÃO' },
           { name: 'RANKING' },
           { name: 'REGIÃO' },
-          { name: 'GÊNERO' },
+          { name: 'GAME' },
         ]}
         renderItem={({ item }) => (
           <Card onPress={() => console.log('Card triggered')}>

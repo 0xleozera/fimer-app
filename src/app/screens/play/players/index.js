@@ -6,11 +6,15 @@ import Carousel from 'react-native-snap-carousel';
 
 import { parsePercentageToPixels } from 'utils/dimensions';
 
-import { Typography, PlayActionButton, Avatar } from 'components';
+import { Typography, PlayActionButton, Avatar, Separator } from 'components';
 import {
   ContainerPlayers,
   CardPlayer,
-  HeaderCardPlayer,
+  HeaderPlayerInformation,
+  HeaderPersonalInformations,
+  HeaderGameInformations,
+  HeaderTitleGameInformations,
+  HeaderDataGameInformations,
   ContainerActionButtons,
   ProfileActionButton,
 } from './styles';
@@ -20,7 +24,7 @@ const Players = () => {
 
   const renderItem = ({ item, index }) => (
     <CardPlayer>
-      <HeaderCardPlayer>
+      <HeaderPlayerInformation>
         <Avatar
           size={150}
           avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
@@ -28,7 +32,41 @@ const Players = () => {
         <Typography font="bold" size="h3" color="contrast">
           brTT
         </Typography>
-      </HeaderCardPlayer>
+      </HeaderPlayerInformation>
+      <HeaderPersonalInformations>
+        <Typography font="medium" size="h7">
+          Felipe Gonçalves
+        </Typography>
+        <Typography font="medium" size="h7">
+          27 anos
+        </Typography>
+      </HeaderPersonalInformations>
+      <Separator />
+      <HeaderGameInformations>
+        <HeaderTitleGameInformations>
+          <Typography font="bold" size="h6" color="contrast">
+            Informações no jogo
+          </Typography>
+        </HeaderTitleGameInformations>
+
+        <HeaderDataGameInformations>
+          <Typography font="bold" size="h6">
+            League of Legends
+          </Typography>
+        </HeaderDataGameInformations>
+
+        <HeaderDataGameInformations>
+          <Typography font="bold" size="h6">
+            AD Carry
+          </Typography>
+        </HeaderDataGameInformations>
+
+        <HeaderDataGameInformations>
+          <Typography font="bold" size="h6">
+            Desafiante
+          </Typography>
+        </HeaderDataGameInformations>
+      </HeaderGameInformations>
     </CardPlayer>
   );
 

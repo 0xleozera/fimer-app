@@ -12,6 +12,8 @@ export const ContainerPlayers = styled.View`
 `;
 
 export const CardPlayer = styled.View`
+  flex: 1;
+  justify-content: center;
   height: ${getViewportDimension('height') - 330};
   padding-horizontal: 10;
   padding-vertical: 10;
@@ -25,8 +27,27 @@ export const CardPlayer = styled.View`
   shadow-radius: 10;
 `;
 
-export const HeaderCardPlayer = styled.View`
+export const HeaderPlayerInformation = styled.View`
   align-items: center;
+  margin-bottom: 10;
+`;
+
+export const HeaderPersonalInformations = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-vertical: 10;
+`;
+
+export const HeaderGameInformations = styled.View`
+  margin-vertical: 10;
+`;
+
+export const HeaderTitleGameInformations = styled.View`
+  margin-vertical: 10;
+`;
+
+export const HeaderDataGameInformations = styled.View`
+  margin-vertical: 3;
 `;
 
 export const ContainerActionButtons = styled.View`

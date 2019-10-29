@@ -18,6 +18,14 @@ export const Card = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.colors.primary.dark};
 `;
 
-export const Nickname = styled.View`
+export const Informations = styled.View`
+  flex: 1;
   margin-left: 10;
+`;
+
+export const LastMessage = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5;
 `;

@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 import { Typography, Avatar } from 'components';
-import { ContainerList, Card, Nickname } from './styles';
+import { ContainerList, Card, Informations, LastMessage } from './styles';
 
 const List = () => {
   return (
@@ -23,11 +23,19 @@ const List = () => {
               size={50}
               avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
             />
-            <Nickname>
+            <Informations>
               <Typography font="bold" color="contrast">
                 brTT
               </Typography>
-            </Nickname>
+              <LastMessage>
+                <Typography size="h7" font="medium" color="regular">
+                  Você: Fala aí cara, beleza?
+                </Typography>
+                <Typography size="h8" font="medium" color="regular">
+                  10h
+                </Typography>
+              </LastMessage>
+            </Informations>
           </Card>
         )}
       />

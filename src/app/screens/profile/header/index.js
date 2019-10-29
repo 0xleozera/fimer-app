@@ -110,10 +110,10 @@ const Header = ({ data }) => {
       <AvatarAndNickUser>
         <Avatar
           size={150}
-          avatar="https://scontent.fccm7-1.fna.fbcdn.net/v/t1.0-1/p160x160/25353925_1651673918223614_4154371523069863251_n.jpg?_nc_cat=104&_nc_oc=AQlptuWqU9BzpzTjg7NxLD0LlEl0GvEuV1wOoPlS7unUbJLw7-C-9PKpuNZr2VlQyEI&_nc_ht=scontent.fccm7-1.fna&oh=128d539f2226b3fb44c4df5775ca7f20&oe=5E2C85E9"
+          avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
         />
         <Typography font="bold" size="h3" color="contrast">
-          Darfus
+          brTT
         </Typography>
       </AvatarAndNickUser>
       <PositionInformationsAndActionButton>

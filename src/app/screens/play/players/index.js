@@ -6,10 +6,11 @@ import Carousel from 'react-native-snap-carousel';
 
 import { parsePercentageToPixels } from 'utils/dimensions';
 
-import { Typography, PlayActionButton } from 'components';
+import { Typography, PlayActionButton, Avatar } from 'components';
 import {
   ContainerPlayers,
   CardPlayer,
+  HeaderCardPlayer,
   ContainerActionButtons,
   ProfileActionButton,
 } from './styles';
@@ -19,13 +20,15 @@ const Players = () => {
 
   const renderItem = ({ item, index }) => (
     <CardPlayer>
-      <Typography color="contrast">{item.title}</Typography>
-      <Typography color="contrast">{item.title}</Typography>
-      <Typography color="contrast">{item.title}</Typography>
-      <Typography color="contrast">{item.title}</Typography>
-      <Typography color="contrast">{item.title}</Typography>
-      <Typography color="contrast">{item.title}</Typography>
-      <Typography color="contrast">{item.title}</Typography>
+      <HeaderCardPlayer>
+        <Avatar
+          size={150}
+          avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
+        />
+        <Typography font="bold" size="h3" color="contrast">
+          brTT
+        </Typography>
+      </HeaderCardPlayer>
     </CardPlayer>
   );
 
@@ -42,6 +45,7 @@ const Players = () => {
         renderItem={renderItem}
         sliderWidth={parsePercentageToPixels(95)}
         itemWidth={parsePercentageToPixels(90)}
+        layoutCardOffset={15}
         containerCustomStyle={{
           marginTop: parsePercentageToPixels(3),
           overflow: 'visible',

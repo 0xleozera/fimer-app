@@ -4,7 +4,7 @@ export const Container = styled.View`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   position: relative;
-  margin-bottom: 10;
+  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : 10)};
 `;
 
 export const ContainerAvatar = styled.View`
@@ -27,8 +27,8 @@ export const ContainerAvatar = styled.View`
 `;
 
 export const UserImage = styled.Image`
-  width: 147;
-  height: 147;
+  width: ${({ size }) => size - 2};
+  height: ${({ size }) => size - 2};
   border-radius: 100;
 `;
 

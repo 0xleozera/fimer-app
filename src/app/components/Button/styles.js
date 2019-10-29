@@ -18,5 +18,6 @@ export const WrapperIcon = styled.View`
 export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.primary.contrast};
   font-family: ${({ theme }) => theme.fonts.bold};
-  font-size: ${({ theme }) => theme.typography.h5};
+  font-size: ${({ theme, mini }) =>
+    mini ? theme.typography.h7 : theme.typography.h5};
 `;

@@ -113,7 +113,7 @@ const Header = ({ data }) => {
           avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
         />
         <Typography font="bold" size="h3" color="contrast">
-          brTT
+          {data.nickname}
         </Typography>
       </AvatarAndNickUser>
       <PositionInformationsAndActionButton>

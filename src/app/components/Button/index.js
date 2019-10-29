@@ -16,6 +16,7 @@ const Button = ({
   background,
   hasIcon,
   iconName,
+  mini,
   ...rest
 }) => {
   const theme = useTheme();
@@ -31,13 +32,13 @@ const Button = ({
           <WrapperIcon style={{ transform: [{ rotate: '-25deg' }] }}>
             <Icon
               name={iconName}
-              size={20}
+              size={mini ? 14 : 20}
               color={theme.colors.primary.contrast}
             />
           </WrapperIcon>
         </If>
 
-        <Text>{children}</Text>
+        <Text mini={mini}>{children}</Text>
       </If>
     </Container>
   );
@@ -47,6 +48,7 @@ Button.propTypes = {
   children: PropTypes.string.isRequired,
   loading: PropTypes.bool,
   background: PropTypes.string,
+  mini: PropTypes.bool,
   hasIcon: PropTypes.bool,
   iconName: PropTypes.string,
 };
@@ -54,6 +56,7 @@ Button.propTypes = {
 Button.defaultProps = {
   loading: false,
   background: themeConfig.colors.primary.dark,
+  mini: false,
   hasIcon: false,
   iconName: 'logo-game-controller-b',
 };

@@ -1,11 +1,35 @@
 import React from 'react';
 
-import { BaseScreen, Typography } from 'components';
+import useTheme from 'hooks/use-theme';
 
-const Home = () => (
-  <BaseScreen>
-    <Typography>Home</Typography>
-  </BaseScreen>
-);
+import { BaseScreen, Typography } from 'components';
+import { HeaderHome, ContainerGreet, Greet } from './styles';
+
+import List from './list';
+
+const Home = () => {
+  const theme = useTheme();
+
+  return (
+    <BaseScreen statusBarBackground={theme.colors.primary.dark}>
+      <HeaderHome>
+        <Typography size="h3" font="bold" color="contrast">
+          FIMER
+        </Typography>
+      </HeaderHome>
+      <ContainerGreet>
+        <Greet>
+          <Typography size="h4" font="bold" color="contrast">
+            Fala tu, Darfus!
+          </Typography>
+        </Greet>
+        <Typography size="h6" font="medium" color="contrast">
+          Encontramos alguns jogadores para jogar com você
+        </Typography>
+      </ContainerGreet>
+      <List />
+    </BaseScreen>
+  );
+};
 
 export default Home;

@@ -9,15 +9,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { If } from 'components';
 import { Container, ContainerAvatar, UserImage, ContainerIcon } from './styles';
 
-const Avatar = ({ onPress, avatar, uploader, size, sizeIcon }) => {
+const Avatar = ({ onPress, avatar, uploader, size, sizeIcon, noMargin }) => {
   const theme = useTheme();
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <Container size={size}>
+      <Container noMargin={noMargin} size={size}>
         <ContainerAvatar size={size}>
           <If test={!!avatar}>
-            <UserImage source={{ uri: avatar }} />
+            <UserImage source={{ uri: avatar }} size={size} />
           </If>
 
           <If test={!avatar}>
@@ -48,6 +48,7 @@ Avatar.propTypes = {
   uploader: PropTypes.bool,
   size: PropTypes.number,
   sizeIcon: PropTypes.number,
+  noMargin: PropTypes.bool,
 };
 
 Avatar.defaultProps = {
@@ -56,6 +57,7 @@ Avatar.defaultProps = {
   uploader: false,
   size: 50,
   sizeIcon: 20,
+  noMargin: false,
 };
 
 export default Avatar;

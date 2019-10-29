@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import { Button } from 'components';
 
 export const ContainerList = styled.View`
+  padding-top: 20;
+  padding-bottom: 10;
   padding-horizontal: 10;
 `;
 
@@ -24,16 +26,21 @@ export const Informations = styled.View`
   margin-left: 10;
 `;
 
-export const Nickname = styled.View`
+export const ContainerNickname = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 
+export const Nickname = styled.View`
+  margin-top: 15px;
+`;
+
 export const PlayButton = styled(Button)`
   width: 80;
   height: 30;
+  margin-top: 15px;
 `;
 
 export const Details = styled.View`

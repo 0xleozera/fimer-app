@@ -30,7 +30,7 @@ const Button = ({
         <If test={hasIcon}>
           <WrapperIcon style={{ transform: [{ rotate: '-25deg' }] }}>
             <Icon
-              name="logo-game-controller-b"
+              name={iconName}
               size={20}
               color={theme.colors.primary.contrast}
             />

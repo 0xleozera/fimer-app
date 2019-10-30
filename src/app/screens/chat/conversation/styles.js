@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 
 import { RectButton } from 'react-native-gesture-handler';
 
+import { getViewportDimension } from 'utils/dimensions';
+
 export const PlayerInformationsHeader = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
@@ -9,6 +11,11 @@ export const PlayerInformationsHeader = styled.TouchableOpacity`
 
 export const NickName = styled.View`
   margin-left: 15;
+`;
+
+export const Content = styled.View`
+  height: ${getViewportDimension('height') - 165};
+  padding-horizontal: 15;
 `;
 
 export const ContainerSender = styled.View`

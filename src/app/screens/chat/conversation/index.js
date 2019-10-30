@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FlatList, View } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -7,6 +8,7 @@ import useTheme from 'hooks/use-theme';
 import { BaseScreen, Avatar, Header, ChatField, Typography } from 'components';
 import {
   PlayerInformationsHeader,
+  Content,
   NickName,
   ContainerSender,
   Sender,
@@ -36,6 +38,62 @@ const Conversation = ({ navigation }) => {
           </NickName>
         </PlayerInformationsHeader>
       </Header>
+
+      <Content>
+        <FlatList
+          keyExtractor={item => item.name}
+          data={[
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+            { name: 'JOGOS' },
+            { name: 'POSIÇÃO' },
+            { name: 'RANKING' },
+            { name: 'REGIÃO' },
+            { name: 'GAME' },
+          ]}
+          renderItem={({ item }) => (
+            <View style={{ marginBottom: 5 }}>
+              <Typography size="h4" font="bold" color="contrast">
+                brTT
+              </Typography>
+            </View>
+          )}
+        />
+      </Content>
+
       <ContainerSender>
         <Sender>
           <ChatField

@@ -10,3 +10,7 @@ export const Container = styled.SafeAreaView`
     : StatusBar.currentHeight};
   background: ${({ theme }) => theme.colors.primary.regular};
 `;
+
+export const ContainerWithoutScrollView = styled.View`
+  flex: 1;
+`;

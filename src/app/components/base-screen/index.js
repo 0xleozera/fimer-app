@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, ScrollView, StatusBar } from 'react-native';
+import { ScrollView, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 
 import useNavigation from 'hooks/use-navigation';
@@ -7,7 +7,7 @@ import useNavigation from 'hooks/use-navigation';
 import theme from 'configs/theme';
 
 import { If } from 'components';
-import { Container } from './styles';
+import { Container, ContainerWithoutScrollView } from './styles';
 
 const BaseScreen = ({ children, statusBarBackground, barStyle, hasScroll }) => {
   const navigation = useNavigation();
@@ -34,7 +34,7 @@ const BaseScreen = ({ children, statusBarBackground, barStyle, hasScroll }) => {
       </If>
 
       <If test={!hasScroll}>
-        <View>{children}</View>
+        <ContainerWithoutScrollView>{children}</ContainerWithoutScrollView>
       </If>
     </Container>
   );

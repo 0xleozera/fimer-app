@@ -1,10 +1,14 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
+import useNavigation from 'hooks/use-navigation';
+
 import { Typography, Avatar } from 'components';
 import { ContainerList, Card, Informations, LastMessage } from './styles';
 
 const List = () => {
+  const navigation = useNavigation();
+
   return (
     <ContainerList>
       <FlatList
@@ -17,7 +21,7 @@ const List = () => {
           { name: 'GAME' },
         ]}
         renderItem={({ item }) => (
-          <Card onPress={() => console.log('Card triggered')}>
+          <Card onPress={() => navigation.navigate('Conversation')}>
             <Avatar
               noMargin
               size={50}

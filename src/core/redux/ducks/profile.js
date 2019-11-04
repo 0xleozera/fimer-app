@@ -12,6 +12,7 @@ export const { Creators, Types } = createActions({
 
 const INITIAL_STATE = {
   isLoading: false,
+  status: 'unplayable',
   user: {
     id: 0,
     email: '',
@@ -35,7 +36,8 @@ const getProfileRequest = (state = INITIAL_STATE) => ({
 const getProfileSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isLoading: false,
-  user: action.data,
+  status: action.data.status,
+  user: action.data.user,
 });
 
 const getProfileFailure = (state = INITIAL_STATE, action) => ({

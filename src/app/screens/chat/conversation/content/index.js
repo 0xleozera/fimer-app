@@ -1,14 +1,10 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
-
-import useTheme from 'hooks/use-theme';
+import { FlatList } from 'react-native';
 
 import { Avatar, Typography } from 'components';
-import { Content } from './styles';
+import { Content, ContainerMessage, Spacing, Balloon } from './styles';
 
 const ContentConversation = () => {
-  const theme = useTheme();
-
   return (
     <Content>
       <FlatList
@@ -23,18 +19,8 @@ const ContentConversation = () => {
           },
         ]}
         renderItem={({ item }) => (
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              marginVertical: 5,
-              flexDirection: item.me ? 'row-reverse' : 'row',
-            }}>
-            <View
-              style={{
-                marginRight: item.me ? 0 : 5,
-                marginLeft: item.me ? 5 : 0,
-              }}>
+          <ContainerMessage me={item.me}>
+            <Spacing me={item.me}>
               <Avatar
                 noMargin
                 size={45}
@@ -44,22 +30,13 @@ const ContentConversation = () => {
                     : 'https://static.invenglobal.com/upload/image/2019/04/01/i1554138410409502.jpeg'
                 }
               />
-            </View>
-            <View
-              style={{
-                maxWidth: 250,
-                paddingHorizontal: 5,
-                paddingVertical: 5,
-                borderRadius: 4,
-                backgroundColor: item.me
-                  ? theme.colors.accent.regular
-                  : theme.colors.secondary.regular,
-              }}>
+            </Spacing>
+            <Balloon me={item.me}>
               <Typography size="h7" font="regular" color="contrast">
                 {item.text}
               </Typography>
-            </View>
-          </View>
+            </Balloon>
+          </ContainerMessage>
         )}
       />
     </Content>

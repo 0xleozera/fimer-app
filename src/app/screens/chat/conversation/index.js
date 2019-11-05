@@ -11,18 +11,18 @@ import Sender from './sender';
 const Conversation = ({ navigation }) => {
   const theme = useTheme();
 
-  const matchId = navigation.getParam('matchId', 0);
-  const userReceiveId = navigation.getParam('userReceiveId', '');
-  const avatar = navigation.getParam('avatar', '');
-  const nickname = navigation.getParam('nickname', '');
+  const matchId = navigation.getParam('matchId');
+  const userReceiveId = navigation.getParam('userReceiveId');
+  const avatar = navigation.getParam('avatar');
+  const nickname = navigation.getParam('nickname');
 
   return (
     <BaseScreen
       statusBarBackground={theme.colors.primary.dark}
       hasScroll={false}>
       <Header avatar={avatar} nickname={nickname} />
-      <Content matchId={matchId} userReceiveId={userReceiveId} />
-      <Sender matchId={matchId} />
+      <Content matchId={matchId} />
+      <Sender matchId={matchId} userReceiveId={userReceiveId} />
     </BaseScreen>
   );
 };

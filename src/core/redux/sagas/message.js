@@ -23,8 +23,8 @@ export function* getMessages(action) {
 
 export function* storeMessage(action) {
   try {
-    const { data } = yield call(api.post, 'messages', action.payload);
-    yield put(MessageActions.storeMessageSuccess(data));
+    yield call(api.post, 'messages', action.payload);
+    yield put(MessageActions.storeMessageSuccess());
   } catch (err) {
     Alert.alert(
       'Falha ao carregar os matches',

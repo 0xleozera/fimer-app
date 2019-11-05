@@ -12,6 +12,7 @@ const Conversation = ({ navigation }) => {
   const theme = useTheme();
 
   const matchId = navigation.getParam('matchId', 0);
+  const userReceiveId = navigation.getParam('userReceiveId', '');
   const avatar = navigation.getParam('avatar', '');
   const nickname = navigation.getParam('nickname', '');
 
@@ -21,7 +22,7 @@ const Conversation = ({ navigation }) => {
       hasScroll={false}>
       <Header avatar={avatar} nickname={nickname} />
       <Content matchId={matchId} />
-      <Sender />
+      <Sender matchId={matchId} userReceiveId={userReceiveId} />
     </BaseScreen>
   );
 };

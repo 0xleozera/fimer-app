@@ -1,15 +1,31 @@
 import React, { useState } from 'react';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import useTheme from 'hooks/use-theme';
+
+import { useDispatch } from 'react-redux';
+import { Creators as MessageActions } from 'ducks/message';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { ChatField } from 'components';
 import { ContainerSender, Sender, SenderButton } from './styles';
 
-const SenderConversation = () => {
+const SenderConversation = ({ matchId, userReceiveId }) => {
   const theme = useTheme();
+  const dispatch = useDispatch();
+
   const [message, setMessage] = useState('');
+
+  const handleSendMessage = () => {
+    const payload = {
+      body: message,
+      userReceiveId: userReceiveId,
+      matchId: matchId,
+    };
+
+    dispatch(MessageActions.storeMessageRequest(payload));
+    setMessage('');
+  };
 
   return (
     <ContainerSender>
@@ -19,11 +35,11 @@ const SenderConversation = () => {
           keyboardType="default"
           autoCorrect
           returnKeyType="send"
-          onSubmitEditing={() => console.log('Send triggered')}
+          onSubmitEditing={() => handleSendMessage()}
           value={message}
           onChangeText={setMessage}
         />
-        <SenderButton onPress={() => console.log('Send triggered')}>
+        <SenderButton onPress={() => handleSendMessage()}>
           <Icon name="send" size={20} color={theme.colors.primary.contrast} />
         </SenderButton>
       </Sender>

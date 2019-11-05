@@ -48,6 +48,12 @@ const List = () => {
     return message.length >= 20 ? `${message.substring(0, 20)}...` : message;
   };
 
+  const defineRouteParams = match => ({
+    matchId: match.id,
+    nickname: getCurrentMatcherName(match),
+    avatar: getCurrentMatcherAvatar(match),
+  });
+
   return (
     <ContainerList>
       <FlatList
@@ -56,7 +62,7 @@ const List = () => {
         renderItem={({ item }) => (
           <Card
             onPress={() =>
-              navigation.navigate('Conversation', { matchId: item.id })
+              navigation.navigate('Conversation', defineRouteParams(item))
             }>
             <Avatar noMargin size={50} avatar={getCurrentMatcherAvatar(item)} />
             <Informations>

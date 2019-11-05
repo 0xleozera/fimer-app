@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 import { Avatar, Typography } from 'components';
 import { Content, ContainerMessage, Spacing, Balloon } from './styles';
 
-const ContentConversation = () => {
+const ContentConversation = ({ matchId }) => {
   return (
     <Content>
       <FlatList
@@ -19,7 +19,7 @@ const ContentConversation = () => {
           },
         ]}
         renderItem={({ item }) => (
-          <ContainerMessage me={item.me}>
+          <ContainerMessage key={item.text} me={item.me}>
             <Spacing me={item.me}>
               <Avatar
                 noMargin

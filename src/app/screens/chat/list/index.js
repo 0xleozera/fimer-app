@@ -54,7 +54,10 @@ const List = () => {
         keyExtractor={item => item.id}
         data={matches}
         renderItem={({ item }) => (
-          <Card onPress={() => navigation.navigate('Conversation')}>
+          <Card
+            onPress={() =>
+              navigation.navigate('Conversation', { matchId: item.id })
+            }>
             <Avatar noMargin size={50} avatar={getCurrentMatcherAvatar(item)} />
             <Informations>
               <Typography font="bold" color="contrast">

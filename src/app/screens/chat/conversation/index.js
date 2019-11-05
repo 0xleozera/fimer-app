@@ -21,8 +21,8 @@ const Conversation = ({ navigation }) => {
       statusBarBackground={theme.colors.primary.dark}
       hasScroll={false}>
       <Header avatar={avatar} nickname={nickname} />
-      <Content matchId={matchId} />
-      <Sender matchId={matchId} userReceiveId={userReceiveId} />
+      <Content matchId={matchId} userReceiveId={userReceiveId} />
+      <Sender matchId={matchId} />
     </BaseScreen>
   );
 };

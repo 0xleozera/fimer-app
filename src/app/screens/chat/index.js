@@ -11,7 +11,9 @@ const Chat = () => {
   const theme = useTheme();
 
   return (
-    <BaseScreen statusBarBackground={theme.colors.primary.dark}>
+    <BaseScreen
+      hasScroll={false}
+      statusBarBackground={theme.colors.primary.dark}>
       <HeaderChat>
         <Typography size="h4" font="bold" color="contrast">
           Conversas

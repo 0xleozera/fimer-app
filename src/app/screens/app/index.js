@@ -13,6 +13,8 @@ import useTheme from 'hooks/use-theme';
 import createRouter from 'routes';
 import Navigator from 'routes/navigator';
 
+import { SocketProvider } from 'contexts/socket';
+
 const Router = () => {
   const theme = useTheme();
   const authenticated = useSelector(state => state.auth.token);
@@ -44,9 +46,11 @@ const Router = () => {
 const App = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <ThemeProvider theme={themeConfig}>
-        <Router />
-      </ThemeProvider>
+      <SocketProvider>
+        <ThemeProvider theme={themeConfig}>
+          <Router />
+        </ThemeProvider>
+      </SocketProvider>
     </PersistGate>
   </Provider>
 );

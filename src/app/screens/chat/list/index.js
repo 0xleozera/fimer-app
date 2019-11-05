@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { FlatList } from 'react-native';
 
+import formatRelative from 'date-fns/formatRelative';
+import parseISO from 'date-fns/parseISO';
+import pt from 'date-fns/locale/pt';
+
 import useNavigation from 'hooks/use-navigation';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Creators as MatchActions } from 'ducks/match';
 
 import { Typography, Avatar } from 'components';
 import { ContainerList, Card, Informations, LastMessage } from './styles';
@@ -9,36 +16,69 @@ import { ContainerList, Card, Informations, LastMessage } from './styles';
 const List = () => {
   const navigation = useNavigation();
 
+  const dispatch = useDispatch();
+  const userId = useSelector(state => state.auth.user.id);
+  const matches = useSelector(state => state.match.matches);
+
+  const getMyMatches = useCallback(() => {
+    dispatch(MatchActions.getMatchesRequest());
+  }, [dispatch]);
+
+  useEffect(() => {
+    getMyMatches();
+  }, [getMyMatches]);
+
+  const getCurrentMatcherName = match => {
+    return match.matcher.id !== userId
+      ? match.matcher.nickname
+      : match.matchee.nickname;
+  };
+
+  const getCurrentMatcherAvatar = match => {
+    return match.matcher.id !== userId
+      ? match.matcher.avatar.url
+      : match.matchee.avatar.url;
+  };
+
+  const getCurrentMatcherMessageName = sender => {
+    return sender.id !== userId ? sender.nickname : 'Você';
+  };
+
+  const getMessageBody = message => {
+    return message.length >= 20 ? `${message.substring(0, 20)}...` : message;
+  };
+
   return (
     <ContainerList>
       <FlatList
-        keyExtractor={item => item.name}
-        data={[
-          { name: 'JOGOS' },
-          { name: 'POSIÇÃO' },
-          { name: 'RANKING' },
-          { name: 'REGIÃO' },
-          { name: 'GAME' },
-        ]}
+        keyExtractor={item => item.id}
+        data={matches}
         renderItem={({ item }) => (
           <Card onPress={() => navigation.navigate('Conversation')}>
-            <Avatar
-              noMargin
-              size={50}
-              avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
-            />
+            <Avatar noMargin size={50} avatar={getCurrentMatcherAvatar(item)} />
             <Informations>
               <Typography font="bold" color="contrast">
-                brTT
+                {getCurrentMatcherName(item)}
               </Typography>
-              <LastMessage>
-                <Typography size="h7" font="medium" color="regular">
-                  Você: Fala aí cara, beleza?
-                </Typography>
-                <Typography size="h8" font="medium" color="regular">
-                  10h
-                </Typography>
-              </LastMessage>
+
+              {item.messages.length > 0 && (
+                <LastMessage>
+                  <Typography size="h7" font="medium" color="regular">
+                    {`${getCurrentMatcherMessageName(
+                      item.messages.slice(-1)[0].send,
+                    )}: ${getMessageBody(item.messages.slice(-1)[0].body)}`}
+                  </Typography>
+                  <Typography size="h8" font="medium" color="regular">
+                    {formatRelative(
+                      parseISO(item.messages.slice(-1)[0].createdAt),
+                      new Date(),
+                      {
+                        locale: pt,
+                      },
+                    )}
+                  </Typography>
+                </LastMessage>
+              )}
             </Informations>
           </Card>
         )}

@@ -8,7 +8,6 @@ import { Creators as MatchActions, Types as MatchTypes } from 'ducks/match';
 export function* getMatches() {
   try {
     const { data } = yield call(api.get, 'matches');
-
     yield put(MatchActions.getMatchesSuccess(data));
   } catch (err) {
     Alert.alert(

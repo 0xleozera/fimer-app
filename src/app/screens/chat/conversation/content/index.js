@@ -26,7 +26,7 @@ const ContentConversation = ({ matchId }) => {
   return (
     <Content>
       <FlatList
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         data={messages}
         renderItem={({ item }) => (
           <ContainerMessage key={item.id} me={itsMe(item.send)}>

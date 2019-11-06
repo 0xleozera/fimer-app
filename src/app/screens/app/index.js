@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import { AppState } from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
-import { Provider, useSelector } from 'react-redux';
+import useSocket from 'hooks/use-socket';
+import { Creators as MessageActions } from 'ducks/message';
+
+import { Provider, useSelector, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from 'store';
 
@@ -19,6 +22,8 @@ const Router = () => {
   const theme = useTheme();
   const authenticated = useSelector(state => state.auth.token);
   const Routes = createRouter(!!authenticated);
+  const socket = useSocket();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     function setAndroidNavigationBar() {
@@ -38,7 +43,14 @@ const Router = () => {
     return () => {
       AppState.removeEventListener('change', handleAppStateChange);
     };
-  }, [theme.colors.primary.dark]);
+  }, [socket.ws, theme.colors.primary.dark]);
+
+  useEffect(() => {
+    const chat = socket.ws.subscribe('messages:1');
+    chat.on('message', message =>
+      dispatch(MessageActions.setNewMessage(message)),
+    );
+  }, [dispatch, socket.ws]);
 
   return <Routes ref={ref => Navigator.setNavigator(ref)} />;
 };

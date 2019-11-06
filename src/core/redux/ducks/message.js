@@ -8,6 +8,8 @@ export const { Creators, Types } = createActions({
   storeMessageRequest: ['payload'],
   storeMessageSuccess: ['data'],
   storeMessageFailure: [],
+
+  setNewMessage: ['data'],
 });
 
 const INITIAL_STATE = {
@@ -17,6 +19,7 @@ const INITIAL_STATE = {
 
 const getMessagesRequest = (state = INITIAL_STATE) => ({
   ...state,
+  messages: [],
   isLoading: true,
 });
 
@@ -46,6 +49,11 @@ const storeMessageFailure = () => ({
   isLoading: false,
 });
 
+const setNewMessage = (state = INITIAL_STATE, action) => ({
+  ...state,
+  messages: [...state.messages, action.data],
+});
+
 export default createReducer(INITIAL_STATE, {
   [Types.GET_MESSAGES_REQUEST]: getMessagesRequest,
   [Types.GET_MESSAGES_SUCCESS]: getMessagesSuccess,
@@ -54,4 +62,6 @@ export default createReducer(INITIAL_STATE, {
   [Types.STORE_MESSAGE_REQUEST]: storeMessageRequest,
   [Types.STORE_MESSAGE_SUCCESS]: storeMessageSuccess,
   [Types.STORE_MESSAGE_FAILURE]: storeMessageFailure,
+
+  [Types.SET_NEW_MESSAGE]: setNewMessage,
 });

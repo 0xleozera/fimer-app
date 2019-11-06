@@ -8,7 +8,6 @@ export const Content = styled.View`
 `;
 
 export const ContainerMessage = styled.View`
-  flex: 1;
   flex-direction: ${({ me }) => (me ? 'row-reverse' : 'row')};
   align-items: center;
   margin-vertical: 5;

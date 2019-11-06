@@ -7,7 +7,6 @@ export const ContainerList = styled.View`
 `;
 
 export const Card = styled.TouchableOpacity`
-  flex: 1;
   flex-direction: row;
   align-items: center;
   padding-vertical: 10;

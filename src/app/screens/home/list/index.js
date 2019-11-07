@@ -8,6 +8,7 @@ import {
   ContainerList,
   Card,
   Informations,
+  ContainerNickname,
   Nickname,
   PlayButton,
   Details,
@@ -35,10 +36,12 @@ const List = () => {
               avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
             />
             <Informations>
-              <Nickname>
-                <Typography font="bold" color="contrast">
-                  brTT
-                </Typography>
+              <ContainerNickname>
+                <Nickname>
+                  <Typography font="bold" color="contrast">
+                    brTT
+                  </Typography>
+                </Nickname>
                 <TouchableWithoutFeedback>
                   <PlayButton
                     background={theme.colors.accent.regular}
@@ -48,7 +51,7 @@ const List = () => {
                     Jogar
                   </PlayButton>
                 </TouchableWithoutFeedback>
-              </Nickname>
+              </ContainerNickname>
               <Details>
                 <Typography size="h7" font="medium">
                   League of Legends

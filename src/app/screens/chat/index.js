@@ -1,11 +1,27 @@
 import React from 'react';
 
-import { BaseScreen, Typography } from 'components';
+import useTheme from 'hooks/use-theme';
 
-const Chat = () => (
-  <BaseScreen>
-    <Typography>Chat</Typography>
-  </BaseScreen>
-);
+import { BaseScreen, Typography } from 'components';
+import { HeaderChat } from './styles';
+
+import List from './list';
+
+const Chat = () => {
+  const theme = useTheme();
+
+  return (
+    <BaseScreen
+      hasScroll={false}
+      statusBarBackground={theme.colors.primary.dark}>
+      <HeaderChat>
+        <Typography size="h4" font="bold" color="contrast">
+          Conversas
+        </Typography>
+      </HeaderChat>
+      <List />
+    </BaseScreen>
+  );
+};
 
 export default Chat;

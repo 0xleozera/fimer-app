@@ -10,7 +10,9 @@ export const { Creators, Types } = createActions({
 
 const INITIAL_STATE = {
   isLoading: false,
-  user: null,
+  user: {
+    id: 0,
+  },
   token: '',
 };
 
@@ -26,12 +28,12 @@ const signInSuccess = (state = INITIAL_STATE, action) => ({
   user: action.data.user,
 });
 
-const signInFailure = (state = INITIAL_STATE, action) => ({
-  ...INITIAL_STATE,
-  error: action.error,
+const signInFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: false,
 });
 
-const signOut = (state = INITIAL_STATE) => ({
+const signOut = () => ({
   ...INITIAL_STATE,
 });
 

@@ -3,15 +3,16 @@ import { createActions, createReducer } from 'reduxsauce';
 export const { Creators, Types } = createActions({
   getProfileRequest: ['payload'],
   getProfileSuccess: ['data'],
-  getProfileFailure: ['error'],
+  getProfileFailure: [],
 
   updateProfileRequest: ['payload'],
   updateProfileSuccess: ['data'],
-  updateProfileFailure: ['error'],
+  updateProfileFailure: [],
 });
 
 const INITIAL_STATE = {
   isLoading: false,
+  status: 'unplayable',
   user: {
     id: 0,
     email: '',
@@ -35,12 +36,13 @@ const getProfileRequest = (state = INITIAL_STATE) => ({
 const getProfileSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isLoading: false,
-  user: action.data,
+  status: action.data.status,
+  user: action.data.user,
 });
 
-const getProfileFailure = (state = INITIAL_STATE, action) => ({
-  ...INITIAL_STATE,
-  error: action.error,
+const getProfileFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: false,
 });
 
 const updateProfileRequest = (state = INITIAL_STATE) => ({
@@ -54,9 +56,9 @@ const updateProfileSuccess = (state = INITIAL_STATE, action) => ({
   user: action.data,
 });
 
-const updateProfileFailure = (state = INITIAL_STATE, action) => ({
-  ...INITIAL_STATE,
-  error: action.error,
+const updateProfileFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: false,
 });
 
 export default createReducer(INITIAL_STATE, {

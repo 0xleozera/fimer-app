@@ -19,6 +19,7 @@ import SignUp from 'screens/sign-up';
 import Home from 'screens/home';
 import Play from 'screens/play';
 import Chat from 'screens/chat';
+import Conversation from 'screens/chat/conversation';
 import Profile from 'screens/profile';
 
 export default (isSigned = false) =>
@@ -52,7 +53,20 @@ export default (isSigned = false) =>
               },
             },
             Chat: {
-              screen: Chat,
+              screen: createStackNavigator({
+                ListChats: {
+                  screen: Chat,
+                  navigationOptions: {
+                    header: null,
+                  },
+                },
+                Conversation: {
+                  screen: Conversation,
+                  navigationOptions: {
+                    header: null,
+                  },
+                },
+              }),
               navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (
                   <IconIonicons
@@ -68,8 +82,7 @@ export default (isSigned = false) =>
                 ShowMyProfile: {
                   screen: Profile,
                   navigationOptions: {
-                    headerMode: 'none',
-                    headerTransparent: true,
+                    header: null,
                   },
                 },
                 EditProfile: {
@@ -112,6 +125,13 @@ export default (isSigned = false) =>
           },
           {
             resetOnBlur: true,
+            defaultNavigationOptions: ({ navigation }) => ({
+              tabBarVisible:
+                navigation.state.routeName === 'Chat' &&
+                navigation.state.routes.length === 2
+                  ? false
+                  : true,
+            }),
             tabBarOptions: {
               showLabel: false,
               keyboardHidesTabBar: true,

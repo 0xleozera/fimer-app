@@ -22,9 +22,9 @@ const signUpSuccess = (state = INITIAL_STATE, action) => ({
   user: action.data,
 });
 
-const signUpFailure = (state = INITIAL_STATE, action) => ({
-  ...INITIAL_STATE,
-  error: action.error,
+const signUpFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: false,
 });
 
 export default createReducer(INITIAL_STATE, {

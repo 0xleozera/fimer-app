@@ -4,6 +4,8 @@ import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 import useSocket from 'hooks/use-socket';
 import { Creators as MessageActions } from 'ducks/message';
+import { Creators as MatchActions } from 'ducks/match';
+import { Creators as NotificationActions } from 'ducks/notification';
 
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -20,10 +22,13 @@ import { SocketProvider } from 'contexts/socket';
 
 const Router = () => {
   const theme = useTheme();
-  const authenticated = useSelector(state => state.auth.token);
-  const Routes = createRouter(!!authenticated);
   const socket = useSocket();
   const dispatch = useDispatch();
+
+  const authenticated = useSelector(state => state.auth.token);
+  const userId = useSelector(state => state.auth.user.id);
+
+  const Routes = createRouter(!!authenticated);
 
   useEffect(() => {
     function setAndroidNavigationBar() {
@@ -46,11 +51,17 @@ const Router = () => {
   }, [socket.ws, theme.colors.primary.dark]);
 
   useEffect(() => {
-    const chat = socket.ws.subscribe('messages:1');
+    const chat = socket.ws.subscribe(`messages:${userId}`);
     chat.on('message', message =>
       dispatch(MessageActions.setNewMessage(message)),
     );
-  }, [dispatch, socket.ws]);
+
+    const matches = socket.ws.subscribe(`matches:${userId}`);
+    matches.on('new', match => dispatch(MatchActions.setNewMatch(match)));
+    matches.on('match', match =>
+      dispatch(NotificationActions.setNewNotification(match)),
+    );
+  }, [dispatch, socket.ws, userId]);
 
   return <Routes ref={ref => Navigator.setNavigator(ref)} />;
 };

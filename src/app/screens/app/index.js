@@ -51,16 +51,20 @@ const Router = () => {
   }, [socket.ws, theme.colors.primary.dark]);
 
   useEffect(() => {
-    const chat = socket.ws.subscribe(`messages:${userId}`);
-    chat.on('message', message =>
-      dispatch(MessageActions.setNewMessage(message)),
-    );
+    if (userId !== 0) {
+      const chat = socket.ws.subscribe(`messages:${userId}`);
+      chat.on('message', message => {
+        dispatch(MessageActions.setNewMessage(message));
+      });
 
-    const matches = socket.ws.subscribe(`matches:${userId}`);
-    matches.on('new', match => dispatch(MatchActions.setNewMatch(match)));
-    matches.on('match', notification =>
-      dispatch(NotificationActions.setNewNotification(notification)),
-    );
+      const matches = socket.ws.subscribe(`matches:${userId}`);
+      matches.on('new', match => {
+        dispatch(MatchActions.setNewMatch(match));
+      });
+      matches.on('match', notification => {
+        dispatch(NotificationActions.setNewNotification(notification));
+      });
+    }
   }, [dispatch, socket.ws, userId]);
 
   return <Routes ref={ref => Navigator.setNavigator(ref)} />;

@@ -9,6 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [status, setStatus] = useState(false);
   const ws = Ws('ws://192.168.0.102:3333');
   const token = useSelector(state => state.auth.token);
+  const userId = useSelector(state => state.auth.user.id);
 
   useEffect(() => {
     ws.withJwtToken(token).connect();
@@ -23,7 +24,7 @@ export const SocketProvider = ({ children }) => {
 
     return () => ws.close();
     // eslint-disable-next-line
-  }, []);
+  }, [userId]);
 
   return (
     <SocketContext.Provider value={{ ws, status }}>

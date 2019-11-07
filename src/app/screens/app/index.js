@@ -58,8 +58,8 @@ const Router = () => {
 
     const matches = socket.ws.subscribe(`matches:${userId}`);
     matches.on('new', match => dispatch(MatchActions.setNewMatch(match)));
-    matches.on('match', match =>
-      dispatch(NotificationActions.setNewNotification(match)),
+    matches.on('match', notification =>
+      dispatch(NotificationActions.setNewNotification(notification)),
     );
   }, [dispatch, socket.ws, userId]);
 

@@ -1,7 +1,7 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Creators, Types } = createActions({
-  setNewNotification: ['payload'],
+  setNewNotification: ['data'],
   closeNotification: [],
 });
 
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 const setNewNotification = (state = INITIAL_STATE, action) => ({
   ...state,
   open: true,
-  content: action.payload,
+  content: action.data,
 });
 
 const closeNotification = () => ({

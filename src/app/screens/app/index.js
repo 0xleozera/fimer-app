@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { AppState } from 'react-native';
+import { AppState, StatusBar } from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 import useSocket from 'hooks/use-socket';
@@ -75,6 +75,7 @@ const App = () => (
     <PersistGate persistor={persistor}>
       <SocketProvider>
         <ThemeProvider theme={themeConfig}>
+          <StatusBar backgroundColor={themeConfig.colors.accent.regular} />
           <Router />
         </ThemeProvider>
       </SocketProvider>

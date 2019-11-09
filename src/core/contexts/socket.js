@@ -21,8 +21,6 @@ export const SocketProvider = ({ children }) => {
     ws.on('close', () => {
       setStatus(false);
     });
-
-    return () => ws.close();
     // eslint-disable-next-line
   }, [userId]);
 

@@ -1,12 +1,18 @@
 import styled from 'styled-components/native';
 
+import logo from 'assets/images/brand/logo.png';
+
 export const HeaderHome = styled.View`
-  flex: 1;
   justify-content: center;
   align-items: center;
   height: 70;
   padding-horizontal: 15;
   background-color: ${({ theme }) => theme.colors.primary.dark};
+`;
+
+export const Logo = styled.Image.attrs({ source: logo })`
+  width: 50;
+  height: 50;
 `;
 
 export const ContainerGreet = styled.View`

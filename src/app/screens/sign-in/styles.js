@@ -1,4 +1,4 @@
-import { Platform, Image } from 'react-native';
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 import { TextField, Button } from 'components';

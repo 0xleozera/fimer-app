@@ -3,6 +3,9 @@ import React from 'react';
 import useTheme from 'hooks/use-theme';
 import useNavigation from 'hooks/use-navigation';
 
+import { useDispatch } from 'react-redux';
+import { Creators as AuthActions } from 'ducks/auth';
+
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import IconAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -22,6 +25,7 @@ import {
 const Header = ({ data }) => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const parsedData = Object.entries(data);
 
@@ -87,12 +91,16 @@ const Header = ({ data }) => {
 
   const handleRedirectRoute = route => navigation.navigate(route);
 
+  const handleSignOutPressed = () => {
+    dispatch(AuthActions.signOut());
+  };
+
   return (
     <ContainerUserInformations>
       <If test={navigation.state.routeName === 'ShowMyProfile'}>
-        <ConfigButton isLeft onPress={() => console.log('Config triggered')}>
+        <ConfigButton isLeft onPress={() => handleSignOutPressed()}>
           <IconMaterial
-            name="settings"
+            name="exit-to-app"
             size={20}
             color={theme.colors.primary.contrast}
           />

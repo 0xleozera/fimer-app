@@ -26,12 +26,13 @@ const List = () => {
 
   // Filters
   const games = useSelector(state => state.auth.user.games);
+  const indexGame = randomNumber(games.length, 0);
+  const currentGame = games[indexGame].id;
   const region = useSelector(state => state.auth.user.region);
-  const game = randomNumber(games.length, 0);
 
   const getHomesIndications = useCallback(() => {
-    dispatch(HomeActions.getHomeRequest({ game, region }));
-  }, [dispatch, game, region]);
+    dispatch(HomeActions.getHomeRequest({ game: currentGame, region }));
+  }, [currentGame, dispatch, region]);
 
   useEffect(() => {
     getHomesIndications();

@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { FlatList, TouchableWithoutFeedback } from 'react-native';
 
 import useTheme from 'hooks/use-theme';
+
+import { randomNumber } from 'utils/random-number';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as HomeActions } from 'ducks/home';
@@ -22,9 +24,18 @@ const List = () => {
   const dispatch = useDispatch();
   const users = useSelector(state => state.home.users);
 
+  // Filters
+  const games = useSelector(state => state.auth.user.games);
+  const region = useSelector(state => state.auth.user.region);
+  const game = randomNumber(games.length, 0);
+
+  const getHomesIndications = useCallback(() => {
+    dispatch(HomeActions.getHomeRequest({ game, region }));
+  }, [dispatch, game, region]);
+
   useEffect(() => {
-    dispatch(HomeActions.getHomeRequest());
-  }, [dispatch]);
+    getHomesIndications();
+  }, [getHomesIndications]);
 
   return (
     <ContainerList>

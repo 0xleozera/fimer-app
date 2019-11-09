@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { parsePercentageToPixels } from 'utils/dimensions';
+
 import logo from 'assets/images/brand/logo.png';
 
 export const HeaderHome = styled.View`
@@ -24,4 +26,9 @@ export const ContainerGreet = styled.View`
 
 export const Greet = styled.View`
   margin-bottom: 10;
+`;
+
+export const IndicationMessage = styled.View`
+  width: ${({ adjustWidth }) =>
+    adjustWidth ? parsePercentageToPixels(80) : 'auto'};
 `;

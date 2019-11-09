@@ -29,6 +29,5 @@ export const Greet = styled.View`
 `;
 
 export const IndicationMessage = styled.View`
-  width: ${({ adjustWidth }) =>
-    adjustWidth ? parsePercentageToPixels(80) : 'auto'};
+  width: ${parsePercentageToPixels(90)};
 `;

@@ -33,7 +33,7 @@ const Home = () => {
             Fala tu, {nickname}!
           </Typography>
         </Greet>
-        <IndicationMessage adjustWidth={indications.length === 0}>
+        <IndicationMessage>
           <Typography size="h6" font="medium" color="contrast">
             {indications.length > 0
               ? 'Encontramos alguns jogadores para jogar com você'
@@ -41,7 +41,7 @@ const Home = () => {
           </Typography>
         </IndicationMessage>
       </ContainerGreet>
-      {indications.length > 0 && <List />}
+      <List />
     </BaseScreen>
   );
 };

@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const ContainerList = styled.View`
   padding-top: 20;
-  padding-bottom: 10;
+  padding-bottom: 70;
   padding-horizontal: 10;
 `;
 

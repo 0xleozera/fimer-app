@@ -38,6 +38,30 @@ const List = () => {
     getHomesIndications();
   }, [getHomesIndications]);
 
+  const getGame = playerGames => {
+    const game = playerGames.filter(
+      playerGame => playerGame.id === games[indexGame].id,
+    );
+
+    return game[0].name;
+  };
+
+  const getPosition = playerPositions => {
+    const position = playerPositions.filter(
+      playerPosition => playerPosition.gameId === games[indexGame].id,
+    );
+
+    return position[0].description;
+  };
+
+  const getRanking = playerRankings => {
+    const ranking = playerRankings.filter(
+      playerRanking => playerRanking.gameId === games[indexGame].id,
+    );
+
+    return ranking[0].description;
+  };
+
   return (
     <ContainerList>
       <FlatList
@@ -65,13 +89,13 @@ const List = () => {
               </ContainerNickname>
               <Details>
                 <Typography size="h7" font="medium">
-                  League of Legends
+                  {getGame(item.games)}
                 </Typography>
                 <Typography size="h7" font="medium">
-                  AD Carry
+                  {getPosition(item.positions)}
                 </Typography>
                 <Typography size="h7" font="medium">
-                  Desafiante
+                  {getRanking(item.rankings)}
                 </Typography>
               </Details>
             </Informations>

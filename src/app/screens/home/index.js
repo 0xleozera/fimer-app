@@ -14,7 +14,9 @@ const Home = () => {
   const nickname = useSelector(state => state.auth.user.nickname);
 
   return (
-    <BaseScreen statusBarBackground={theme.colors.primary.dark}>
+    <BaseScreen
+      hasScroll={false}
+      statusBarBackground={theme.colors.primary.dark}>
       <HeaderHome>
         <Logo />
       </HeaderHome>

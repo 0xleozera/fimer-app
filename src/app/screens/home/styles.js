@@ -16,7 +16,6 @@ export const Logo = styled.Image.attrs({ source: logo })`
 `;
 
 export const ContainerGreet = styled.View`
-  flex: 1;
   justify-content: center;
   align-items: center;
   margin-top: 30;

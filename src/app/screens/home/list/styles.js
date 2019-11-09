@@ -4,12 +4,11 @@ import { Button } from 'components';
 
 export const ContainerList = styled.View`
   padding-top: 20;
-  padding-bottom: 10;
+  padding-bottom: 80;
   padding-horizontal: 10;
 `;
 
 export const Card = styled.TouchableOpacity`
-  flex: 1;
   flex-direction: row;
   align-items: center;
   padding-vertical: 10;

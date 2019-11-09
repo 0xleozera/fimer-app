@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, TouchableWithoutFeedback } from 'react-native';
 
 import useTheme from 'hooks/use-theme';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Creators as HomeActions } from 'ducks/home';
 
 import { Typography, Avatar } from 'components';
 import {
@@ -16,30 +19,26 @@ import {
 
 const List = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.home.users);
+
+  useEffect(() => {
+    dispatch(HomeActions.getHomeRequest());
+  }, [dispatch]);
 
   return (
     <ContainerList>
       <FlatList
-        keyExtractor={item => item.name}
-        data={[
-          { name: 'JOGOS' },
-          { name: 'POSIÇÃO' },
-          { name: 'RANKING' },
-          { name: 'REGIÃO' },
-          { name: 'GAME' },
-        ]}
+        keyExtractor={item => item.id.toString()}
+        data={users}
         renderItem={({ item }) => (
           <Card onPress={() => console.log('Card triggered')}>
-            <Avatar
-              noMargin
-              size={50}
-              avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
-            />
+            <Avatar noMargin size={50} avatar={item.avatar.url} />
             <Informations>
               <ContainerNickname>
                 <Nickname>
                   <Typography font="bold" color="contrast">
-                    brTT
+                    {item.nickname}
                   </Typography>
                 </Nickname>
                 <TouchableWithoutFeedback>

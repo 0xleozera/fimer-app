@@ -64,8 +64,9 @@ const List = () => {
       <FlatList
         keyExtractor={item => item.id}
         data={matches}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <Card
+            isFirstItem={index === 0}
             onPress={() =>
               navigation.navigate('Conversation', defineRouteParams(item))
             }>

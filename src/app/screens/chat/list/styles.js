@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const ContainerList = styled.View`
-  padding-top: 20;
   padding-bottom: 70;
   padding-horizontal: 10;
 `;
@@ -11,6 +10,7 @@ export const Card = styled.TouchableOpacity`
   align-items: center;
   padding-vertical: 10;
   padding-horizontal: 10;
+  margin-top: ${({ isFirstItem }) => (isFirstItem ? 10 : 0)};
   margin-bottom: 10;
   height: 80;
   border-radius: ${({ theme }) => theme.radius.regular};

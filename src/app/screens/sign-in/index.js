@@ -1,13 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { Image } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as AuthActions } from 'ducks/auth';
 
-import logo from 'assets/images/brand/logo.png';
 import { Background } from 'components';
 import {
   Container,
+  Logo,
   Form,
   FormInput,
   SubmitButton,
@@ -31,7 +30,7 @@ const SignIn = ({ navigation }) => {
   return (
     <Background>
       <Container>
-        <Image source={logo} />
+        <Logo />
 
         <Form>
           <FormInput

@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { Image } from 'react-native';
 
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -7,10 +6,10 @@ import pt from 'date-fns/locale/pt';
 import { useSelector, useDispatch } from 'react-redux';
 import { Creators as SignUpActions } from 'ducks/sign-up';
 
-import logo from 'assets/images/brand/logo.png';
 import { Background, DateField } from 'components';
 import {
   Container,
+  Logo,
   Form,
   FormInput,
   SubmitButton,
@@ -60,7 +59,7 @@ const SignUp = ({ navigation }) => {
   return (
     <Background>
       <Container>
-        <Image source={logo} />
+        <Logo />
 
         <Form>
           <FormInput

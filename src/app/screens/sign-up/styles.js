@@ -1,6 +1,8 @@
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
+import logo from 'assets/images/brand/logo.png';
+
 import { TextField, Button } from 'components';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -11,6 +13,11 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   justify-content: center;
   align-items: center;
   padding: ${({ theme }) => `0 ${theme.padding.wide}px`};
+`;
+
+export const Logo = styled.Image.attrs({ source: logo })`
+  width: 130;
+  height: 130;
 `;
 
 export const Form = styled.View`

@@ -32,6 +32,11 @@ const FilterModal = ({ isVisible, closeModal }) => {
     }
   };
 
+  const handleClearFilter = () => {
+    dispatch(FilterActions.clearFilter(currentFilter));
+    closeModal();
+  };
+
   const handlePressed = ({ id: selected, slug: label }) => {
     dispatch(
       FilterActions.setFilter({ field: currentFilter, selected, label }),
@@ -64,7 +69,7 @@ const FilterModal = ({ isVisible, closeModal }) => {
           <Typography font="bold" size="h7" color="contrast">
             {filters[currentFilter].modal}
           </Typography>
-          <ClearButton onPress={() => console.log('Clear triggered')}>
+          <ClearButton onPress={() => handleClearFilter()}>
             <WrapperIconButton>
               <Icon
                 size={10}

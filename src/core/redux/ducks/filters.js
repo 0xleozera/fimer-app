@@ -6,7 +6,7 @@ export const { Creators, Types } = createActions({
   getAllGamesFailure: [],
 
   setFilter: ['payload'],
-
+  clearFilter: ['payload'],
   currentFilter: ['payload'],
 });
 
@@ -55,9 +55,9 @@ const setFilter = (state = INITIAL_STATE, action) => {
 
     return {
       ...state,
-      game: { ...state[field], selected, label },
-      position: { label: '', selected: 0, items: positions },
-      ranking: { label: '', selected: 0, items: rankings },
+      game: { ...state.game, selected, label },
+      position: { ...state.position, label: '', selected: 0, items: positions },
+      ranking: { ...state.ranking, label: '', selected: 0, items: rankings },
     };
   }
 
@@ -66,6 +66,16 @@ const setFilter = (state = INITIAL_STATE, action) => {
     [field]: { selected, label, items: [...state[field].items] },
   };
 };
+
+const clearFilter = (state = INITIAL_STATE, action) => ({
+  ...state,
+  [action.payload]: {
+    ...state[action.payload],
+    label: '',
+    selected: 0,
+    items: [...state[action.payload].items],
+  },
+});
 
 const currentFilter = (state = INITIAL_STATE, action) => ({
   ...state,
@@ -78,5 +88,6 @@ export default createReducer(INITIAL_STATE, {
   [Types.GET_ALL_GAMES_FAILURE]: getAllGamesFailure,
 
   [Types.SET_FILTER]: setFilter,
+  [Types.CLEAR_FILTER]: clearFilter,
   [Types.CURRENT_FILTER]: currentFilter,
 });

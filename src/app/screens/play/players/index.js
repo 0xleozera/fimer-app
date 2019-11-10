@@ -1,11 +1,12 @@
 import React from 'react';
 
-import useTheme from 'hooks/use-theme';
+import { useSelector } from 'react-redux';
 
-import Carousel from 'react-native-snap-carousel';
+import useTheme from 'hooks/use-theme';
 
 import { parsePercentageToPixels } from 'utils/dimensions';
 
+import Carousel from 'react-native-snap-carousel';
 import { Typography, PlayActionButton, Avatar, Separator } from 'components';
 import {
   ContainerPlayers,
@@ -21,21 +22,19 @@ import {
 
 const Players = () => {
   const theme = useTheme();
+  const players = useSelector(state => state.play.players);
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item }) => (
     <CardPlayer>
       <HeaderPlayerInformation>
-        <Avatar
-          size={150}
-          avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
-        />
+        <Avatar size={150} avatar={item.avatar.url} />
         <Typography font="bold" size="h3" color="contrast">
-          brTT
+          {item.nickname}
         </Typography>
       </HeaderPlayerInformation>
       <HeaderPersonalInformations>
         <Typography font="medium" size="h7">
-          Felipe Gonçalves
+          {item.name}
         </Typography>
         <Typography font="medium" size="h7">
           27 anos
@@ -74,12 +73,7 @@ const Players = () => {
     <ContainerPlayers>
       <Carousel
         layout="tinder"
-        data={[
-          { title: 'João' },
-          { title: 'Carlos' },
-          { title: 'Leo' },
-          { title: 'Ramon' },
-        ]}
+        data={players}
         renderItem={renderItem}
         sliderWidth={parsePercentageToPixels(95)}
         itemWidth={parsePercentageToPixels(90)}

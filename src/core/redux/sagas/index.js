@@ -5,9 +5,10 @@ import home from './home';
 import match from './match';
 import message from './message';
 import notification from './notification';
+import play from './play';
 import profile from './profile';
 import signUp from './sign-up';
 
 export default function* root() {
-  yield all([auth, home, match, message, notification, profile, signUp]);
+  yield all([auth, home, match, message, notification, play, profile, signUp]);
 }

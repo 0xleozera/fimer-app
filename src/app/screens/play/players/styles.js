@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { PlayActionButton, Typography } from 'components';
+import { PlayActionButton } from 'components';
 
 import {
   getViewportDimension,

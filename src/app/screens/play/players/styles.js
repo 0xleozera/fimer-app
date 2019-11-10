@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { PlayActionButton } from 'components';
+import { PlayActionButton, Typography } from 'components';
 
 import {
   getViewportDimension,
@@ -47,7 +47,12 @@ export const HeaderTitleGameInformations = styled.View`
 `;
 
 export const HeaderDataGameInformations = styled.View`
+  flex-direction: ${({ positions }) => (positions ? 'row' : 'column')};
   margin-vertical: 3;
+`;
+
+export const DescriptionPosition = styled.View`
+  margin-right: 15;
 `;
 
 export const ContainerActionButtons = styled.View`

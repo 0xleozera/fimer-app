@@ -20,14 +20,21 @@ import {
   HeaderGameInformations,
   HeaderTitleGameInformations,
   HeaderDataGameInformations,
+  DescriptionPosition,
   ContainerActionButtons,
   ProfileActionButton,
 } from './styles';
 
 const Players = () => {
   const theme = useTheme();
-  const players = useSelector(state => state.play.players);
   const dispatch = useDispatch();
+
+  const players = useSelector(state => state.play.players);
+  const selectedGame = useSelector(state => state.filters.game.selected);
+  const selectedPosition = useSelector(
+    state => state.filters.position.selected,
+  );
+  const selectedRanking = useSelector(state => state.filters.ranking.selected);
 
   useEffect(() => {
     dispatch(PlayActions.getPlayRequest());
@@ -43,50 +50,125 @@ const Players = () => {
     return `${difference} anos`;
   };
 
-  const renderItem = ({ item }) => (
-    <CardPlayer>
-      <HeaderPlayerInformation>
-        <Avatar size={150} avatar={item.avatar.url} />
-        <Typography font="bold" size="h3" color="contrast">
-          {item.nickname}
-        </Typography>
-      </HeaderPlayerInformation>
-      <HeaderPersonalInformations>
-        <Typography font="medium" size="h7">
-          {item.name}
-        </Typography>
-        <Typography font="medium" size="h7">
-          {handleBirthDate(item.birthDate)}
-        </Typography>
-      </HeaderPersonalInformations>
-      <Separator />
-      <HeaderGameInformations>
-        <HeaderTitleGameInformations>
-          <Typography font="bold" size="h6" color="contrast">
-            Informações no jogo
-          </Typography>
-        </HeaderTitleGameInformations>
+  const filteredPositions = (position, choicedGame) => {
+    if (selectedPosition === 0 && selectedGame === 0) {
+      return position.gameId === choicedGame;
+    }
 
-        <HeaderDataGameInformations>
-          <Typography font="bold" size="h6">
-            League of Legends
-          </Typography>
-        </HeaderDataGameInformations>
+    if (selectedPosition !== 0 && selectedGame !== 0) {
+      return (
+        position.gameId === selectedGame && position.id === selectedPosition
+      );
+    }
 
-        <HeaderDataGameInformations>
-          <Typography font="bold" size="h6">
-            AD Carry
-          </Typography>
-        </HeaderDataGameInformations>
+    return position.gameId === selectedGame;
+  };
 
-        <HeaderDataGameInformations>
+  const getGame = (games, choicedGame) => {
+    if (games.length === 0) {
+      return null;
+    }
+
+    const game = games.find(currentGame => currentGame.id === selectedGame);
+    const randomGame = games.find(
+      currentGame => currentGame.id === choicedGame,
+    );
+
+    return (
+      <HeaderDataGameInformations>
+        <Typography font="bold" size="h6">
+          {selectedGame === 0 ? randomGame.name : game.name}
+        </Typography>
+      </HeaderDataGameInformations>
+    );
+  };
+
+  const getPositions = (positions, choicedGame) => {
+    if (positions.length === 0) {
+      return null;
+    }
+
+    const correctPositions = positions
+      .filter(position => filteredPositions(position, choicedGame))
+      .map(position => (
+        <DescriptionPosition>
           <Typography font="bold" size="h6">
-            Desafiante
+            {position.description}
           </Typography>
-        </HeaderDataGameInformations>
-      </HeaderGameInformations>
-    </CardPlayer>
-  );
+        </DescriptionPosition>
+      ));
+
+    return (
+      <HeaderDataGameInformations positions>
+        {correctPositions}
+      </HeaderDataGameInformations>
+    );
+  };
+
+  const getRanking = (rankings, choicedGame) => {
+    if (rankings.length === 0) {
+      return null;
+    }
+
+    const correctRanking = rankings.find(ranking => {
+      if (selectedRanking === 0 && selectedGame === 0) {
+        return ranking.gameId === choicedGame;
+      }
+
+      if (selectedRanking !== 0 && selectedGame !== 0) {
+        return (
+          ranking.gameId === selectedGame && ranking.id === selectedRanking
+        );
+      }
+
+      return ranking.gameId === selectedGame;
+    });
+
+    return (
+      <HeaderDataGameInformations>
+        <Typography font="bold" size="h6">
+          {correctRanking.description}
+        </Typography>
+      </HeaderDataGameInformations>
+    );
+  };
+
+  const renderItem = ({ item }) => {
+    const choicedGame =
+      item.games.length > 0 && !selectedGame ? item.games[0].id : 0;
+
+    return (
+      <CardPlayer>
+        <HeaderPlayerInformation>
+          <Avatar size={150} avatar={item.avatar.url} />
+          <Typography font="bold" size="h3" color="contrast">
+            {item.nickname}
+          </Typography>
+        </HeaderPlayerInformation>
+        <HeaderPersonalInformations>
+          <Typography font="medium" size="h7">
+            {item.name}
+          </Typography>
+          <Typography font="medium" size="h7">
+            {handleBirthDate(item.birthDate)}
+          </Typography>
+        </HeaderPersonalInformations>
+        <Separator />
+        <HeaderGameInformations>
+          <HeaderTitleGameInformations>
+            <Typography font="bold" size="h6" color="contrast">
+              {item.games.length > 0
+                ? 'Informações de jogo'
+                : 'Nenhum jogo cadastrado :('}
+            </Typography>
+          </HeaderTitleGameInformations>
+          {getGame(item.games, choicedGame)}
+          {getPositions(item.positions, choicedGame)}
+          {getRanking(item.rankings, choicedGame)}
+        </HeaderGameInformations>
+      </CardPlayer>
+    );
+  };
 
   return (
     <ContainerPlayers>

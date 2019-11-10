@@ -11,7 +11,8 @@ export const ButtonBadge = styled.TouchableOpacity`
   align-items: center;
   padding-horizontal: 15;
   padding-vertical: 12;
-  background-color: transparent;
+  background-color: ${({ active, theme }) =>
+    active ? theme.colors.accent.regular : 'transparent'};
   border-radius: 50;
   border-width: 2;
   border-color: ${({ theme }) => theme.colors.accent.regular};

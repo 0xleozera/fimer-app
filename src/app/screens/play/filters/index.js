@@ -57,6 +57,7 @@ const Filters = ({ openModal }) => {
             <Badge
               onPress={() => handleChangeFilter(item.key)}
               label={item.selected !== 0 ? item.label : item.description}
+              active={item.selected !== 0}
             />
           )}
         />

@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+import { splitDate } from 'utils/date';
+import differenceInCalendarYears from 'date-fns/differenceInCalendarYears';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as PlayActions } from 'ducks/play';
 
@@ -30,6 +33,16 @@ const Players = () => {
     dispatch(PlayActions.getPlayRequest());
   }, [dispatch]);
 
+  const handleBirthDate = birthDate => {
+    const { day, month, years } = splitDate(birthDate);
+    const difference = differenceInCalendarYears(
+      new Date(),
+      new Date(years, month, day),
+    );
+
+    return `${difference} anos`;
+  };
+
   const renderItem = ({ item }) => (
     <CardPlayer>
       <HeaderPlayerInformation>
@@ -43,7 +56,7 @@ const Players = () => {
           {item.name}
         </Typography>
         <Typography font="medium" size="h7">
-          27 anos
+          {handleBirthDate(item.birthDate)}
         </Typography>
       </HeaderPersonalInformations>
       <Separator />

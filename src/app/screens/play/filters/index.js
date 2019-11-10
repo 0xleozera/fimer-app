@@ -20,6 +20,11 @@ const Filters = ({ openModal }) => {
     dispatch(FilterActions.getAllGamesRequest());
   }, [dispatch]);
 
+  const handleChangeFilter = filter => {
+    dispatch(FilterActions.currentFilter(filter));
+    openModal(true);
+  };
+
   return (
     <ContainerFilters>
       <Typography font="bold" size="h4" color="contrast">
@@ -28,16 +33,19 @@ const Filters = ({ openModal }) => {
       <PositionFilterList>
         <FlatList
           horizontal
-          keyExtractor={item => item.label}
+          keyExtractor={item => item.description}
           data={[
-            { label: 'JOGOS' },
-            { label: 'POSIÇÃO' },
-            { label: 'RANKING' },
-            { label: 'REGIÃO' },
-            { label: 'GÊNERO' },
+            { key: 'game', description: 'JOGO', ...game },
+            { key: 'position', description: 'POSIÇÃO', ...position },
+            { key: 'ranking', description: 'RANKING', ...ranking },
+            { key: 'region', description: 'REGIÃO', ...region },
+            { key: 'gender', description: 'GÊNERO', ...gender },
           ]}
           renderItem={({ item }) => (
-            <Badge onPress={() => openModal(true)} label={item.label} />
+            <Badge
+              onPress={() => handleChangeFilter(item.key)}
+              label={item.selected !== 0 ? item.label : item.description}
+            />
           )}
         />
       </PositionFilterList>

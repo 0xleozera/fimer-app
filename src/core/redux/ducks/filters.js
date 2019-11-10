@@ -6,6 +6,8 @@ export const { Creators, Types } = createActions({
   getAllGamesFailure: [],
 
   setFilter: ['payload'],
+
+  currentFilter: ['payload'],
 });
 
 const INITIAL_STATE = {
@@ -16,6 +18,7 @@ const INITIAL_STATE = {
   gender: { label: '', selected: 0, items: [] },
 
   allGames: [],
+  currentFilter: '',
 };
 
 const getAllGamesRequest = (state = INITIAL_STATE) => ({
@@ -56,10 +59,16 @@ const setFilter = (state = INITIAL_STATE, action) => {
   };
 };
 
+const currentFilter = (state = INITIAL_STATE, action) => ({
+  ...state,
+  currentFilter: action.payload,
+});
+
 export default createReducer(INITIAL_STATE, {
   [Types.GET_ALL_GAMES_REQUEST]: getAllGamesRequest,
   [Types.GET_ALL_GAMES_SUCCESS]: getAllGamesSuccess,
   [Types.GET_ALL_GAMES_FAILURE]: getAllGamesFailure,
 
   [Types.SET_FILTER]: setFilter,
+  [Types.CURRENT_FILTER]: currentFilter,
 });

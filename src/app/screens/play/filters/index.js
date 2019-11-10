@@ -13,16 +13,16 @@ const Filters = ({ openModal }) => {
       <PositionFilterList>
         <FlatList
           horizontal
-          keyExtractor={item => item.name}
+          keyExtractor={item => item.label}
           data={[
-            { name: 'JOGOS' },
-            { name: 'POSIÇÃO' },
-            { name: 'RANKING' },
-            { name: 'REGIÃO' },
-            { name: 'GÊNERO' },
+            { label: 'JOGOS' },
+            { label: 'POSIÇÃO' },
+            { label: 'RANKING' },
+            { label: 'REGIÃO' },
+            { label: 'GÊNERO' },
           ]}
           renderItem={({ item }) => (
-            <Badge onPress={() => openModal(true)} label={item.name} />
+            <Badge onPress={() => openModal(true)} label={item.label} />
           )}
         />
       </PositionFilterList>

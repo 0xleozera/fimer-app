@@ -39,27 +39,27 @@ const List = () => {
   }, [getHomesIndications]);
 
   const getGame = playerGames => {
-    const game = playerGames.filter(
+    const game = playerGames.find(
       playerGame => playerGame.id === games[indexGame].id,
     );
 
-    return game[0].name;
+    return game.name;
   };
 
   const getPosition = playerPositions => {
-    const position = playerPositions.filter(
+    const position = playerPositions.find(
       playerPosition => playerPosition.gameId === games[indexGame].id,
     );
 
-    return position[0].description;
+    return position.description;
   };
 
   const getRanking = playerRankings => {
-    const ranking = playerRankings.filter(
+    const ranking = playerRankings.find(
       playerRanking => playerRanking.gameId === games[indexGame].id,
     );
 
-    return ranking[0].description;
+    return ranking.description;
   };
 
   return (

@@ -44,5 +44,6 @@ export function* getFilteringPlayers() {
 
 export default all([
   takeLatest(PlayTypes.GET_PLAY_REQUEST, getPlayers),
+  takeLatest(FilterTypes.CLEAR_FILTER, getFilteringPlayers),
   takeLatest(FilterTypes.SET_FILTER, getFilteringPlayers),
 ]);

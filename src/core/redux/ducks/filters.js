@@ -1,5 +1,8 @@
 import { createActions, createReducer } from 'reduxsauce';
 
+import genders from 'utils/genders';
+import states from 'utils/states';
+
 export const { Creators, Types } = createActions({
   getAllGamesRequest: ['payload'],
   getAllGamesSuccess: ['data'],
@@ -14,8 +17,8 @@ const INITIAL_STATE = {
   game: { modal: 'ESCOLHA O JOGO', label: '', selected: 0, items: [] },
   position: { modal: 'ESCOLHA A POSIÇÃO', label: '', selected: 0, items: [] },
   ranking: { modal: 'ESCOLHA O RANKING', label: '', selected: 0, items: [] },
-  region: { modal: 'ESCOLHA A REGIÃO', label: '', selected: 0, items: [] },
-  gender: { modal: 'ESCOLHA O GÊNERO', label: '', selected: 0, items: [] },
+  region: { modal: 'ESCOLHA A REGIÃO', label: '', selected: 0, items: states },
+  gender: { modal: 'ESCOLHA O GÊNERO', label: '', selected: 0, items: genders },
 
   allGames: [],
   currentFilter: 'game',
@@ -63,7 +66,12 @@ const setFilter = (state = INITIAL_STATE, action) => {
 
   return {
     ...state,
-    [field]: { selected, label, items: [...state[field].items] },
+    [field]: {
+      ...state[field],
+      selected,
+      label,
+      items: [...state[field].items],
+    },
   };
 };
 

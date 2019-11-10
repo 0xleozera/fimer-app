@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { PlayActionButton } from 'components';
+import { PlayActionButton, Typography } from 'components';
 
 import {
   getViewportDimension,
@@ -66,4 +66,12 @@ export const ContainerActionButtons = styled.View`
 export const ProfileActionButton = styled(PlayActionButton)`
   margin-left: 35;
   margin-right: 35;
+`;
+
+export const EmptyPlayers = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: ${parsePercentageToPixels(75)};
+  margin-top: 100;
 `;

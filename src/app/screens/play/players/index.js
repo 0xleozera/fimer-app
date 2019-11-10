@@ -11,7 +11,13 @@ import useTheme from 'hooks/use-theme';
 import { parsePercentageToPixels } from 'utils/dimensions';
 
 import Carousel from 'react-native-snap-carousel';
-import { Typography, PlayActionButton, Avatar, Separator } from 'components';
+import {
+  Typography,
+  PlayActionButton,
+  Avatar,
+  Separator,
+  If,
+} from 'components';
 import {
   ContainerPlayers,
   CardPlayer,
@@ -23,6 +29,7 @@ import {
   DescriptionPosition,
   ContainerActionButtons,
   ProfileActionButton,
+  EmptyPlayers,
 } from './styles';
 
 const Players = () => {
@@ -172,39 +179,51 @@ const Players = () => {
 
   return (
     <ContainerPlayers>
-      <Carousel
-        layout="tinder"
-        data={players}
-        renderItem={renderItem}
-        sliderWidth={parsePercentageToPixels(95)}
-        itemWidth={parsePercentageToPixels(90)}
-        layoutCardOffset={15}
-        containerCustomStyle={{
-          marginTop: parsePercentageToPixels(3),
-          overflow: 'visible',
-        }}
-        contentContainerCustomStyle={{
-          paddingVertical: 10,
-        }}
-      />
-      <ContainerActionButtons>
-        <PlayActionButton
-          background={theme.colors.actions.red}
-          forbidden
-          onPress={() => {}}
+      <If test={players.length === 0}>
+        <EmptyPlayers>
+          <Typography font="bold" size="h6" color="contrast">
+            Não encontramos jogadores com essas características :(
+          </Typography>
+        </EmptyPlayers>
+      </If>
+      <If test={players.length !== 0}>
+        <Carousel
+          layout="tinder"
+          data={players}
+          renderItem={renderItem}
+          sliderWidth={parsePercentageToPixels(95)}
+          itemWidth={parsePercentageToPixels(90)}
+          layoutCardOffset={15}
+          containerCustomStyle={{
+            marginTop: parsePercentageToPixels(3),
+            overflow: 'visible',
+          }}
+          contentContainerCustomStyle={{
+            paddingVertical: 10,
+          }}
+          onBeforeSnapToItem={slideIndex =>
+            dispatch(PlayActions.setCurrentIndex(slideIndex))
+          }
         />
+        <ContainerActionButtons>
+          <PlayActionButton
+            background={theme.colors.actions.red}
+            forbidden
+            onPress={() => dispatch(PlayActions.removePlayer())}
+          />
 
-        <ProfileActionButton
-          background={theme.colors.actions.blue}
-          iconName="md-person"
-          onPress={() => {}}
-        />
+          <ProfileActionButton
+            background={theme.colors.actions.blue}
+            iconName="md-person"
+            onPress={() => {}}
+          />
 
-        <PlayActionButton
-          background={theme.colors.accent.regular}
-          onPress={() => {}}
-        />
-      </ContainerActionButtons>
+          <PlayActionButton
+            background={theme.colors.accent.regular}
+            onPress={() => {}}
+          />
+        </ContainerActionButtons>
+      </If>
     </ContainerPlayers>
   );
 };

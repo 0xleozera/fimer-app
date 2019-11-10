@@ -3,6 +3,9 @@ import { ScrollView } from 'react-native';
 
 import useTheme from 'hooks/use-theme';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { Creators as FilterActions } from 'ducks/filters';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Modal, Typography, SelectItem } from 'components';
@@ -13,32 +16,36 @@ import {
   WrapperIconButton,
 } from './styles';
 
-// MOCK DATA
-const data = [
-  { name: 'League of Legends' },
-  { name: 'Fortnite' },
-  { name: 'Counter Strike: Global Offensive' },
-  { name: 'Dota2' },
-];
-
-const FilterModal = ({ isVisible, onSwipe, onBackdropPress }) => {
+const FilterModal = ({ isVisible, closeModal }) => {
   const theme = useTheme();
   const modalRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
 
-  const handleScrollTo = position => {
+  const dispatch = useDispatch();
+
+  const filters = useSelector(state => state.filters);
+  const currentFilter = useSelector(state => state.filters.currentFilter);
+
+  const handleScrollTo = currentPosition => {
     if (modalRef.current) {
-      modalRef.current.scrollTo(position);
+      modalRef.current.scrollTo(currentPosition);
     }
   };
 
+  const handlePressed = ({ id: selected, slug: label }) => {
+    dispatch(
+      FilterActions.setFilter({ field: currentFilter, selected, label }),
+    );
+    closeModal();
+  };
+
   const renderItems = () => {
-    const mappedItems = data.map((item, index) => (
+    const mappedItems = filters[currentFilter].items.map(item => (
       <SelectItem
-        key={item.name}
-        label={item.name}
-        active={index === 1}
-        onPress={() => console.log('Select triggered')}
+        key={item.id}
+        label={item.description}
+        active={filters[currentFilter].selected === item.id}
+        onPress={() => handlePressed(item)}
       />
     ));
 
@@ -48,14 +55,14 @@ const FilterModal = ({ isVisible, onSwipe, onBackdropPress }) => {
   return (
     <Modal
       isVisible={isVisible}
-      onSwipe={onSwipe}
-      onBackdropPress={onBackdropPress}
+      onSwipe={closeModal}
+      onBackdropPress={closeModal}
       scrollTo={handleScrollTo}
       scrollOffset={scrollOffset}>
       <ContentModal>
         <TitleModal>
           <Typography font="bold" size="h7" color="contrast">
-            ESCOLHA O JOGO
+            {filters[currentFilter].modal}
           </Typography>
           <ClearButton onPress={() => console.log('Clear triggered')}>
             <WrapperIconButton>

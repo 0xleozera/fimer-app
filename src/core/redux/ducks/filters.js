@@ -11,14 +11,14 @@ export const { Creators, Types } = createActions({
 });
 
 const INITIAL_STATE = {
-  game: { label: '', selected: 0, items: [] },
-  position: { label: '', selected: 0, items: [] },
-  ranking: { label: '', selected: 0, items: [] },
-  region: { label: '', selected: 0, items: [] },
-  gender: { label: '', selected: 0, items: [] },
+  game: { modal: 'ESCOLHA O JOGO', label: '', selected: 0, items: [] },
+  position: { modal: 'ESCOLHA A POSIÇÃO', label: '', selected: 0, items: [] },
+  ranking: { modal: 'ESCOLHA O RANKING', label: '', selected: 0, items: [] },
+  region: { modal: 'ESCOLHA A REGIÃO', label: '', selected: 0, items: [] },
+  gender: { modal: 'ESCOLHA O GÊNERO', label: '', selected: 0, items: [] },
 
   allGames: [],
-  currentFilter: '',
+  currentFilter: 'game',
 };
 
 const getAllGamesRequest = (state = INITIAL_STATE) => ({
@@ -29,6 +29,14 @@ const getAllGamesRequest = (state = INITIAL_STATE) => ({
 const getAllGamesSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isLoading: false,
+  game: {
+    ...state.game,
+    items: action.data.map(game => ({
+      description: game.name,
+      slug: game.slug,
+      id: game.id,
+    })),
+  },
   allGames: action.data,
 });
 

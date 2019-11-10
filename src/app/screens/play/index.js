@@ -19,8 +19,7 @@ const Play = () => {
       <Players />
       <FilterModal
         isVisible={isVisible}
-        onSwipe={() => setIsVisible(false)}
-        onBackdropPress={() => setIsVisible(false)}
+        closeModal={() => setIsVisible(false)}
       />
     </BaseScreen>
   );

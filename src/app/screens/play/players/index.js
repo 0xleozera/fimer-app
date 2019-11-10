@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Creators as PlayActions } from 'ducks/play';
 
 import useTheme from 'hooks/use-theme';
 
@@ -23,6 +24,11 @@ import {
 const Players = () => {
   const theme = useTheme();
   const players = useSelector(state => state.play.players);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(PlayActions.getPlayRequest());
+  }, [dispatch]);
 
   const renderItem = ({ item }) => (
     <CardPlayer>

@@ -22,9 +22,9 @@ export const URLBuilder = ({
 
 const defineQuery = ({ game, ranking, position, region, gender }) => {
   const filters = [
-    { filter: 'games', isArray: true, value: game },
-    { filter: 'rankings', isArray: true, value: ranking },
-    { filter: 'positions', isArray: true, value: position },
+    { filter: 'game', isArray: true, value: game },
+    { filter: 'ranking', isArray: true, value: ranking },
+    { filter: 'position', isArray: true, value: position },
     { filter: 'region', isArray: false, value: region },
     { filter: 'gender', isArray: false, value: gender },
   ];

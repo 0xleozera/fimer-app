@@ -14,7 +14,7 @@ export const DateButton = styled.TouchableOpacity`
 `;
 
 export const DateText = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${({ theme }) => theme.typography.h5};
   color: ${({ isPlaceholder, theme }) =>
     isPlaceholder
@@ -25,6 +25,6 @@ export const DateText = styled.Text`
 
 export const Picker = styled.View`
   background: ${({ theme }) => theme.colors.opacity.black};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-family: ${({ theme }) => theme.fonts.medium};
   margin-bottom: 10px;
 `;

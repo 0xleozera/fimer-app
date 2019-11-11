@@ -95,8 +95,6 @@ const Header = ({ data }) => {
     dispatch(AuthActions.signOut());
   };
 
-  console.log(data);
-
   return (
     <ContainerUserInformations>
       <If test={navigation.state.routeName === 'ShowMyProfile'}>

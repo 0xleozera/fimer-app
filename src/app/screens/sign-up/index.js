@@ -74,7 +74,7 @@ const SignUp = ({ navigation }) => {
           />
 
           <FormInput
-            icon="videogame-asset"
+            icon="logo-game-controller-b"
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Apelido nos jogos"
@@ -86,7 +86,7 @@ const SignUp = ({ navigation }) => {
           />
 
           <FormInput
-            icon="person-outline"
+            icon="transgender-alt"
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Sexo"
@@ -98,7 +98,7 @@ const SignUp = ({ navigation }) => {
           />
 
           <DateField
-            placeholder="Seu aniversário"
+            placeholder="Aniversário"
             date={birthDate}
             onChange={handleBirthDateChange}
           />
@@ -108,7 +108,7 @@ const SignUp = ({ navigation }) => {
             keyboardType="email-address"
             autoCorrect={false}
             autoCapitalize="none"
-            placeholder="Digite seu e-mail"
+            placeholder="Email"
             ref={emailRef}
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
@@ -119,7 +119,7 @@ const SignUp = ({ navigation }) => {
           <FormInput
             icon="lock-outline"
             secureTextEntry
-            placeholder="Sua senha secreta"
+            placeholder="Senha"
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}

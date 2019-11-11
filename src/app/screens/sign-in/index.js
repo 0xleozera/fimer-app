@@ -48,7 +48,7 @@ const SignIn = ({ navigation }) => {
           <FormInput
             icon="lock-outline"
             secureTextEntry
-            placeholder="Sua senha secreta"
+            placeholder="Digite sua senha"
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}

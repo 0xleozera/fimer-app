@@ -21,7 +21,9 @@ const INITIAL_STATE = {
     birthDate: '',
     region: '',
     gender: '',
-    avatar: null,
+    avatar: {
+      url: '',
+    },
     games: [],
     position: [],
     rankings: [],

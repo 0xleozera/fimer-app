@@ -1,27 +1,23 @@
 import React from 'react';
-import { Text } from 'react-native';
-
-import useTheme from 'hooks/use-theme';
 
 import { Typography } from 'components';
 import { ContentUserGames, CardGame } from './styles';
 
 const Games = ({ data }) => {
   const { games, positions, rankings } = data;
-  const theme = useTheme();
 
   const filterGamesInformations = (information, gameId) => {
     return information.gameId === gameId;
   };
 
   const mountCardGames = game => {
-    const position = positions.filter(currentPosition =>
+    const position = positions.find(currentPosition =>
       filterGamesInformations(currentPosition, game.id),
-    )[0];
+    );
 
-    const ranking = rankings.filter(currentRanking =>
+    const ranking = rankings.find(currentRanking =>
       filterGamesInformations(currentRanking, game.id),
-    )[0];
+    );
 
     return (
       <CardGame key={game.id}>

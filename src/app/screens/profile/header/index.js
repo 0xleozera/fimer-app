@@ -95,6 +95,8 @@ const Header = ({ data }) => {
     dispatch(AuthActions.signOut());
   };
 
+  console.log(data);
+
   return (
     <ContainerUserInformations>
       <If test={navigation.state.routeName === 'ShowMyProfile'}>
@@ -116,10 +118,7 @@ const Header = ({ data }) => {
       </If>
 
       <AvatarAndNickUser>
-        <Avatar
-          size={150}
-          avatar="https://www.maisesports.com.br/wp-content/uploads/2019/06/brTT-e-Flanalista-Flamengo-2%C2%BA-Split-CBLoL-2019-1.jpg"
-        />
+        <Avatar size={150} avatar={data.avatar.url} />
         <Typography font="bold" size="h3" color="contrast">
           {data.nickname}
         </Typography>

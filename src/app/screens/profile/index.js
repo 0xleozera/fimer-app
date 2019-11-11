@@ -20,7 +20,13 @@ const Profile = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(ProfileActions.getProfileRequest({ id: userId || authId }));
-  }, [authId, dispatch, userId]);
+
+    const profileRequest = navigation.addListener('didFocus', () => {
+      dispatch(ProfileActions.getProfileRequest({ id: userId || authId }));
+    });
+
+    return () => profileRequest.remove();
+  }, [authId, dispatch, navigation, userId]);
 
   return (
     <BaseScreen statusBarBackground={theme.colors.primary.dark}>

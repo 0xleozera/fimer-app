@@ -5,6 +5,7 @@ import useTheme from 'hooks/use-theme';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as FilterActions } from 'ducks/filters';
+import { Creators as PlayActions } from 'ducks/play';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -41,6 +42,7 @@ const FilterModal = ({ isVisible, closeModal }) => {
     dispatch(
       FilterActions.setFilter({ field: currentFilter, selected, label }),
     );
+    dispatch(PlayActions.setCurrentIndex(0));
     closeModal();
   };
 

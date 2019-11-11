@@ -219,11 +219,11 @@ const Players = () => {
           <ProfileActionButton
             background={theme.colors.actions.blue}
             iconName="md-person"
-            onPress={() =>
+            onPress={() => {
               navigation.navigate('ShowProfile', {
                 userId: players[currentIndex].id,
-              })
-            }
+              });
+            }}
           />
 
           <PlayActionButton

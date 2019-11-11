@@ -31,7 +31,9 @@ const Profile = ({ navigation }) => {
           'ShowProfileChat',
         ].includes(navigation.state.routeName)}>
         <Header>
-          <Typography>Perfil</Typography>
+          <Typography size="h4" font="bold" color="contrast">
+            Perfil
+          </Typography>
         </Header>
       </If>
       <HeaderUserInformations data={user} />

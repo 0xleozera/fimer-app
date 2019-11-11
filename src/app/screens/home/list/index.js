@@ -71,7 +71,10 @@ const List = () => {
         keyExtractor={item => item.id.toString()}
         data={users}
         renderItem={({ item }) => (
-          <Card onPress={() => navigation.navigate('ShowProfileHome')}>
+          <Card
+            onPress={() =>
+              navigation.navigate('ShowProfileHome', { userId: item.id })
+            }>
             <Avatar noMargin size={50} avatar={item.avatar.url} />
             <Informations>
               <ContainerNickname>

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { splitDate } from 'utils/date';
+import differenceInCalendarYears from 'date-fns/differenceInCalendarYears';
+
 import useTheme from 'hooks/use-theme';
 import useNavigation from 'hooks/use-navigation';
 
@@ -64,6 +67,16 @@ const Header = ({ data }) => {
     return icons[icon];
   };
 
+  const formatBirthDate = birthDate => {
+    const { day, month, years } = splitDate(birthDate);
+    const difference = differenceInCalendarYears(
+      new Date(),
+      new Date(years, month, day),
+    );
+
+    return `${difference} anos`;
+  };
+
   const filterCorrectFields = ([key]) => {
     const fields = ['name', 'birthDate', 'region', 'gender'];
 
@@ -75,7 +88,7 @@ const Header = ({ data }) => {
       <Information>
         <WrapperIcon>{getIcon(key)}</WrapperIcon>
         <Typography font="medium" type="secondary" color="regular">
-          {value}
+          {key === 'birthDate' ? formatBirthDate(value) : value}
         </Typography>
       </Information>
     </If>

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Creators as PlayActions } from 'ducks/play';
 
 import useTheme from 'hooks/use-theme';
+import useNavigation from 'hooks/use-navigation';
 
 import { parsePercentageToPixels } from 'utils/dimensions';
 
@@ -34,7 +35,10 @@ import {
 
 const Players = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  const currentIndex = useSelector(state => state.play.currentIndex);
 
   const players = useSelector(state => state.play.players);
   const selectedGame = useSelector(state => state.filters.game.selected);
@@ -215,7 +219,11 @@ const Players = () => {
           <ProfileActionButton
             background={theme.colors.actions.blue}
             iconName="md-person"
-            onPress={() => {}}
+            onPress={() =>
+              navigation.navigate('ShowProfile', {
+                userId: players[currentIndex].id,
+              })
+            }
           />
 
           <PlayActionButton

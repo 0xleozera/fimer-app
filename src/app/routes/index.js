@@ -21,6 +21,7 @@ import Play from 'screens/play';
 import Chat from 'screens/chat';
 import Conversation from 'screens/chat/conversation';
 import Profile from 'screens/profile';
+import ProfileEdit from 'screens/profile-edit';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -118,18 +119,9 @@ export default (isSigned = false) =>
                   },
                 },
                 EditProfile: {
-                  screen: Profile,
+                  screen: ProfileEdit,
                   navigationOptions: {
-                    title: 'Editar Perfil',
-                    headerStyle: {
-                      backgroundColor: theme.colors.primary.dark,
-                      borderColor: theme.colors.primary.dark,
-                      marginTop:
-                        Platform.OS === 'android'
-                          ? StatusBar.currentHeight
-                          : 'auto',
-                    },
-                    headerTintColor: theme.colors.primary.contrast,
+                    header: null,
                   },
                 },
               }),

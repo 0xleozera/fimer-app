@@ -11,7 +11,7 @@ const HeaderConversation = ({ avatar, nickname }) => {
   return (
     <Header hasBackButton>
       <PlayerInformationsHeader
-        onPress={() => navigation.navigate('ShowProfile')}>
+        onPress={() => navigation.navigate('ShowProfileChat')}>
         <Avatar noMargin size={45} avatar={avatar} />
         <NickName>
           <Typography size="h4" font="bold" color="contrast">

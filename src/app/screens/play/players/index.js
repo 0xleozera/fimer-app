@@ -220,7 +220,7 @@ const Players = () => {
             background={theme.colors.actions.blue}
             iconName="md-person"
             onPress={() => {
-              navigation.navigate('ShowProfile', {
+              navigation.navigate('ShowProfilePlay', {
                 userId: players[currentIndex].id,
               });
             }}

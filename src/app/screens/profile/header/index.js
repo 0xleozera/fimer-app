@@ -124,7 +124,12 @@ const Header = ({ data }) => {
       <PositionInformationsAndActionButton>
         <WrapperInformations>{renderUserInformations()}</WrapperInformations>
 
-        <If test={navigation.state.routeName === 'ShowProfile'}>
+        <If
+          test={[
+            'ShowProfileHome',
+            'ShowProfilePlay',
+            'ShowProfileChat',
+          ].includes(navigation.state.routeName)}>
           <WrapperPlayButton>
             <PlayButton
               background={theme.colors.accent.regular}

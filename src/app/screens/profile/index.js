@@ -5,9 +5,9 @@ import useTheme from 'hooks/use-theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as ProfileActions } from 'ducks/profile';
 
-import { BaseScreen } from 'components';
+import { BaseScreen, Header, Typography, If } from 'components';
 
-import Header from './header';
+import HeaderUserInformations from './header';
 import Games from './games';
 
 const Profile = ({ navigation }) => {
@@ -24,7 +24,17 @@ const Profile = ({ navigation }) => {
 
   return (
     <BaseScreen statusBarBackground={theme.colors.primary.dark}>
-      <Header data={user} />
+      <If
+        test={[
+          'ShowProfileHome',
+          'ShowProfilePlay',
+          'ShowProfileChat',
+        ].includes(navigation.state.routeName)}>
+        <Header>
+          <Typography>Perfil</Typography>
+        </Header>
+      </If>
+      <HeaderUserInformations data={user} />
       <Games data={user} />
     </BaseScreen>
   );

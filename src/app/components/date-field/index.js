@@ -55,7 +55,6 @@ const DateField = ({ date, onChange, placeholder }) => {
             minimumDate={minimumDate}
             maximumDate={new Date()}
             mode="date"
-            display="calendar"
             is24Hour={true}
             locale="pt-BR"
           />

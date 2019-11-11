@@ -228,7 +228,7 @@ const Players = () => {
 
           <PlayActionButton
             background={theme.colors.accent.regular}
-            onPress={() => {}}
+            onPress={() => dispatch(PlayActions.likeRequest())}
           />
         </ContainerActionButtons>
       </If>

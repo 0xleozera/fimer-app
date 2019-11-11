@@ -42,8 +42,24 @@ export function* getFilteringPlayers() {
   }
 }
 
+export function* like() {
+  try {
+    const [currentIndex, players] = yield all([
+      select(state => state.play.currentIndex),
+      select(state => state.play.players),
+    ]);
+
+    yield call(api.post, 'likes', { likeeId: players[currentIndex].id });
+    yield put(PlayActions.likeSuccess());
+  } catch (err) {
+    Alert.alert('Falha no curtir', 'Houve um erro ao curtir o jogador');
+    yield put(PlayActions.likeFailure());
+  }
+}
+
 export default all([
   takeLatest(PlayTypes.GET_PLAY_REQUEST, getPlayers),
+  takeLatest(PlayTypes.LIKE_REQUEST, like),
   takeLatest(FilterTypes.CLEAR_FILTER, getFilteringPlayers),
   takeLatest(FilterTypes.SET_FILTER, getFilteringPlayers),
 ]);

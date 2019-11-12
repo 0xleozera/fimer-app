@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import useTheme from 'hooks/use-theme';
 
-import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { Modal, SelectItem, Typography } from 'components';
@@ -93,7 +93,7 @@ const SelectField = ({ label, value, onChange, placeholder, options }) => {
           <ContentModal>
             <TitleModal>
               <Typography font="bold" size="h7" color="contrast">
-                {placeholder}
+                {placeholder.toUpperCase()}
               </Typography>
               <ClearButton onPress={() => handleClearFilter()}>
                 <WrapperIconButton>

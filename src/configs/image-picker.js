@@ -4,7 +4,6 @@ export default {
   cancelButtonTitle: 'Cancelar',
   takePhotoButtonTitle: 'Câmera',
   chooseFromLibraryButtonTitle: 'Galeria',
-  tintColor: '#007aff',
   permissionDenied: {
     title: 'Permissão negada',
     text:

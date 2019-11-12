@@ -14,11 +14,10 @@
         <item name="colorAccent">#6e6eff</item>
 
         <!-- Used for the title and text -->
-        <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:textColorSecondary">#FFFFFF</item>
+        <item name="android:textColorPrimary">#6e6eff</item>
 
         <!-- Used for the background -->
-        <item name="android:background">#27273e</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
 
 </resources>

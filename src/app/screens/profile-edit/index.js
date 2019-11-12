@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 
-import { BaseScreen, Typography, Header } from 'components';
+import { BaseScreen, Typography, Header, Tabs, If } from 'components';
 import { HeaderInformations, SaveButton, Content } from './styles';
 
 import Informations from './informations';
@@ -19,6 +19,7 @@ const ProfileEdit = () => {
   const theme = useTheme();
   const currentUser = useSelector(state => state.profile.user);
 
+  const [currentTab, setCurrentTab] = useState('information');
   const [user, setUser] = useState(currentUser);
 
   const handleChangeUser = (field, value) => {
@@ -40,7 +41,9 @@ const ProfileEdit = () => {
   };
 
   return (
-    <BaseScreen statusBarBackground={theme.colors.primary.dark}>
+    <BaseScreen
+      hasScroll={false}
+      statusBarBackground={theme.colors.primary.dark}>
       <Header hasBackButton>
         <HeaderInformations>
           <Typography font="bold" size="h4" color="contrast">
@@ -55,13 +58,25 @@ const ProfileEdit = () => {
           </SaveButton>
         </HeaderInformations>
       </Header>
+      <Tabs
+        initialTab="information"
+        onChange={tab => setCurrentTab(tab)}
+        tabs={[
+          { key: 'information', title: 'Pessoal' },
+          { key: 'games', title: 'Jogos' },
+        ]}
+      />
       <Content>
-        {/* <Informations
-          user={user}
-          setBirthDate={handleChangeBirthDateUser}
-          setUser={(field, value) => handleChangeUser(field, value)}
-        /> */}
-        <Games />
+        <If test={currentTab === 'information'}>
+          <Informations
+            user={user}
+            setBirthDate={handleChangeBirthDateUser}
+            setUser={(field, value) => handleChangeUser(field, value)}
+          />
+        </If>
+        <If test={currentTab === 'games'}>
+          <Games />
+        </If>
       </Content>
     </BaseScreen>
   );

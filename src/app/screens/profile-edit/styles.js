@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 
 import { RectButton } from 'react-native-gesture-handler';
 
+export const Container = styled.View``;
+
 export const HeaderInformations = styled.View`
   flex: 1;
   flex-direction: row;
@@ -18,7 +20,8 @@ export const SaveButton = styled(RectButton)`
   border-radius: 20;
 `;
 
-export const Content = styled.View`
+export const Content = styled.ScrollView`
+  flex: 1;
   padding-vertical: 10;
   padding-horizontal: 10;
 `;

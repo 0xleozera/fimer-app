@@ -7,6 +7,7 @@ import { Avatar, Typography, DateField } from 'components';
 import {
   ContainerInformations,
   ContentBackground,
+  ContentBackgroundAvatar,
   ContainerAvatar,
   Title,
   FormInput,
@@ -27,7 +28,7 @@ const Informations = ({ user, setUser, setBirthDate }) => {
 
   return (
     <ContainerInformations>
-      <ContentBackground>
+      <ContentBackgroundAvatar>
         <Title>
           <Typography size="h6" font="bold" color="contrast">
             Avatar
@@ -41,7 +42,7 @@ const Informations = ({ user, setUser, setBirthDate }) => {
             size={130}
           />
         </ContainerAvatar>
-      </ContentBackground>
+      </ContentBackgroundAvatar>
 
       <ContentBackground>
         <Title>

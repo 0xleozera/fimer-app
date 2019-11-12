@@ -23,7 +23,7 @@ const Informations = ({ user, setUser, setBirthDate }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const [avatar, setAvatat] = useState(user.avatar.url);
+  const [avatar, setAvatar] = useState(user.avatar.url);
 
   const handleCamera = () => {
     ImagePicker.showImagePicker(imagePickerConfig, response => {
@@ -32,7 +32,12 @@ const Informations = ({ user, setUser, setBirthDate }) => {
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        setAvatat(response.uri);
+        setUser('newAvatar', {
+          uri: response.uri,
+          name: response.fileName,
+          type: response.type,
+        });
+        setAvatar(response.uri);
       }
     });
   };

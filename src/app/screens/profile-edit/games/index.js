@@ -77,7 +77,7 @@ const Games = ({
       <ContentBackground>
         <SelectField
           label="Jogo"
-          value={game.description}
+          value={game.game.description}
           onChange={value => updateGameOrRanking(index, 'game', value)}
           placeholder="Escolha o jogo"
           options={handleGameOptions()}

@@ -36,6 +36,18 @@ const Games = ({
     return filteredOptions;
   };
 
+  const handlePositionOptions = () => {
+    const options = [
+      { id: 1, description: 'AD Carry' },
+      { id: 2, description: 'Support' },
+    ];
+    const filteredOptions = options.filter(
+      option => !selectedPositions.includes(option.description),
+    );
+
+    return filteredOptions;
+  };
+
   const renderRanking = (ranking, index) => (
     <SelectField
       label="Ranking"
@@ -53,7 +65,7 @@ const Games = ({
         value={position.description}
         onChange={value => updatePosition(gameIndex, index, value)}
         placeholder="Escolha sua posição"
-        options={[{ id: 1, description: 'AD Carry' }]}
+        options={handlePositionOptions()}
       />
     ));
 

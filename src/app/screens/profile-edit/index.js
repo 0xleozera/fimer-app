@@ -84,6 +84,25 @@ const ProfileEdit = () => {
   };
 
   const handleUpdatePosition = (indexGame, indexPosition, value) => {
+    if (games[indexGame].positions[indexPosition].description === '') {
+      setSelectedPositions(selectedPositions.concat(value.description));
+    }
+
+    if (games[indexGame].positions[indexPosition].description !== '') {
+      setSelectedPositions(oldSelectedPosition => {
+        const filteredSelectedPositions = oldSelectedPosition.filter(
+          selectedGame =>
+            selectedGame !==
+            games[indexGame].positions[indexPosition].description,
+        );
+        const addNewSelectedGame = filteredSelectedPositions.concat(
+          value.description,
+        );
+
+        return [...addNewSelectedGame];
+      });
+    }
+
     setGames(oldGame => {
       const newGame = oldGame;
       newGame[indexGame].positions[indexPosition] = value;

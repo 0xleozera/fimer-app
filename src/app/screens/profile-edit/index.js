@@ -23,13 +23,21 @@ const ProfileEdit = () => {
   const userId = useSelector(state => state.auth.user.id);
   const currentUser = useSelector(state => state.profile.edit);
   const currentGames = useSelector(state => state.profile.edit.games);
+  const currentSelectedGames = useSelector(
+    state => state.profile.edit.selectedGames,
+  );
+  const currentSelectedPositions = useSelector(
+    state => state.profile.edit.selectedPositions,
+  );
 
   const [currentTab, setCurrentTab] = useState('information');
   const [user, setUser] = useState(currentUser);
 
   const [games, setGames] = useState(currentGames);
-  const [selectedGames, setSelectedGames] = useState([]);
-  const [selectedPositions, setSelectedPositions] = useState([]);
+  const [selectedGames, setSelectedGames] = useState(currentSelectedGames);
+  const [selectedPositions, setSelectedPositions] = useState(
+    currentSelectedPositions,
+  );
 
   useEffect(() => {
     dispatch(ActionProfile.getProfileEditRequest({ id: userId }));
@@ -38,7 +46,14 @@ const ProfileEdit = () => {
   useEffect(() => {
     setUser(currentUser);
     setGames(currentGames);
-  }, [currentUser, currentGames]);
+    setSelectedGames(currentSelectedGames);
+    setSelectedPositions(currentSelectedPositions);
+  }, [
+    currentUser,
+    currentGames,
+    currentSelectedGames,
+    currentSelectedPositions,
+  ]);
 
   const handleChangeUser = (field, value) => {
     setUser(oldUser => ({

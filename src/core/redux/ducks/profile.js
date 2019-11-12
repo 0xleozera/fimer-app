@@ -47,6 +47,8 @@ const INITIAL_STATE = {
       url: '',
     },
     games: [],
+    selectedGames: [],
+    selectedPositions: [],
   },
 };
 

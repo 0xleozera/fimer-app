@@ -26,27 +26,42 @@ export function* showToEdit({ payload }) {
   try {
     const { data } = yield call(api.get, `users/${payload.id}`);
 
-    const games = data.user.games.map(game => ({
-      game: {
-        id: game.id,
-        description: game.name,
-      },
-      ranking: {
-        id: data.user.rankings.filter(ranking => ranking.gameId === game.id)[0]
-          .id,
-        description: data.user.rankings.filter(
-          ranking => ranking.gameId === game.id,
-        )[0].description,
-      },
-      positions: data.user.positions
-        .filter(position => position.gameId === game.id)
-        .map(position => ({
-          id: position.id,
-          description: position.description,
-        })),
-    }));
+    const games = data.user.games.map(game => {
+      const ranking = data.user.rankings.filter(
+        currentRanking => currentRanking.gameId === game.id,
+      );
 
-    yield put(ProfileActions.getProfileEditSuccess({ ...data.user, games }));
+      return {
+        game: {
+          id: game.id,
+          description: game.name,
+        },
+        ranking: {
+          id: ranking[0].id || 0,
+          description: ranking[0].description || '',
+        },
+        positions: data.user.positions
+          .filter(position => position.gameId === game.id)
+          .map(position => ({
+            id: position.id,
+            description: position.description,
+          })),
+      };
+    });
+
+    const selectedGames = data.user.games.map(game => game.name);
+    const selectedPositions = data.user.positions.map(
+      position => position.description,
+    );
+
+    yield put(
+      ProfileActions.getProfileEditSuccess({
+        ...data.user,
+        games,
+        selectedGames,
+        selectedPositions,
+      }),
+    );
   } catch (err) {
     Alert.alert(
       'Falha no carregamento',

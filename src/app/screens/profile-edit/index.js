@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-
-import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
 
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import useTheme from 'hooks/use-theme';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Creators as ActionProfile } from 'ducks/profile';
 
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 
@@ -19,14 +18,27 @@ import Games from './games';
 
 const ProfileEdit = () => {
   const theme = useTheme();
-  const currentUser = useSelector(state => state.profile.user);
+  const dispatch = useDispatch();
+
+  const userId = useSelector(state => state.auth.user.id);
+  const currentUser = useSelector(state => state.profile.edit);
+  const currentGames = useSelector(state => state.profile.edit.games);
 
   const [currentTab, setCurrentTab] = useState('information');
   const [user, setUser] = useState(currentUser);
 
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState(currentGames);
   const [selectedGames, setSelectedGames] = useState([]);
   const [selectedPositions, setSelectedPositions] = useState([]);
+
+  useEffect(() => {
+    dispatch(ActionProfile.getProfileEditRequest({ id: userId }));
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    setUser(currentUser);
+    setGames(currentGames);
+  }, [currentUser, currentGames]);
 
   const handleChangeUser = (field, value) => {
     setUser(oldUser => ({

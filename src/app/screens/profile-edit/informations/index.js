@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import ImagePicker from 'react-native-image-picker';
 import imagePickerConfig from 'configs/image-picker';
@@ -24,6 +24,10 @@ const Informations = ({ user, setUser, setBirthDate }) => {
   const passwordRef = useRef();
 
   const [avatar, setAvatar] = useState(user.avatar.url);
+
+  useEffect(() => {
+    setAvatar(user.avatar.url);
+  }, [user.avatar.url]);
 
   const handleCamera = () => {
     ImagePicker.showImagePicker(imagePickerConfig, response => {

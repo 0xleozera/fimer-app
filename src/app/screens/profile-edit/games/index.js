@@ -67,7 +67,7 @@ const Games = ({
 
   const renderPositions = (positions, gameIndex) => {
     const mappedPositions = positions.map((position, index) => (
-      <ContainerSelectPosition>
+      <ContainerSelectPosition key={index}>
         <SelectField
           label="Posição"
           value={position.description}
@@ -94,7 +94,7 @@ const Games = ({
   const renderGames = () => {
     const mappedGames = games.map((currentGame, index) => {
       return (
-        <ContentBackground>
+        <ContentBackground key={index}>
           <ContainerRemoveButton>
             <WrapperContentButton onPress={() => removeGames(index)}>
               <RemoveIcon>

@@ -4,6 +4,7 @@ import { RectButton } from 'react-native-gesture-handler';
 
 export const ContainerGames = styled.View`
   flex: 1;
+  margin-top: 10;
 `;
 
 export const ContentBackground = styled.View`

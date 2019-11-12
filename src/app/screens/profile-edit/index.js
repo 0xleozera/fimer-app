@@ -22,6 +22,10 @@ const ProfileEdit = () => {
   const [currentTab, setCurrentTab] = useState('information');
   const [user, setUser] = useState(currentUser);
 
+  const [games, setGames] = useState([]);
+  const [selectedGames, setSelectedGames] = useState([]);
+  const [selectedPositions, setSelectedPositions] = useState([]);
+
   const handleChangeUser = (field, value) => {
     setUser(oldUser => ({
       ...oldUser,
@@ -38,6 +42,10 @@ const ProfileEdit = () => {
       ...oldUser,
       birthDate: formattedBirthDate,
     }));
+  };
+
+  const handleSetGame = game => {
+    setGames(oldGame => [...oldGame, game]);
   };
 
   return (
@@ -75,7 +83,14 @@ const ProfileEdit = () => {
           />
         </If>
         <If test={currentTab === 'games'}>
-          <Games />
+          <Games
+            games={games}
+            setGames={game => handleSetGame(game)}
+            selectedGames={selectedGames}
+            setSelectedGames={() => {}}
+            selectedPositions={selectedPositions}
+            setSelectedPositions={() => {}}
+          />
         </If>
       </Content>
     </BaseScreen>

@@ -9,6 +9,7 @@ import Header from './header';
 import If from './if';
 import Modal from './modal';
 import PlayActionButton from './play-action-button';
+import SelectField from './select-field';
 import SelectItem from './select-item';
 import Separator from './separator';
 import TextField from './text-field';
@@ -26,6 +27,7 @@ export {
   If,
   Modal,
   PlayActionButton,
+  SelectField,
   SelectItem,
   Separator,
   TextField,

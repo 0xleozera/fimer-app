@@ -13,6 +13,7 @@ import { BaseScreen, Typography, Header } from 'components';
 import { HeaderInformations, SaveButton, Content } from './styles';
 
 import Informations from './informations';
+import Games from './games';
 
 const ProfileEdit = () => {
   const theme = useTheme();
@@ -55,11 +56,12 @@ const ProfileEdit = () => {
         </HeaderInformations>
       </Header>
       <Content>
-        <Informations
+        {/* <Informations
           user={user}
           setBirthDate={handleChangeBirthDateUser}
           setUser={(field, value) => handleChangeUser(field, value)}
-        />
+        /> */}
+        <Games />
       </Content>
     </BaseScreen>
   );

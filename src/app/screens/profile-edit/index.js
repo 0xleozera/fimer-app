@@ -58,6 +58,23 @@ const ProfileEdit = () => {
   };
 
   const handleUpdateGameOrRanking = (index, field, value) => {
+    if (field === 'game' && games[index].game.description === '') {
+      setSelectedGames(selectedGames.concat(value.description));
+    }
+
+    if (field === 'game' && games[index].game.description !== '') {
+      setSelectedGames(oldSelectedGames => {
+        const filteredSelectedGames = oldSelectedGames.filter(
+          selectedGame => selectedGame !== games[index].game.description,
+        );
+        const addNewSelectedGame = filteredSelectedGames.concat(
+          value.description,
+        );
+
+        return [...addNewSelectedGame];
+      });
+    }
+
     setGames(oldGame => {
       const newGame = oldGame;
       newGame[index][field] = value;
@@ -123,9 +140,7 @@ const ProfileEdit = () => {
               handleUpdateGameOrRanking(index, field, value)
             }
             selectedGames={selectedGames}
-            setSelectedGames={() => {}}
             selectedPositions={selectedPositions}
-            setSelectedPositions={() => {}}
           />
         </If>
       </Content>

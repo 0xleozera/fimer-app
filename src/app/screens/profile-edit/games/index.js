@@ -20,9 +20,7 @@ const Games = ({
   updatePosition,
   updateGameOrRanking,
   selectedGames,
-  setSelectedGames,
   selectedPositions,
-  setSelectedPositions,
 }) => {
   const theme = useTheme();
 
@@ -51,7 +49,6 @@ const Games = ({
   };
 
   const renderGames = () => {
-    console.log(games);
     const mappedGames = games.map((game, index) => (
       <ContentBackground>
         <SelectField
@@ -59,7 +56,10 @@ const Games = ({
           value={game.description}
           onChange={value => updateGameOrRanking(index, 'game', value)}
           placeholder="Escolha o jogo"
-          options={[{ id: 1, description: 'League of Legends' }]}
+          options={[
+            { id: 1, description: 'League of Legends' },
+            { id: 2, description: 'Fortnite' },
+          ].filter(option => !selectedGames.includes(option.description))}
         />
 
         <If test={!!game.game.description}>

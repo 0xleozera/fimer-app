@@ -17,3 +17,8 @@ export const SaveButton = styled(RectButton)`
   background-color: ${({ theme }) => theme.colors.accent.regular};
   border-radius: 20;
 `;
+
+export const Content = styled.View`
+  padding-vertical: 10;
+  padding-horizontal: 10;
+`;

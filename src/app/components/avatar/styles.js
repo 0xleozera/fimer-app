@@ -1,9 +1,13 @@
 import styled from 'styled-components/native';
 
+export const Button = styled.TouchableWithoutFeedback`
+  position: relative;
+  z-index: 1;
+`;
+
 export const Container = styled.View`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
-  position: relative;
   margin-bottom: ${({ noMargin }) => (noMargin ? 0 : 10)};
 `;
 
@@ -16,14 +20,6 @@ export const ContainerAvatar = styled.View`
   background-color: ${({ theme }) => theme.colors.primary.dark};
   justify-content: center;
   align-items: center;
-  shadow-color: ${({ theme }) => theme.colors.accent.regular};
-  shadow-offset: {
-    width: 0,
-    height: 5
-  };
-  shadow-opacity: 0.34;
-  shadow-radius: 6.27;
-  elevation: 10;
 `;
 
 export const UserImage = styled.Image`
@@ -38,7 +34,7 @@ export const ContainerIcon = styled.View`
   right: 10;
   height: 30;
   width: 30;
-  border-radius: 100;
+  border-radius: 20;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.accent.regular};

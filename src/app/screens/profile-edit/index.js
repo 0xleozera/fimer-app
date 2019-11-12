@@ -44,8 +44,35 @@ const ProfileEdit = () => {
     }));
   };
 
-  const handleSetGame = game => {
+  const handleAddMoreGame = game => {
     setGames(oldGame => [...oldGame, game]);
+  };
+
+  const handleAddMorePosition = (position, index) => {
+    setGames(oldGame => {
+      const newGame = oldGame;
+      newGame[index].positions = [...newGame[index].positions, position];
+
+      return [...newGame];
+    });
+  };
+
+  const handleUpdateGameOrRanking = (index, field, value) => {
+    setGames(oldGame => {
+      const newGame = oldGame;
+      newGame[index][field] = value;
+
+      return [...newGame];
+    });
+  };
+
+  const handleUpdatePosition = (indexGame, indexPosition, value) => {
+    setGames(oldGame => {
+      const newGame = oldGame;
+      newGame[indexGame].positions[indexPosition] = value;
+
+      return [...newGame];
+    });
   };
 
   return (
@@ -85,7 +112,16 @@ const ProfileEdit = () => {
         <If test={currentTab === 'games'}>
           <Games
             games={games}
-            setGames={game => handleSetGame(game)}
+            addMoreGame={game => handleAddMoreGame(game)}
+            addMorePosition={(position, index) =>
+              handleAddMorePosition(position, index)
+            }
+            updatePosition={(indexGame, indexPosition, value) =>
+              handleUpdatePosition(indexGame, indexPosition, value)
+            }
+            updateGameOrRanking={(index, field, value) =>
+              handleUpdateGameOrRanking(index, field, value)
+            }
             selectedGames={selectedGames}
             setSelectedGames={() => {}}
             selectedPositions={selectedPositions}

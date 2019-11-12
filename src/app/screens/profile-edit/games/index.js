@@ -15,7 +15,10 @@ import {
 
 const Games = ({
   games,
-  setGames,
+  addMoreGame,
+  addMorePosition,
+  updatePosition,
+  updateGameOrRanking,
   selectedGames,
   setSelectedGames,
   selectedPositions,
@@ -23,22 +26,22 @@ const Games = ({
 }) => {
   const theme = useTheme();
 
-  const renderRanking = ranking => (
+  const renderRanking = (ranking, index) => (
     <SelectField
       label="Ranking"
       value={ranking.description}
-      onChange={value => console.log(ranking.id)}
+      onChange={value => updateGameOrRanking(index, 'ranking', value)}
       placeholder="Escolha seu ranking"
       options={[{ id: 1, description: 'Bronze' }]}
     />
   );
 
-  const renderPositions = positions => {
-    const mappedPositions = positions.map(position => (
+  const renderPositions = (positions, gameIndex) => {
+    const mappedPositions = positions.map((position, index) => (
       <SelectField
         label="Posição"
         value={position.description}
-        onChange={value => console.log(position.id)}
+        onChange={value => updatePosition(gameIndex, index, value)}
         placeholder="Escolha sua posição"
         options={[{ id: 1, description: 'AD Carry' }]}
       />
@@ -48,22 +51,23 @@ const Games = ({
   };
 
   const renderGames = () => {
-    const mappedGames = games.map(game => (
+    console.log(games);
+    const mappedGames = games.map((game, index) => (
       <ContentBackground>
         <SelectField
           label="Jogo"
           value={game.description}
-          onChange={value => console.log(value)}
+          onChange={value => updateGameOrRanking(index, 'game', value)}
           placeholder="Escolha o jogo"
           options={[{ id: 1, description: 'League of Legends' }]}
         />
 
-        <If test={!!game.description}>
-          {renderRanking(game.rankings)}
-          {renderPositions(game.positions)}
+        <If test={!!game.game.description}>
+          {renderRanking(game.ranking, index)}
+          {renderPositions(game.positions, index)}
 
           <AddMorePositionButton
-            onPress={() => console.log('New position triggered')}>
+            onPress={() => addMorePosition({ id: 0, description: '' }, index)}>
             <Typography size="h6" font="bold" color="contrast">
               Mais uma posição
             </Typography>
@@ -83,10 +87,10 @@ const Games = ({
         </Typography>
         <NewGameButton
           onPress={() =>
-            setGames({
+            addMoreGame({
               game: { id: 0, description: '' },
-              rankings: { id: 0, description: '' },
-              positions: [],
+              ranking: { id: 0, description: '' },
+              positions: [{ id: 0, description: '' }],
             })
           }>
           <IconMaterial

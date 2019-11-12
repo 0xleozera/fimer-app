@@ -29,7 +29,7 @@ const SelectField = ({ label, value, onChange, placeholder, options }) => {
 
   const handleChangeOptions = option => {
     setCurrentValue(option.description);
-    onChange(option.id);
+    onChange(option);
   };
 
   const handleScrollTo = currentPosition => {

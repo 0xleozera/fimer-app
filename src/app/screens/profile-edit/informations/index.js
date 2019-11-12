@@ -1,4 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
+
+import ImagePicker from 'react-native-image-picker';
+import imagePickerConfig from 'configs/image-picker';
 
 import parseISO from 'date-fns/parseISO';
 import { splitDate } from 'utils/date';
@@ -20,6 +23,20 @@ const Informations = ({ user, setUser, setBirthDate }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  const [avatar, setAvatat] = useState(user.avatar.url);
+
+  const handleCamera = () => {
+    ImagePicker.showImagePicker(imagePickerConfig, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        setAvatat(response.uri);
+      }
+    });
+  };
+
   const getBirthDate = () => {
     const { day, month, years } = splitDate(user.birthDate);
 
@@ -36,9 +53,10 @@ const Informations = ({ user, setUser, setBirthDate }) => {
         </Title>
         <ContainerAvatar>
           <Avatar
-            onPress={() => {}}
-            avatar={user.avatar.url}
+            onPress={() => handleCamera()}
+            avatar={avatar}
             uploader
+            sizeIcon={70}
             size={130}
           />
         </ContainerAvatar>

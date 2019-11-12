@@ -129,7 +129,7 @@ const Header = ({ data }) => {
       </If>
 
       <AvatarAndNickUser>
-        <Avatar size={150} avatar={data.avatar.url} />
+        <Avatar size={150} sizeIcon={80} avatar={data.avatar.url} />
         <Typography font="bold" size="h3" color="contrast">
           {data.nickname}
         </Typography>
@@ -149,6 +149,7 @@ const Header = ({ data }) => {
               loading={false}
               onPress={() => {}}
               hasIcon>
+              {/* Jogar ou Jogando */}
               Jogar
             </PlayButton>
           </WrapperPlayButton>

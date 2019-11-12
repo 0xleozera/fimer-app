@@ -21,14 +21,12 @@ import {
 
 const SelectField = ({ label, value, onChange, placeholder, options }) => {
   const theme = useTheme();
-  const [currentValue, setCurrentValue] = useState(value);
   const [opened, setOpened] = useState(false);
 
   const modalRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
 
   const handleChangeOptions = option => {
-    setCurrentValue(option.description);
     onChange(option);
   };
 
@@ -53,7 +51,7 @@ const SelectField = ({ label, value, onChange, placeholder, options }) => {
       <SelectItem
         key={item.id}
         label={item.description}
-        active={currentValue === item.description}
+        active={value === item.description}
         onPress={() => handlePressed(item)}
       />
     ));
@@ -77,8 +75,8 @@ const SelectField = ({ label, value, onChange, placeholder, options }) => {
             color={theme.colors.opacity.white}
             size={theme.controls.icon.small}
           />
-          <SelectText isPlaceholder={currentValue === ''}>
-            {currentValue === '' ? placeholder : currentValue}
+          <SelectText isPlaceholder={value === ''}>
+            {value === '' ? placeholder : value}
           </SelectText>
         </SelectButton>
       </Container>

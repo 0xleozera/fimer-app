@@ -11,6 +11,9 @@ import {
   Title,
   NewGameButton,
   AddMorePositionButton,
+  ContainerRemoveButton,
+  WrapperContentButton,
+  RemoveIcon,
 } from './styles';
 
 const Games = ({
@@ -19,6 +22,7 @@ const Games = ({
   addMorePosition,
   updatePosition,
   updateGameOrRanking,
+  removeGames,
   selectedGames,
   selectedPositions,
 }) => {
@@ -73,29 +77,47 @@ const Games = ({
   };
 
   const renderGames = () => {
-    const mappedGames = games.map((game, index) => (
-      <ContentBackground>
-        <SelectField
-          label="Jogo"
-          value={game.game.description}
-          onChange={value => updateGameOrRanking(index, 'game', value)}
-          placeholder="Escolha o jogo"
-          options={handleGameOptions()}
-        />
+    const mappedGames = games.map((currentGame, index) => {
+      return (
+        <ContentBackground>
+          <ContainerRemoveButton>
+            <WrapperContentButton onPress={() => removeGames(index)}>
+              <RemoveIcon>
+                <IconMaterial
+                  name="close"
+                  color={theme.colors.primary.contrast}
+                  size={10}
+                />
+              </RemoveIcon>
+              <Typography size="h8" font="bold" color="contrast">
+                REMOVER
+              </Typography>
+            </WrapperContentButton>
+          </ContainerRemoveButton>
+          <SelectField
+            label="Jogo"
+            value={currentGame.game.description}
+            onChange={value => updateGameOrRanking(index, 'game', value)}
+            placeholder="Escolha o jogo"
+            options={handleGameOptions()}
+          />
 
-        <If test={!!game.game.description}>
-          {renderRanking(game.ranking, index)}
-          {renderPositions(game.positions, index)}
+          <If test={!!currentGame.game.description}>
+            {renderRanking(currentGame.ranking, index)}
+            {renderPositions(currentGame.positions, index)}
 
-          <AddMorePositionButton
-            onPress={() => addMorePosition({ id: 0, description: '' }, index)}>
-            <Typography size="h6" font="bold" color="contrast">
-              Mais uma posição
-            </Typography>
-          </AddMorePositionButton>
-        </If>
-      </ContentBackground>
-    ));
+            <AddMorePositionButton
+              onPress={() =>
+                addMorePosition({ id: 0, description: '' }, index)
+              }>
+              <Typography size="h6" font="bold" color="contrast">
+                Mais uma posição
+              </Typography>
+            </AddMorePositionButton>
+          </If>
+        </ContentBackground>
+      );
+    });
 
     return mappedGames;
   };

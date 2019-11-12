@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import _ from 'lodash';
+
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -111,6 +113,33 @@ const ProfileEdit = () => {
     });
   };
 
+  const removeGames = gameIndex => {
+    if (games[gameIndex].game.description !== '') {
+      const filteredGame = selectedGames.filter(
+        selectedGame => selectedGame !== games[gameIndex].game.description,
+      );
+
+      setSelectedGames(filteredGame);
+    }
+
+    if (games[gameIndex].positions.length !== 0) {
+      games[gameIndex].positions.forEach(position => {
+        if (position.description !== '') {
+          setSelectedPositions(
+            selectedPositions.filter(
+              selectedPosition => selectedPosition !== position.description,
+            ),
+          );
+        }
+      });
+    }
+
+    setGames(oldGames => {
+      oldGames.splice(gameIndex, 1);
+      return [...oldGames];
+    });
+  };
+
   return (
     <BaseScreen
       hasScroll={false}
@@ -149,6 +178,7 @@ const ProfileEdit = () => {
           <Games
             games={games}
             addMoreGame={game => handleAddMoreGame(game)}
+            removeGames={indexGame => removeGames(indexGame)}
             addMorePosition={(position, index) =>
               handleAddMorePosition(position, index)
             }

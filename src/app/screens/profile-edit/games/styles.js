@@ -40,3 +40,23 @@ export const AddMorePositionButton = styled(RectButton)`
   border-radius: 4;
   margin-vertical: 10;
 `;
+
+export const ContainerRemoveButton = styled.View`
+  flex: 1;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
+export const WrapperContentButton = styled(RectButton)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 25;
+  padding-horizontal: 5;
+  background-color: ${({ theme }) => theme.colors.actions.red};
+  border-radius: 4;
+`;
+
+export const RemoveIcon = styled.View`
+  margin-right: 5;
+`;

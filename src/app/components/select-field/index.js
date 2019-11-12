@@ -81,41 +81,40 @@ const SelectField = ({ label, value, onChange, placeholder, options }) => {
         </SelectButton>
       </Container>
 
-      {opened && (
-        <Modal
-          isVisible={opened}
-          onSwipe={() => setOpened(false)}
-          onBackdropPress={() => setOpened(false)}
-          scrollTo={handleScrollTo}
-          scrollOffset={scrollOffset}>
-          <ContentModal>
-            <TitleModal>
+      <Modal
+        isVisible={opened}
+        onSwipe={() => setOpened(false)}
+        onBackdropPress={() => setOpened(false)}
+        scrollTo={handleScrollTo}
+        scrollOffset={scrollOffset}
+        statusBarColor={theme.colors.primary.dark}>
+        <ContentModal>
+          <TitleModal>
+            <Typography font="bold" size="h7" color="contrast">
+              {placeholder.toUpperCase()}
+            </Typography>
+            <ClearButton onPress={() => handleClearFilter()}>
+              <WrapperIconButton>
+                <IconMaterial
+                  size={10}
+                  color={theme.colors.primary.regular}
+                  name="close"
+                />
+              </WrapperIconButton>
               <Typography font="bold" size="h7" color="contrast">
-                {placeholder.toUpperCase()}
+                LIMPAR
               </Typography>
-              <ClearButton onPress={() => handleClearFilter()}>
-                <WrapperIconButton>
-                  <IconMaterial
-                    size={10}
-                    color={theme.colors.primary.regular}
-                    name="close"
-                  />
-                </WrapperIconButton>
-                <Typography font="bold" size="h7" color="contrast">
-                  LIMPAR
-                </Typography>
-              </ClearButton>
-            </TitleModal>
-            <ScrollView
-              ref={modalRef}
-              onScroll={event => {
-                setScrollOffset(event.nativeEvent.contentOffset.y);
-              }}>
-              {renderItems()}
-            </ScrollView>
-          </ContentModal>
-        </Modal>
-      )}
+            </ClearButton>
+          </TitleModal>
+          <ScrollView
+            ref={modalRef}
+            onScroll={event => {
+              setScrollOffset(event.nativeEvent.contentOffset.y);
+            }}>
+            {renderItems()}
+          </ScrollView>
+        </ContentModal>
+      </Modal>
     </>
   );
 };

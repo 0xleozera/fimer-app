@@ -14,6 +14,8 @@ import {
   ContainerRemoveButton,
   WrapperContentButton,
   RemoveIcon,
+  ContainerSelectPosition,
+  WrapperRemovePositionButton,
 } from './styles';
 
 const Games = ({
@@ -23,6 +25,7 @@ const Games = ({
   updatePosition,
   updateGameOrRanking,
   removeGames,
+  removePosition,
   selectedGames,
   selectedPositions,
 }) => {
@@ -64,13 +67,25 @@ const Games = ({
 
   const renderPositions = (positions, gameIndex) => {
     const mappedPositions = positions.map((position, index) => (
-      <SelectField
-        label="Posição"
-        value={position.description}
-        onChange={value => updatePosition(gameIndex, index, value)}
-        placeholder="Escolha sua posição"
-        options={handlePositionOptions()}
-      />
+      <ContainerSelectPosition>
+        <SelectField
+          label="Posição"
+          value={position.description}
+          onChange={value => updatePosition(gameIndex, index, value)}
+          placeholder="Escolha sua posição"
+          options={handlePositionOptions()}
+        />
+        <If test={index > 0}>
+          <WrapperRemovePositionButton
+            onPress={() => removePosition(gameIndex, index)}>
+            <IconMaterial
+              name="delete"
+              color={theme.colors.primary.contrast}
+              size={18}
+            />
+          </WrapperRemovePositionButton>
+        </If>
+      </ContainerSelectPosition>
     ));
 
     return mappedPositions;
@@ -84,9 +99,9 @@ const Games = ({
             <WrapperContentButton onPress={() => removeGames(index)}>
               <RemoveIcon>
                 <IconMaterial
-                  name="close"
+                  name="delete"
                   color={theme.colors.primary.contrast}
-                  size={10}
+                  size={13}
                 />
               </RemoveIcon>
               <Typography size="h8" font="bold" color="contrast">

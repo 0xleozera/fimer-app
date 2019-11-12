@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+import { SelectField } from 'components';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const ContainerGames = styled.View`
@@ -59,4 +60,21 @@ export const WrapperContentButton = styled(RectButton)`
 
 export const RemoveIcon = styled.View`
   margin-right: 5;
+`;
+
+export const ContainerSelectPosition = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const WrapperRemovePositionButton = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+  height: 30;
+  width: 30;
+  background-color: ${({ theme }) => theme.colors.actions.red};
+  border-radius: 20;
+  margin-top: 10;
+  margin-left: 10;
 `;

@@ -140,6 +140,24 @@ const ProfileEdit = () => {
     });
   };
 
+  const removePosition = (gameIndex, positionIndex) => {
+    const currentPosition =
+      games[gameIndex].positions[positionIndex].description;
+
+    if (currentPosition !== '') {
+      setSelectedPositions(
+        selectedPositions.filter(
+          selectedPosition => selectedPosition !== currentPosition,
+        ),
+      );
+    }
+
+    setGames(oldGames => {
+      oldGames[gameIndex].positions.splice(positionIndex, 1);
+      return [...oldGames];
+    });
+  };
+
   return (
     <BaseScreen
       hasScroll={false}
@@ -179,6 +197,9 @@ const ProfileEdit = () => {
             games={games}
             addMoreGame={game => handleAddMoreGame(game)}
             removeGames={indexGame => removeGames(indexGame)}
+            removePosition={(indexGame, indexPosition) =>
+              removePosition(indexGame, indexPosition)
+            }
             addMorePosition={(position, index) =>
               handleAddMorePosition(position, index)
             }

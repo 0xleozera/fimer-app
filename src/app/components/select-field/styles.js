@@ -19,7 +19,7 @@ export const SelectButton = styled.TouchableOpacity`
 
 export const SelectText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
-  font-size: ${({ theme }) => theme.typography.h5};
+  font-size: ${({ theme }) => theme.typography.h6};
   color: ${({ isPlaceholder, theme }) =>
     isPlaceholder
       ? theme.colors.opacity.placeholder

@@ -16,6 +16,6 @@ export const Input = styled.TextInput.attrs({
   flex: 1;
   color: ${({ theme }) => theme.colors.primary.contrast};
   font-family: ${({ theme }) => theme.fonts.medium};
-  font-size: ${({ theme }) => theme.typography.h5};
+  font-size: ${({ theme }) => theme.typography.h6};
   margin-left: 10px;
 `;

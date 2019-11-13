@@ -37,8 +37,8 @@ export function* showToEdit({ payload }) {
           description: game.name,
         },
         ranking: {
-          id: ranking[0].id || 0,
-          description: ranking[0].description || '',
+          id: ranking.length > 0 ? ranking[0].id : 0,
+          description: ranking.length > 0 ? ranking[0].description : '',
         },
         positions: data.user.positions
           .filter(position => position.gameId === game.id)

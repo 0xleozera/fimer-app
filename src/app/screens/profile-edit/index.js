@@ -40,6 +40,7 @@ const ProfileEdit = () => {
   );
 
   useEffect(() => {
+    dispatch(ActionProfile.getAllGamesRequest());
     dispatch(ActionProfile.getProfileEditRequest({ id: userId }));
   }, [dispatch, userId]);
 

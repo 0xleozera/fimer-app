@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import useTheme from 'hooks/use-theme';
 
@@ -30,12 +31,14 @@ const Games = ({
   selectedPositions,
 }) => {
   const theme = useTheme();
+  const allGames = useSelector(state => state.profile.allGames);
 
   const handleGameOptions = () => {
-    const options = [
-      { id: 1, description: 'League of Legends' },
-      { id: 2, description: 'Fortnite' },
-    ];
+    const options = allGames.map(game => ({
+      id: game.id,
+      description: game.name,
+    }));
+
     const filteredOptions = options.filter(
       option => !selectedGames.includes(option.description),
     );
@@ -43,11 +46,20 @@ const Games = ({
     return filteredOptions;
   };
 
-  const handlePositionOptions = () => {
-    const options = [
-      { id: 1, description: 'AD Carry' },
-      { id: 2, description: 'Support' },
-    ];
+  const handlePositionOptions = indexGame => {
+    const options = allGames
+      .map(game => {
+        const filteredPositions = game.positions
+          .filter(position => games[indexGame].game.id === position.gameId)
+          .map(position => ({
+            id: position.id,
+            description: position.description,
+          }));
+
+        return filteredPositions;
+      })
+      .reduce((all, game) => [...all, ...game], []);
+
     const filteredOptions = options.filter(
       option => !selectedPositions.includes(option.description),
     );
@@ -55,13 +67,34 @@ const Games = ({
     return filteredOptions;
   };
 
-  const renderRanking = (ranking, index) => (
+  const handleRankingOptions = indexGame => {
+    const options = allGames
+      .map(game => {
+        const filteredRankings = game.rankings
+          .filter(ranking => games[indexGame].game.id === ranking.gameId)
+          .map(ranking => ({
+            id: ranking.id,
+            description: ranking.description,
+          }));
+
+        return filteredRankings;
+      })
+      .reduce((all, game) => [...all, ...game], []);
+
+    const filteredOptions = options.filter(
+      option => !selectedPositions.includes(option.description),
+    );
+
+    return filteredOptions;
+  };
+
+  const renderRanking = (ranking, gameIndex) => (
     <SelectField
       label="Ranking"
       value={ranking.description}
-      onChange={value => updateGameOrRanking(index, 'ranking', value)}
+      onChange={value => updateGameOrRanking(gameIndex, 'ranking', value)}
       placeholder="Escolha seu ranking"
-      options={[{ id: 1, description: 'Bronze' }]}
+      options={handleRankingOptions(gameIndex)}
     />
   );
 
@@ -73,7 +106,7 @@ const Games = ({
           value={position.description}
           onChange={value => updatePosition(gameIndex, index, value)}
           placeholder="Escolha sua posição"
-          options={handlePositionOptions()}
+          options={handlePositionOptions(gameIndex)}
         />
         <If test={index > 0}>
           <WrapperRemovePositionButton

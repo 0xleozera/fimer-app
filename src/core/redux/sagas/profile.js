@@ -119,7 +119,6 @@ export function* update({ payload }) {
     yield put(ProfileActions.updateProfileSuccess(data));
     Navigator.goBack();
   } catch (err) {
-    console.log(err);
     Alert.alert(
       'Falha na atualização',
       'Houve um erro na atualização do perfil, verifique seus dados',
@@ -128,8 +127,23 @@ export function* update({ payload }) {
   }
 }
 
+export function* listGames() {
+  try {
+    const { data } = yield call(api.get, 'games');
+
+    yield put(ProfileActions.getAllGamesSuccess(data));
+  } catch (err) {
+    Alert.alert(
+      'Falha no carregar',
+      'Houve um erro no carregamento dos jogos, verifique seus dados',
+    );
+    yield put(ProfileActions.getAllGamesFailure());
+  }
+}
+
 export default all([
   takeLatest(ProfileTypes.GET_PROFILE_REQUEST, show),
   takeLatest(ProfileTypes.GET_PROFILE_EDIT_REQUEST, showToEdit),
+  takeLatest(ProfileTypes.GET_ALL_GAMES_REQUEST, listGames),
   takeLatest(ProfileTypes.UPDATE_PROFILE_REQUEST, update),
 ]);

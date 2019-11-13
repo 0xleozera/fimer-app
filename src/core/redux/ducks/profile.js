@@ -12,6 +12,10 @@ export const { Creators, Types } = createActions({
   getProfileEditSuccess: ['data'],
   getProfileEditFailure: [],
 
+  getAllGamesRequest: ['payload'],
+  getAllGamesSuccess: ['data'],
+  getAllGamesFailure: [],
+
   updateProfileRequest: ['payload'],
   updateProfileSuccess: ['data'],
   updateProfileFailure: [],
@@ -50,6 +54,7 @@ const INITIAL_STATE = {
     selectedGames: [],
     selectedPositions: [],
   },
+  allGames: [],
 };
 
 const getProfileRequest = (state = INITIAL_STATE) => ({
@@ -85,6 +90,22 @@ const getProfileEditFailure = (state = INITIAL_STATE) => ({
   isLoading: false,
 });
 
+const getAllGamesRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: true,
+});
+
+const getAllGamesSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isLoading: false,
+  allGames: action.data,
+});
+
+const getAllGamesFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: false,
+});
+
 const updateProfileRequest = (state = INITIAL_STATE) => ({
   ...state,
   isLoading: true,
@@ -109,6 +130,10 @@ export default createReducer(INITIAL_STATE, {
   [Types.GET_PROFILE_EDIT_REQUEST]: getProfileEditRequest,
   [Types.GET_PROFILE_EDIT_SUCCESS]: getProfileEditSuccess,
   [Types.GET_PROFILE_EDIT_FAILURE]: getProfileEditFailure,
+
+  [Types.GET_ALL_GAMES_REQUEST]: getAllGamesRequest,
+  [Types.GET_ALL_GAMES_SUCCESS]: getAllGamesSuccess,
+  [Types.GET_ALL_GAMES_FAILURE]: getAllGamesFailure,
 
   [Types.UPDATE_PROFILE_REQUEST]: updateProfileRequest,
   [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,

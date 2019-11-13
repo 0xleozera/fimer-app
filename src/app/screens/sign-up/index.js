@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react';
 
+import useTheme from 'hooks/use-theme';
+import genders from 'utils/genders';
+
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Creators as SignUpActions } from 'ducks/sign-up';
 
-import { Background, DateField } from 'components';
+import { Background, DateField, SelectField } from 'components';
 import {
   Container,
   Logo,
@@ -19,9 +22,9 @@ import {
 
 const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const nicknameRef = useRef();
-  const genderRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -80,27 +83,25 @@ const SignUp = ({ navigation }) => {
             placeholder="Apelido nos jogos"
             ref={nicknameRef}
             returnKeyType="next"
-            onSubmitEditing={() => genderRef.current.focus()}
+            onSubmitEditing={() => emailRef.current.focus()}
             value={nickname}
             onChangeText={setNickname}
-          />
-
-          <FormInput
-            icon="transgender-alt"
-            autoCorrect={false}
-            autoCapitalize="none"
-            placeholder="Sexo"
-            ref={genderRef}
-            returnKeyType="next"
-            onSubmitEditing={() => emailRef.current.focus()}
-            value={gender}
-            onChangeText={setGender}
           />
 
           <DateField
             placeholder="Aniversário"
             date={birthDate}
             onChange={handleBirthDateChange}
+          />
+
+          <SelectField
+            icon="transgender-alt"
+            value={gender}
+            onChange={value => setGender(value.description)}
+            placeholder="Escolha seu gênero"
+            options={genders}
+            container={false}
+            statusBarColor={theme.colors.accent.regular}
           />
 
           <FormInput

@@ -27,6 +27,8 @@ const SelectField = ({
   onChange,
   placeholder,
   options,
+  container,
+  statusBarColor,
 }) => {
   const theme = useTheme();
   const [opened, setOpened] = useState(false);
@@ -99,7 +101,7 @@ const SelectField = ({
 
   return (
     <>
-      <Container>
+      <Container container={container}>
         {!!label && (
           <Label>
             <Typography font="bold" size="h7" color="contrast">
@@ -121,7 +123,7 @@ const SelectField = ({
         onBackdropPress={() => setOpened(false)}
         scrollTo={handleScrollTo}
         scrollOffset={scrollOffset}
-        statusBarColor={theme.colors.primary.dark}>
+        statusBarColor={statusBarColor || theme.colors.primary.dark}>
         <ContentModal>
           <TitleModal>
             <Typography font="bold" size="h7" color="contrast">
@@ -160,6 +162,8 @@ SelectField.propTypes = {
   placeholder: PropTypes.string,
   options: PropTypes.array,
   icon: PropTypes.string,
+  container: PropTypes.bool,
+  statusBarColor: PropTypes.string,
 };
 
 SelectField.defaultProps = {
@@ -169,6 +173,8 @@ SelectField.defaultProps = {
   placeholder: '',
   options: [],
   icon: 'logo-game-controller-b',
+  container: true,
+  statusBarColor: '',
 };
 
 export default SelectField;

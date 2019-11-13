@@ -110,7 +110,7 @@ const Informations = ({ user, setUser, setBirthDate }) => {
         <SelectField
           icon="home"
           value={user.region}
-          onChange={value => setUser('gender', value.description)}
+          onChange={value => setUser('region', value.description)}
           placeholder="Escolha sua região"
           options={states}
         />

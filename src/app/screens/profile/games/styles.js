@@ -2,7 +2,8 @@ import styled from 'styled-components/native';
 
 export const ContentUserGames = styled.View`
   flex: 1;
-  margin-vertical: 10;
+  margin-top: 10;
+  margin-bottom: 2;
   margin-horizontal: 10;
 `;
 
@@ -21,7 +22,7 @@ export const CardGame = styled.View`
 export const ListPositions = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 3;
+  margin-bottom: 8;
 `;
 
 export const Position = styled.View`
@@ -30,7 +31,7 @@ export const Position = styled.View`
 
 export const ContainerInformations = styled.View`
   flex-direction: row;
-  margin-bottom: 3;
+  margin-bottom: 8;
 `;
 
 export const Label = styled.View`

@@ -29,6 +29,7 @@ const Games = ({
   removePosition,
   selectedGames,
   selectedPositions,
+  hasError,
 }) => {
   const theme = useTheme();
   const allGames = useSelector(state => state.profile.allGames);
@@ -96,6 +97,8 @@ const Games = ({
       onChange={value => updateGameOrRanking(gameIndex, 'ranking', value)}
       placeholder="Escolha seu ranking"
       options={handleRankingOptions(gameIndex)}
+      hasError={hasError}
+      errorMessage="Ranking é obrigatório"
     />
   );
 
@@ -109,6 +112,8 @@ const Games = ({
           onChange={value => updatePosition(gameIndex, index, value)}
           placeholder="Escolha sua posição"
           options={handlePositionOptions(gameIndex)}
+          hasError={hasError}
+          errorMessage="Posição é obrigatória"
         />
         <If test={index > 0}>
           <WrapperRemovePositionButton
@@ -150,6 +155,8 @@ const Games = ({
             onChange={value => updateGameOrRanking(index, 'game', value)}
             placeholder="Escolha o jogo"
             options={handleGameOptions()}
+            hasError={hasError}
+            errorMessage="Jogo é obrigatório"
           />
 
           <If test={!!currentGame.game.description}>

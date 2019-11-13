@@ -8,17 +8,22 @@ import { splitDate } from 'utils/date';
 import states from 'utils/states';
 import genders from 'utils/genders';
 
-import { Avatar, Typography, DateField, SelectField } from 'components';
+import {
+  Avatar,
+  Typography,
+  DateField,
+  TextField,
+  SelectField,
+} from 'components';
 import {
   ContainerInformations,
   ContentBackground,
   ContentBackgroundAvatar,
   ContainerAvatar,
   Title,
-  FormInput,
 } from './styles';
 
-const Informations = ({ user, setUser, setBirthDate }) => {
+const Informations = ({ user, setUser, setBirthDate, hasError }) => {
   const nicknameRef = useRef();
   const emailRef = useRef();
 
@@ -76,7 +81,7 @@ const Informations = ({ user, setUser, setBirthDate }) => {
             Informações Pessoais
           </Typography>
         </Title>
-        <FormInput
+        <TextField
           icon="person-outline"
           autoCorrect={false}
           autoCapitalize="none"
@@ -85,9 +90,11 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           onSubmitEditing={() => nicknameRef.current.focus()}
           value={user.name}
           onChangeText={value => setUser('name', value)}
+          hasError={hasError}
+          errorMessage="Nome completo é obrigatório"
         />
 
-        <FormInput
+        <TextField
           icon="logo-game-controller-b"
           autoCorrect={false}
           autoCapitalize="none"
@@ -97,6 +104,8 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           onSubmitEditing={() => emailRef.current.focus()}
           value={user.nickname}
           onChangeText={value => setUser('nickname', value)}
+          hasError={hasError}
+          errorMessage="Apelido nos jogos é obrigatório"
         />
 
         <SelectField
@@ -105,6 +114,8 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           onChange={value => setUser('gender', value.description)}
           placeholder="Escolha seu sexo"
           options={genders}
+          hasError={hasError}
+          errorMessage="Sexo é obrigatório"
         />
 
         <SelectField
@@ -119,9 +130,11 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           placeholder="Aniversário"
           date={getBirthDate()}
           onChange={value => setBirthDate(value)}
+          hasError={hasError}
+          errorMessage="Aniversário é obrigatório"
         />
 
-        <FormInput
+        <TextField
           icon="mail-outline"
           keyboardType="email-address"
           autoCorrect={false}
@@ -130,6 +143,8 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           ref={emailRef}
           value={user.email}
           onChangeText={value => setUser('email', value)}
+          hasError={hasError}
+          errorMessage="Email é obrigatório"
         />
       </ContentBackground>
     </ContainerInformations>

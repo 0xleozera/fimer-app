@@ -31,10 +31,6 @@ export const ContainerAvatar = styled.View`
   align-items: center;
 `;
 
-export const FormInput = styled(TextField)`
-  margin-bottom: 10px;
-`;
-
 export const Title = styled.View`
   margin-bottom: 20;
 `;

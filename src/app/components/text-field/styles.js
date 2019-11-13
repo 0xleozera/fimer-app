@@ -1,6 +1,11 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
+  flex: 1;
+  margin-bottom: 10;
+`;
+
+export const Field = styled.View`
   padding: ${({ theme }) => `0 ${theme.padding.regular}px`};
   height: 46px;
   background: ${({ theme }) => theme.colors.opacity.black};

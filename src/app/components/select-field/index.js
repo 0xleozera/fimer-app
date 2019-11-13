@@ -8,7 +8,7 @@ import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { Modal, SelectItem, Typography } from 'components';
+import { Modal, SelectItem, Typography, ErrorMessage } from 'components';
 import {
   Container,
   Label,
@@ -29,6 +29,8 @@ const SelectField = ({
   options,
   container,
   statusBarColor,
+  hasError,
+  errorMessage,
 }) => {
   const theme = useTheme();
   const [opened, setOpened] = useState(false);
@@ -112,9 +114,10 @@ const SelectField = ({
         <SelectButton onPress={() => setOpened(!opened)}>
           {hanldeIcon()}
           <SelectText isPlaceholder={value === ''}>
-            {value === '' ? placeholder : value}
+            {!value ? placeholder : value}
           </SelectText>
         </SelectButton>
+        {hasError && !value && <ErrorMessage message={errorMessage} />}
       </Container>
 
       <Modal
@@ -164,6 +167,8 @@ SelectField.propTypes = {
   icon: PropTypes.string,
   container: PropTypes.bool,
   statusBarColor: PropTypes.string,
+  hasError: PropTypes.bool,
+  errorMessage: PropTypes.string,
 };
 
 SelectField.defaultProps = {
@@ -175,6 +180,8 @@ SelectField.defaultProps = {
   icon: 'logo-game-controller-b',
   container: true,
   statusBarColor: '',
+  hasError: false,
+  errorMessage: 'Campo obrigatório',
 };
 
 export default SelectField;

@@ -5,6 +5,7 @@ import BaseScreen from './base-screen';
 import Button from './button';
 import ChatField from './chat-field';
 import DateField from './date-field';
+import ErrorMessage from './error-message';
 import Header from './header';
 import If from './if';
 import Modal from './modal';
@@ -24,6 +25,7 @@ export {
   Button,
   ChatField,
   DateField,
+  ErrorMessage,
   Header,
   If,
   Modal,

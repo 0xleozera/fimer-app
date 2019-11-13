@@ -30,6 +30,8 @@ const ProfileEdit = () => {
     state => state.profile.edit.selectedPositions,
   );
 
+  const [hasError, setHasError] = useState(false);
+
   const [currentTab, setCurrentTab] = useState('information');
   const [user, setUser] = useState(currentUser);
 
@@ -56,6 +58,37 @@ const ProfileEdit = () => {
     currentSelectedPositions,
   ]);
 
+  const validateUserInformations = () => {
+    const ignoredKeys = ['region', 'newAvatar', 'avatar'];
+    const parseUserObjectToArray = Object.entries(user);
+
+    const filteredUser = parseUserObjectToArray
+      .filter(([key]) => !ignoredKeys.includes(key))
+      .filter(([key, value]) => value === '');
+
+    return filteredUser.length === 0;
+  };
+
+  const validateGames = () => {
+    const filteredEmptyFields = games.filter(game => {
+      const filteredPositions = game.positions.filter(
+        position => !position.description,
+      );
+
+      if (
+        game.game.description ||
+        game.ranking.description ||
+        filteredPositions.length === 0
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+
+    return filteredEmptyFields.length === 0;
+  };
+
   const handleSaveUpdate = () => {
     const {
       id,
@@ -68,21 +101,29 @@ const ProfileEdit = () => {
       newAvatar,
       avatar,
     } = user;
+    const validatedGames = validateGames();
+    const validatedUserInformations = validateUserInformations();
 
-    dispatch(
-      ActionProfile.updateProfileRequest({
-        id,
-        email,
-        name,
-        nickname,
-        birthDate,
-        region,
-        gender,
-        newAvatar,
-        avatar,
-        games,
-      }),
-    );
+    if (validatedGames && validatedUserInformations) {
+      dispatch(
+        ActionProfile.updateProfileRequest({
+          id,
+          email,
+          name,
+          nickname,
+          birthDate,
+          region,
+          gender,
+          newAvatar,
+          avatar,
+          games,
+        }),
+      );
+
+      setHasError(false);
+    }
+
+    setHasError(true);
   };
 
   const handleChangeUser = (field, value) => {
@@ -247,6 +288,7 @@ const ProfileEdit = () => {
             user={user}
             setBirthDate={handleChangeBirthDateUser}
             setUser={(field, value) => handleChangeUser(field, value)}
+            hasError={hasError}
           />
         </If>
         <If test={currentTab === 'games'}>
@@ -268,6 +310,7 @@ const ProfileEdit = () => {
             }
             selectedGames={selectedGames}
             selectedPositions={selectedPositions}
+            hasError={hasError}
           />
         </If>
       </Content>

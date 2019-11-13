@@ -98,7 +98,7 @@ const SignUp = ({ navigation }) => {
             icon="transgender-alt"
             value={gender}
             onChange={value => setGender(value.description)}
-            placeholder="Escolha seu gênero"
+            placeholder="Sexo"
             options={genders}
             container={false}
             statusBarColor={theme.colors.accent.regular}

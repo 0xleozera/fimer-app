@@ -76,8 +76,8 @@ const ProfileEdit = () => {
       );
 
       if (
-        game.game.description ||
-        game.ranking.description ||
+        game.game.description &&
+        game.ranking.description &&
         filteredPositions.length === 0
       ) {
         return false;
@@ -105,6 +105,7 @@ const ProfileEdit = () => {
     const validatedUserInformations = validateUserInformations();
 
     if (validatedGames && validatedUserInformations) {
+      console.log('parei aqui');
       dispatch(
         ActionProfile.updateProfileRequest({
           id,

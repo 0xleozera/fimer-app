@@ -9,11 +9,30 @@ export const ContentUserGames = styled.View`
 export const CardGame = styled.View`
   flex: 1;
   justify-content: center;
-  align-items: center;
-  height: 100;
   margin-bottom: 10;
   border-width: 0.3;
   border-color: ${({ theme }) => theme.colors.opacity.border};
   border-radius: 4;
   background-color: ${({ theme }) => theme.colors.primary.dark};
+  padding-vertical: 15;
+  padding-horizontal: 15;
+`;
+
+export const ListPositions = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 3;
+`;
+
+export const Position = styled.View`
+  margin-right: 15;
+`;
+
+export const ContainerInformations = styled.View`
+  flex-direction: row;
+  margin-bottom: 3;
+`;
+
+export const Label = styled.View`
+  margin-right: 10;
 `;

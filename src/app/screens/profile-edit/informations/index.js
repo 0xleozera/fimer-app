@@ -103,7 +103,7 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           icon="transgender-alt"
           value={user.gender}
           onChange={value => setUser('gender', value.description)}
-          placeholder="Escolha seu gênero"
+          placeholder="Escolha seu sexo"
           options={genders}
         />
 

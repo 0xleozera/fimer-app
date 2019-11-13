@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { FlatList } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import { Content, ContainerMessage, Spacing, Balloon } from './styles';
 
 const ContentConversation = ({ matchId }) => {
   const dispatch = useDispatch();
+  const list = useRef(null);
 
   const userId = useSelector(state => state.auth.user.id);
   const messages = useSelector(state => state.message.messages);
@@ -26,7 +27,9 @@ const ContentConversation = ({ matchId }) => {
   return (
     <Content>
       <FlatList
+        ref={list}
         keyExtractor={item => item.id.toString()}
+        onContentSizeChange={() => list.current.scrollToEnd()}
         data={messages}
         renderItem={({ item }) => (
           <ContainerMessage key={item.id} me={itsMe(item.send)}>

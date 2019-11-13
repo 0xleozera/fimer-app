@@ -10,7 +10,7 @@ import {
 
 import Navigator from 'routes/navigator';
 
-const image = async body => {
+const handleCreateImage = async body => {
   const response = await fetch('http://192.168.0.102:3333/files', {
     method: 'POST',
     body,
@@ -97,7 +97,7 @@ export function* update({ payload }) {
       const currentAvatar = new FormData();
       currentAvatar.append('file', newAvatar);
 
-      const data = yield call(image, currentAvatar);
+      const data = yield call(handleCreateImage, currentAvatar);
 
       fileId = data.id;
     }

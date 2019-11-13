@@ -8,6 +8,8 @@ import {
   Types as ProfileTypes,
 } from 'ducks/profile';
 
+import Navigator from 'routes/navigator';
+
 export function* show({ payload }) {
   try {
     const response = yield call(api.get, `users/${payload.id}`);
@@ -73,15 +75,14 @@ export function* showToEdit({ payload }) {
 
 export function* update({ payload }) {
   try {
-    const response = yield call(api.put, 'users', payload.data);
+    const { data } = yield call(api.put, 'users', payload.data);
 
-    Alert.alert('Sucesso', 'Perfil atualizado com sucesso');
-
-    yield put(ProfileActions.updateProfileSuccess(response.data));
+    yield put(ProfileActions.updateProfileSuccess(data));
+    Navigator.goBack();
   } catch (err) {
     Alert.alert(
       'Falha na atualização',
-      'Houve um erro na atualização do perfil, verifiique seus dados',
+      'Houve um erro na atualização do perfil, verifique seus dados',
     );
     yield put(ProfileActions.updateProfileFailure());
   }

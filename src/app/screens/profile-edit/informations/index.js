@@ -21,7 +21,6 @@ const Informations = ({ user, setUser, setBirthDate }) => {
   const genderRef = useRef();
   const regionRef = useRef();
   const emailRef = useRef();
-  const passwordRef = useRef();
 
   const [avatar, setAvatar] = useState(user.avatar.url);
 
@@ -137,21 +136,8 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           autoCapitalize="none"
           placeholder="Email"
           ref={emailRef}
-          returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current.focus()}
           value={user.email}
           onChangeText={value => setUser('email', value)}
-        />
-
-        <FormInput
-          icon="lock-outline"
-          secureTextEntry
-          placeholder="Nova Senha"
-          ref={passwordRef}
-          returnKeyType="send"
-          onSubmitEditing={() => {}}
-          value={user.password}
-          onChangeText={value => setUser('password', value)}
         />
       </ContentBackground>
     </ContainerInformations>

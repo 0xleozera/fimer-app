@@ -55,6 +55,35 @@ const ProfileEdit = () => {
     currentSelectedPositions,
   ]);
 
+  const handleSaveUpdate = () => {
+    const {
+      id,
+      email,
+      name,
+      nickname,
+      birthDate,
+      region,
+      gender,
+      newAvatar,
+      avatar,
+    } = user;
+
+    dispatch(
+      ActionProfile.updateProfileRequest({
+        id,
+        email,
+        name,
+        nickname,
+        birthDate,
+        region,
+        gender,
+        newAvatar,
+        avatar,
+        games,
+      }),
+    );
+  };
+
   const handleChangeUser = (field, value) => {
     setUser(oldUser => ({
       ...oldUser,
@@ -194,7 +223,7 @@ const ProfileEdit = () => {
           <Typography font="bold" size="h4" color="contrast">
             Editar Perfil
           </Typography>
-          <SaveButton onPress={() => console.log('Save triggered')}>
+          <SaveButton onPress={() => handleSaveUpdate()}>
             <IconMaterial
               name="check"
               size={20}

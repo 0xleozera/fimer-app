@@ -1,9 +1,9 @@
 export default {
   title: 'Selecione sua foto de perfil',
-  noData: true,
   cancelButtonTitle: 'Cancelar',
   takePhotoButtonTitle: 'Câmera',
   chooseFromLibraryButtonTitle: 'Galeria',
+  quality: 0.5,
   permissionDenied: {
     title: 'Permissão negada',
     text:

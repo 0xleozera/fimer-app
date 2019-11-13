@@ -10,6 +10,16 @@ import {
 
 import Navigator from 'routes/navigator';
 
+const image = async body => {
+  const response = await fetch('http://192.168.0.102:3333/files', {
+    method: 'POST',
+    body,
+  });
+  const data = await response.json();
+
+  return data;
+};
+
 export function* show({ payload }) {
   try {
     const response = yield call(api.get, `users/${payload.id}`);
@@ -75,11 +85,41 @@ export function* showToEdit({ payload }) {
 
 export function* update({ payload }) {
   try {
-    const { data } = yield call(api.put, 'users', payload.data);
+    const { games, newAvatar, avatar } = payload;
+
+    const currentGames = [];
+    const currentPositions = [];
+    const currentRankings = [];
+
+    let fileId = avatar.id;
+
+    if (newAvatar) {
+      const currentAvatar = new FormData();
+      currentAvatar.append('file', newAvatar);
+
+      const data = yield call(image, currentAvatar);
+
+      fileId = data.id;
+    }
+
+    games.forEach(game => {
+      currentGames.push(game.game.id);
+      game.positions.forEach(position => currentPositions.push(position.id));
+      currentRankings.push(game.ranking.id);
+    });
+
+    const { data } = yield call(api.put, 'users', {
+      ...payload,
+      games: currentGames,
+      positions: currentPositions,
+      rankings: currentRankings,
+      fileId,
+    });
 
     yield put(ProfileActions.updateProfileSuccess(data));
     Navigator.goBack();
   } catch (err) {
+    console.log(err);
     Alert.alert(
       'Falha na atualização',
       'Houve um erro na atualização do perfil, verifique seus dados',

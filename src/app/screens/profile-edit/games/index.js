@@ -90,6 +90,7 @@ const Games = ({
 
   const renderRanking = (ranking, gameIndex) => (
     <SelectField
+      icon="ios-trophy"
       label="Ranking"
       value={ranking.description}
       onChange={value => updateGameOrRanking(gameIndex, 'ranking', value)}
@@ -102,6 +103,7 @@ const Games = ({
     const mappedPositions = positions.map((position, index) => (
       <ContainerSelectPosition key={index}>
         <SelectField
+          icon="md-contacts"
           label="Posição"
           value={position.description}
           onChange={value => updatePosition(gameIndex, index, value)}

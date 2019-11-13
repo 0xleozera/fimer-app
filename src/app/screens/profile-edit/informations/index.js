@@ -5,8 +5,10 @@ import imagePickerConfig from 'configs/image-picker';
 
 import parseISO from 'date-fns/parseISO';
 import { splitDate } from 'utils/date';
+import states from 'utils/states';
+import genders from 'utils/genders';
 
-import { Avatar, Typography, DateField } from 'components';
+import { Avatar, Typography, DateField, SelectField } from 'components';
 import {
   ContainerInformations,
   ContentBackground,
@@ -18,8 +20,6 @@ import {
 
 const Informations = ({ user, setUser, setBirthDate }) => {
   const nicknameRef = useRef();
-  const genderRef = useRef();
-  const regionRef = useRef();
   const emailRef = useRef();
 
   const [avatar, setAvatar] = useState(user.avatar.url);
@@ -94,33 +94,25 @@ const Informations = ({ user, setUser, setBirthDate }) => {
           placeholder="Apelido nos jogos"
           ref={nicknameRef}
           returnKeyType="next"
-          onSubmitEditing={() => genderRef.current.focus()}
+          onSubmitEditing={() => emailRef.current.focus()}
           value={user.nickname}
           onChangeText={value => setUser('nickname', value)}
         />
 
-        <FormInput
+        <SelectField
           icon="transgender-alt"
-          autoCorrect={false}
-          autoCapitalize="none"
-          placeholder="Sexo"
-          ref={genderRef}
-          returnKeyType="next"
-          onSubmitEditing={() => regionRef.current.focus()}
           value={user.gender}
-          onChangeText={value => setUser('gender', value)}
+          onChange={value => setUser('gender', value.description)}
+          placeholder="Escolha seu gênero"
+          options={genders}
         />
 
-        <FormInput
+        <SelectField
           icon="home"
-          autoCorrect={false}
-          autoCapitalize="none"
-          placeholder="Região"
-          ref={regionRef}
-          returnKeyType="next"
-          onSubmitEditing={() => emailRef.current.focus()}
           value={user.region}
-          onChangeText={value => setUser('region', value)}
+          onChange={value => setUser('gender', value.description)}
+          placeholder="Escolha sua região"
+          options={states}
         />
 
         <DateField

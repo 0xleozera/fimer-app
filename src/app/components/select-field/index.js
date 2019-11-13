@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import useTheme from 'hooks/use-theme';
 
+import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -19,7 +20,14 @@ import {
   WrapperIconButton,
 } from './styles';
 
-const SelectField = ({ label, value, onChange, placeholder, options }) => {
+const SelectField = ({
+  label,
+  value,
+  icon,
+  onChange,
+  placeholder,
+  options,
+}) => {
   const theme = useTheme();
   const [opened, setOpened] = useState(false);
 
@@ -59,6 +67,36 @@ const SelectField = ({ label, value, onChange, placeholder, options }) => {
     return mappedItems;
   };
 
+  const hanldeIcon = () => {
+    if (icon === 'transgender-alt') {
+      return (
+        <IconAwesome
+          name={icon}
+          color={theme.colors.opacity.white}
+          size={theme.controls.icon.small}
+        />
+      );
+    }
+
+    if (icon === 'home') {
+      return (
+        <IconMaterial
+          name={icon}
+          color={theme.colors.opacity.white}
+          size={theme.controls.icon.small}
+        />
+      );
+    }
+
+    return (
+      <Icon
+        name={icon}
+        color={theme.colors.opacity.white}
+        size={theme.controls.icon.small}
+      />
+    );
+  };
+
   return (
     <>
       <Container>
@@ -70,11 +108,7 @@ const SelectField = ({ label, value, onChange, placeholder, options }) => {
           </Label>
         )}
         <SelectButton onPress={() => setOpened(!opened)}>
-          <Icon
-            name="logo-game-controller-b"
-            color={theme.colors.opacity.white}
-            size={theme.controls.icon.small}
-          />
+          {hanldeIcon()}
           <SelectText isPlaceholder={value === ''}>
             {value === '' ? placeholder : value}
           </SelectText>
@@ -125,6 +159,7 @@ SelectField.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   options: PropTypes.array,
+  icon: PropTypes.string,
 };
 
 SelectField.defaultProps = {
@@ -133,6 +168,7 @@ SelectField.defaultProps = {
   onChange: () => {},
   placeholder: '',
   options: [],
+  icon: 'logo-game-controller-b',
 };
 
 export default SelectField;

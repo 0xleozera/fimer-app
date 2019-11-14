@@ -8,7 +8,7 @@ import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { Modal, SelectItem, Typography, ErrorMessage } from 'components';
+import { Modal, SelectItem, Typography, ErrorMessage, If } from 'components';
 import {
   Container,
   Label,
@@ -18,6 +18,7 @@ import {
   TitleModal,
   ClearButton,
   WrapperIconButton,
+  EmptyOptions,
 } from './styles';
 
 const SelectField = ({
@@ -153,7 +154,15 @@ const SelectField = ({
             onScroll={event => {
               setScrollOffset(event.nativeEvent.contentOffset.y);
             }}>
-            {renderItems()}
+            <If test={options.length === 0}>
+              <EmptyOptions>
+                <Typography font="bold" size="h6" color="contrast">
+                  Não há mais opções
+                </Typography>
+              </EmptyOptions>
+            </If>
+
+            <If test={options.length > 0}>{renderItems()}</If>
           </ScrollView>
         </ContentModal>
       </Modal>

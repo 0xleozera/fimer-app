@@ -58,3 +58,8 @@ export const WrapperIconButton = styled.View`
   background-color: ${({ theme }) => theme.colors.primary.contrast};
   margin-right: 5;
 `;
+
+export const EmptyOptions = styled.View`
+  align-items: center;
+  margin-top: 40;
+`;

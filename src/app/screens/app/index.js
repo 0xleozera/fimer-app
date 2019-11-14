@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { AppState, StatusBar } from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 
 import useSocket from 'hooks/use-socket';
 import { Creators as MessageActions } from 'ducks/message';
 import { Creators as MatchActions } from 'ducks/match';
-import { Creators as NotificationActions } from 'ducks/notification';
 
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -62,10 +62,34 @@ const Router = () => {
         dispatch(MatchActions.setNewMatch(match));
       });
       matches.on('match', notification => {
-        dispatch(NotificationActions.setNewNotification(notification));
+        showMessage({
+          message: 'Bora jogar? 🎮',
+          description: notification.content,
+          type: 'default',
+          backgroundColor: theme.colors.accent.regular,
+          color: theme.colors.primary.contrast,
+          duration: 3500,
+          titleStyle: {
+            fontFamily: theme.fonts.bold,
+          },
+          textStyle: {
+            fontFamily: theme.fonts.medium,
+          },
+          style: {
+            height: 90,
+          },
+        });
       });
     }
-  }, [dispatch, socket.ws, userId]);
+  }, [
+    dispatch,
+    socket.ws,
+    theme.colors.accent.regular,
+    theme.colors.primary.contrast,
+    theme.fonts.bold,
+    theme.fonts.medium,
+    userId,
+  ]);
 
   return <Routes ref={ref => Navigator.setNavigator(ref)} />;
 };
@@ -77,6 +101,7 @@ const App = () => (
         <ThemeProvider theme={themeConfig}>
           <StatusBar backgroundColor={themeConfig.colors.accent.regular} />
           <Router />
+          <FlashMessage hideStatusBar position="top" />
         </ThemeProvider>
       </SocketProvider>
     </PersistGate>

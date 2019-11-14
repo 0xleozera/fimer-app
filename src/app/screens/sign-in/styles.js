@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
-import { TextField, Button } from 'components';
+import { Button } from 'components';
 
 import logo from 'assets/images/brand/logo.png';
 

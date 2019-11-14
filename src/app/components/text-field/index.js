@@ -10,7 +10,10 @@ import useTheme from 'hooks/use-theme';
 import { ErrorMessage } from 'components';
 import { Container, Input, Field } from './styles';
 
-const TextField = ({ style, icon, hasError, errorMessage, ...rest }, ref) => {
+const TextField = (
+  { style, icon, hasError, errorMessage, breatheBottom, ...rest },
+  ref,
+) => {
   const theme = useTheme();
 
   const renderIcon = () => {
@@ -49,7 +52,9 @@ const TextField = ({ style, icon, hasError, errorMessage, ...rest }, ref) => {
         {icon && renderIcon()}
         <Input {...rest} ref={ref} />
       </Field>
-      {hasError && !rest.value && <ErrorMessage message={errorMessage} />}
+      {hasError && !rest.value && (
+        <ErrorMessage breatheBottom={breatheBottom} message={errorMessage} />
+      )}
     </Container>
   );
 };
@@ -59,6 +64,7 @@ TextField.propTypes = {
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   hasError: PropTypes.bool,
   errorMessage: PropTypes.string,
+  breatheBottom: PropTypes.bool,
 };
 
 TextField.defaultProps = {
@@ -66,6 +72,7 @@ TextField.defaultProps = {
   style: {},
   hasError: false,
   errorMessage: 'Campo obrigatório',
+  breatheBottom: false,
 };
 
 export default forwardRef(TextField);

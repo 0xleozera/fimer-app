@@ -9,12 +9,11 @@ import pt from 'date-fns/locale/pt';
 import { useSelector, useDispatch } from 'react-redux';
 import { Creators as SignUpActions } from 'ducks/sign-up';
 
-import { Background, DateField, SelectField } from 'components';
+import { Background, TextField, DateField, SelectField } from 'components';
 import {
   Container,
   Logo,
   Form,
-  FormInput,
   SubmitButton,
   SignLink,
   SignLinkText,
@@ -28,6 +27,8 @@ const SignUp = ({ navigation }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  const [hasError, setHasError] = useState(false);
+
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
   const [gender, setGender] = useState('');
@@ -38,19 +39,34 @@ const SignUp = ({ navigation }) => {
   const loadingSignUp = useSelector(state => state.signUp.isLoading);
   const loadingSignIn = useSelector(state => state.auth.isLoading);
 
+  const validateForm = () => {
+    if (!name || !nickname || !gender || !email || !password || !birthDate) {
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = () => {
+    const validatedForm = validateForm();
     const formattedBirthDate = format(birthDate, 'dd/MM/yyyy', { locale: pt });
 
-    dispatch(
-      SignUpActions.signUpRequest({
-        name,
-        nickname,
-        gender,
-        birthDate: formattedBirthDate,
-        email,
-        password,
-      }),
-    );
+    if (validatedForm) {
+      dispatch(
+        SignUpActions.signUpRequest({
+          name,
+          nickname,
+          gender,
+          birthDate: formattedBirthDate,
+          email,
+          password,
+        }),
+      );
+
+      setHasError(false);
+    }
+
+    setHasError(true);
   };
 
   const handleBirthDateChange = date => {
@@ -65,7 +81,7 @@ const SignUp = ({ navigation }) => {
         <Logo />
 
         <Form>
-          <FormInput
+          <TextField
             icon="person-outline"
             autoCorrect={false}
             autoCapitalize="none"
@@ -74,9 +90,12 @@ const SignUp = ({ navigation }) => {
             onSubmitEditing={() => nicknameRef.current.focus()}
             value={name}
             onChangeText={setName}
+            hasError={hasError}
+            errorMessage="Nome completo é obrigatório"
+            breatheBottom
           />
 
-          <FormInput
+          <TextField
             icon="logo-game-controller-b"
             autoCorrect={false}
             autoCapitalize="none"
@@ -86,12 +105,18 @@ const SignUp = ({ navigation }) => {
             onSubmitEditing={() => emailRef.current.focus()}
             value={nickname}
             onChangeText={setNickname}
+            hasError={hasError}
+            errorMessage="Apelido nos jogos é obrigatório"
+            breatheBottom
           />
 
           <DateField
             placeholder="Aniversário"
             date={birthDate}
             onChange={handleBirthDateChange}
+            hasError={hasError}
+            errorMessage="Aniversário é obrigatório"
+            breatheBottom
           />
 
           <SelectField
@@ -102,9 +127,12 @@ const SignUp = ({ navigation }) => {
             options={genders}
             container={false}
             statusBarColor={theme.colors.accent.regular}
+            hasError={hasError}
+            errorMessage="Sexo é obrigatório"
+            breatheBottom
           />
 
-          <FormInput
+          <TextField
             icon="mail-outline"
             keyboardType="email-address"
             autoCorrect={false}
@@ -115,9 +143,12 @@ const SignUp = ({ navigation }) => {
             onSubmitEditing={() => passwordRef.current.focus()}
             value={email}
             onChangeText={setEmail}
+            hasError={hasError}
+            errorMessage="Email é obrigatório"
+            breatheBottom
           />
 
-          <FormInput
+          <TextField
             icon="lock-outline"
             secureTextEntry
             placeholder="Senha"
@@ -126,6 +157,9 @@ const SignUp = ({ navigation }) => {
             onSubmitEditing={handleSubmit}
             value={password}
             onChangeText={setPassword}
+            hasError={hasError}
+            errorMessage="Senha é obrigatória"
+            breatheBottom
           />
 
           <SubmitButton

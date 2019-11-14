@@ -31,6 +31,7 @@ const SelectField = ({
   statusBarColor,
   hasError,
   errorMessage,
+  breatheBottom,
 }) => {
   const theme = useTheme();
   const [opened, setOpened] = useState(false);
@@ -117,7 +118,9 @@ const SelectField = ({
             {!value ? placeholder : value}
           </SelectText>
         </SelectButton>
-        {hasError && !value && <ErrorMessage message={errorMessage} />}
+        {hasError && !value && (
+          <ErrorMessage breatheBottom={breatheBottom} message={errorMessage} />
+        )}
       </Container>
 
       <Modal
@@ -169,6 +172,7 @@ SelectField.propTypes = {
   statusBarColor: PropTypes.string,
   hasError: PropTypes.bool,
   errorMessage: PropTypes.string,
+  breatheBottom: PropTypes.bool,
 };
 
 SelectField.defaultProps = {
@@ -182,6 +186,7 @@ SelectField.defaultProps = {
   statusBarColor: '',
   hasError: false,
   errorMessage: 'Campo obrigatório',
+  breatheBottom: false,
 };
 
 export default SelectField;

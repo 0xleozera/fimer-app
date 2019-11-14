@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 import logo from 'assets/images/brand/logo.png';
 
-import { TextField, Button } from 'components';
+import { Button, TextField } from 'components';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
   enabled: Platform.OS === 'ios',
@@ -23,10 +23,6 @@ export const Logo = styled.Image.attrs({ source: logo })`
 export const Form = styled.View`
   align-self: stretch;
   margin-top: 50px;
-`;
-
-export const FormInput = styled(TextField)`
-  margin-bottom: 10px;
 `;
 
 export const SubmitButton = styled(Button)`

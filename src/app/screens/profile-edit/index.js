@@ -16,6 +16,7 @@ import { HeaderInformations, SaveButton, Content } from './styles';
 import Informations from './informations';
 import Games from './games';
 
+// TODO: IMRPOVE THIS COMPONENT CREATING CONTEXT TO CONTROLL THIS LOGICS
 const ProfileEdit = () => {
   const theme = useTheme();
   const dispatch = useDispatch();

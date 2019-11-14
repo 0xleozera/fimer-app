@@ -25,12 +25,23 @@ import {
   ConfigButton,
 } from './styles';
 
-const Header = ({ data }) => {
+const Header = ({ data, status }) => {
   const theme = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const parsedData = Object.entries(data);
+
+  const getButtonLabel = () => {
+    const labels = {
+      matched: 'Jogando',
+      liked: 'Esperando',
+      playable: 'Jogar',
+      unplayable: 'Jogar',
+    };
+
+    return labels[status];
+  };
 
   const getIcon = icon => {
     const icons = {
@@ -149,8 +160,7 @@ const Header = ({ data }) => {
               loading={false}
               onPress={() => {}}
               hasIcon>
-              {/* Jogar ou Jogando */}
-              Jogar
+              {getButtonLabel()}
             </PlayButton>
           </WrapperPlayButton>
         </If>

@@ -15,6 +15,7 @@ const Profile = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const authId = useSelector(state => state.auth.user.id);
+  const status = useSelector(state => state.profile.status);
   const user = useSelector(state => state.profile.user);
   const userId = navigation.getParam('userId');
 
@@ -42,7 +43,7 @@ const Profile = ({ navigation }) => {
           </Typography>
         </Header>
       </If>
-      <HeaderUserInformations data={user} />
+      <HeaderUserInformations data={user} status={status} />
       <Games data={user} />
     </BaseScreen>
   );

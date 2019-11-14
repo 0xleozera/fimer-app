@@ -1,6 +1,8 @@
 import api from 'api';
 
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
+import notification from 'configs/notification';
+
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import {
@@ -26,10 +28,7 @@ export function* show({ payload }) {
 
     yield put(ProfileActions.getProfileSuccess(response.data));
   } catch (err) {
-    Alert.alert(
-      'Falha no carregamento',
-      'Houve um erro ao carregar o perfil, verifique seus dados',
-    );
+    showMessage(notification);
     yield put(ProfileActions.getProfileFailure());
   }
 }
@@ -75,10 +74,7 @@ export function* showToEdit({ payload }) {
       }),
     );
   } catch (err) {
-    Alert.alert(
-      'Falha no carregamento',
-      'Houve um erro ao carregar os dados do perfil, verifique seus dados',
-    );
+    showMessage(notification);
     yield put(ProfileActions.getProfileEditFailure());
   }
 }
@@ -119,10 +115,7 @@ export function* update({ payload }) {
     yield put(ProfileActions.updateProfileSuccess(data));
     Navigator.goBack();
   } catch (err) {
-    Alert.alert(
-      'Falha na atualização',
-      'Houve um erro na atualização do perfil, verifique seus dados',
-    );
+    showMessage(notification);
     yield put(ProfileActions.updateProfileFailure());
   }
 }
@@ -133,10 +126,7 @@ export function* listGames() {
 
     yield put(ProfileActions.getAllGamesSuccess(data));
   } catch (err) {
-    Alert.alert(
-      'Falha no carregar',
-      'Houve um erro no carregamento dos jogos, verifique seus dados',
-    );
+    showMessage(notification);
     yield put(ProfileActions.getAllGamesFailure());
   }
 }

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { showMessage } from 'react-native-flash-message';
+import notification from 'configs/notification';
+
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -106,7 +109,6 @@ const ProfileEdit = () => {
     const validatedUserInformations = validateUserInformations();
 
     if (validatedGames && validatedUserInformations) {
-      console.log('parei aqui');
       dispatch(
         ActionProfile.updateProfileRequest({
           id,
@@ -121,10 +123,22 @@ const ProfileEdit = () => {
           games,
         }),
       );
-
       setHasError(false);
+      showMessage({
+        ...notification,
+        duration: 2000,
+        backgroundColor: theme.colors.actions.blue,
+        message: 'Aeee! 🎉',
+        description: 'Dados atualizados!',
+      });
+      return;
     }
 
+    showMessage({
+      ...notification,
+      duration: 3000,
+      description: 'Houve um problema nos dados inseridos, você pode conferir?',
+    });
     setHasError(true);
   };
 

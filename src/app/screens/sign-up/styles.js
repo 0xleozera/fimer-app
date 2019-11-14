@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 import logo from 'assets/images/brand/logo.png';
 
-import { Button, TextField } from 'components';
+import { Button } from 'components';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
   enabled: Platform.OS === 'ios',

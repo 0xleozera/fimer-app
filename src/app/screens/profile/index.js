@@ -17,20 +17,18 @@ const Profile = ({ navigation }) => {
   const authId = useSelector(state => state.auth.user.id);
   const status = useSelector(state => state.profile.status);
   const user = useSelector(state => state.profile.user);
+  const loading = useSelector(state => state.profile.isLoading);
+
   const userId = navigation.getParam('userId');
 
   useEffect(() => {
     dispatch(ProfileActions.getProfileRequest({ id: userId || authId }));
-
-    const profileRequest = navigation.addListener('didFocus', () => {
-      dispatch(ProfileActions.getProfileRequest({ id: userId || authId }));
-    });
-
-    return () => profileRequest.remove();
-  }, [authId, dispatch, navigation, userId]);
+  }, [authId, dispatch, userId]);
 
   return (
-    <BaseScreen statusBarBackground={theme.colors.primary.dark}>
+    <BaseScreen
+      loading={loading}
+      statusBarBackground={theme.colors.primary.dark}>
       <If
         test={[
           'ShowProfileHome',

@@ -19,9 +19,11 @@ const Home = () => {
   const theme = useTheme();
   const nickname = useSelector(state => state.auth.user.nickname);
   const indications = useSelector(state => state.home.users);
+  const loading = useSelector(state => state.home.isLoading);
 
   return (
     <BaseScreen
+      loading={loading}
       hasScroll={false}
       statusBarBackground={theme.colors.primary.dark}>
       <HeaderHome>

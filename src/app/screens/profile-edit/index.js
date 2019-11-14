@@ -25,6 +25,7 @@ const ProfileEdit = () => {
   const dispatch = useDispatch();
 
   const userId = useSelector(state => state.auth.user.id);
+  const loading = useSelector(state => state.profile.isLoading);
   const currentUser = useSelector(state => state.profile.edit);
   const currentGames = useSelector(state => state.profile.edit.games);
   const currentSelectedGames = useSelector(
@@ -274,6 +275,7 @@ const ProfileEdit = () => {
 
   return (
     <BaseScreen
+      loading={loading}
       hasScroll={false}
       statusBarBackground={theme.colors.primary.dark}>
       <Header hasBackButton>

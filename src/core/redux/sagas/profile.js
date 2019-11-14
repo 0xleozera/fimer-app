@@ -131,9 +131,31 @@ export function* listGames() {
   }
 }
 
+export function* like({ payload }) {
+  try {
+    yield call(api.post, 'likes', { likeeId: payload });
+    yield put(ProfileActions.ProfileLikeSuccess());
+  } catch (err) {
+    showMessage(notification);
+    yield put(ProfileActions.profileLikeFailure());
+  }
+}
+
+export function* unlike({ payload }) {
+  try {
+    yield call(api.delete, `likes/${payload}`);
+    yield put(ProfileActions.profileUnlikeSuccess());
+  } catch (err) {
+    showMessage(notification);
+    yield put(ProfileActions.profileUnlikeFailure());
+  }
+}
+
 export default all([
   takeLatest(ProfileTypes.GET_PROFILE_REQUEST, show),
   takeLatest(ProfileTypes.GET_PROFILE_EDIT_REQUEST, showToEdit),
   takeLatest(ProfileTypes.GET_ALL_GAMES_REQUEST, listGames),
   takeLatest(ProfileTypes.UPDATE_PROFILE_REQUEST, update),
+  takeLatest(ProfileTypes.PROFILE_LIKE_REQUEST, like),
+  takeLatest(ProfileTypes.PROFILE_UNLIKE_REQUEST, unlike),
 ]);

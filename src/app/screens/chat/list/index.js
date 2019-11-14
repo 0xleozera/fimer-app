@@ -26,7 +26,13 @@ const List = () => {
 
   useEffect(() => {
     getMyMatches();
-  }, [getMyMatches]);
+
+    const matchesRequest = navigation.addListener('didFocus', () => {
+      getMyMatches();
+    });
+
+    return () => matchesRequest.remove();
+  }, [getMyMatches, navigation]);
 
   const getCurrentMatcherId = match => {
     return match.matcher.id !== userId ? match.matcher.id : match.matchee.id;

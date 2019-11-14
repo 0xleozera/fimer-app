@@ -39,7 +39,13 @@ const List = () => {
 
   useEffect(() => {
     getHomesIndications();
-  }, [getHomesIndications]);
+
+    const homeRequest = navigation.addListener('didFocus', () => {
+      getHomesIndications();
+    });
+
+    return () => homeRequest.remove();
+  }, [getHomesIndications, navigation]);
 
   const getGame = playerGames => {
     const game = playerGames.find(

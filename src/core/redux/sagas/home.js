@@ -19,4 +19,17 @@ export function* getHome(action) {
   }
 }
 
-export default all([takeLatest(HomeTypes.GET_HOME_REQUEST, getHome)]);
+export function* like({ payload }) {
+  try {
+    yield call(api.post, 'likes', { likeeId: payload });
+    yield put(HomeActions.homeLikeSuccess());
+  } catch (err) {
+    showMessage(notification);
+    yield put(HomeActions.homeLikeFailure());
+  }
+}
+
+export default all([
+  takeLatest(HomeTypes.GET_HOME_REQUEST, getHome),
+  takeLatest(HomeTypes.HOME_LIKE_REQUEST, like),
+]);

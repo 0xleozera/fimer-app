@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ScrollView, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 
-import Spinner from 'react-native-loading-spinner-overlay';
+import Loadable from 'react-native-loading-spinner-overlay';
 
 import useNavigation from 'hooks/use-navigation';
 
@@ -31,7 +31,7 @@ const BaseScreen = ({
 
   return (
     <Container>
-      <Spinner
+      <Loadable
         visible={loading}
         textContent="Carregando..."
         textStyle={{

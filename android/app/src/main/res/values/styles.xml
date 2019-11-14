@@ -9,4 +9,15 @@
         <item name="colorAccent">#6e6eff</item>
     </style>
 
+    <style name="DefaultExplainingPermissionsTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#6e6eff</item>
+
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#6e6eff</item>
+
+        <!-- Used for the background -->
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
 </resources>

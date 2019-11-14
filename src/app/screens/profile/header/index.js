@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { splitDate } from 'utils/date';
+import differenceInCalendarYears from 'date-fns/differenceInCalendarYears';
+
 import useTheme from 'hooks/use-theme';
 import useNavigation from 'hooks/use-navigation';
 
@@ -64,6 +67,16 @@ const Header = ({ data }) => {
     return icons[icon];
   };
 
+  const formatBirthDate = birthDate => {
+    const { day, month, years } = splitDate(birthDate);
+    const difference = differenceInCalendarYears(
+      new Date(),
+      new Date(years, month, day),
+    );
+
+    return `${difference} anos`;
+  };
+
   const filterCorrectFields = ([key]) => {
     const fields = ['name', 'birthDate', 'region', 'gender'];
 
@@ -75,7 +88,7 @@ const Header = ({ data }) => {
       <Information>
         <WrapperIcon>{getIcon(key)}</WrapperIcon>
         <Typography font="medium" type="secondary" color="regular">
-          {value}
+          {key === 'birthDate' ? formatBirthDate(value) : value}
         </Typography>
       </Information>
     </If>
@@ -94,8 +107,6 @@ const Header = ({ data }) => {
   const handleSignOutPressed = () => {
     dispatch(AuthActions.signOut());
   };
-
-  console.log(data);
 
   return (
     <ContainerUserInformations>
@@ -118,7 +129,7 @@ const Header = ({ data }) => {
       </If>
 
       <AvatarAndNickUser>
-        <Avatar size={150} avatar={data.avatar.url} />
+        <Avatar size={150} sizeIcon={80} avatar={data.avatar.url} />
         <Typography font="bold" size="h3" color="contrast">
           {data.nickname}
         </Typography>
@@ -126,13 +137,19 @@ const Header = ({ data }) => {
       <PositionInformationsAndActionButton>
         <WrapperInformations>{renderUserInformations()}</WrapperInformations>
 
-        <If test={navigation.state.routeName === 'ShowProfile'}>
+        <If
+          test={[
+            'ShowProfileHome',
+            'ShowProfilePlay',
+            'ShowProfileChat',
+          ].includes(navigation.state.routeName)}>
           <WrapperPlayButton>
             <PlayButton
               background={theme.colors.accent.regular}
               loading={false}
               onPress={() => {}}
               hasIcon>
+              {/* Jogar ou Jogando */}
               Jogar
             </PlayButton>
           </WrapperPlayButton>

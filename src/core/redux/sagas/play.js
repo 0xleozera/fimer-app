@@ -1,7 +1,9 @@
 import api from 'api';
 import { URLBuilder } from 'utils/url-builder';
 
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
+import notification from 'configs/notification';
+
 import { takeLatest, call, put, all, select } from 'redux-saga/effects';
 
 import { Creators as PlayActions, Types as PlayTypes } from 'ducks/play';
@@ -12,10 +14,7 @@ export function* getPlayers() {
     const { data } = yield call(api.get, 'search');
     yield put(PlayActions.getPlaySuccess(data));
   } catch (err) {
-    Alert.alert(
-      'Falha ao carregar',
-      'Houve um erro ao carregar a lista de jogadores',
-    );
+    showMessage(notification);
     yield put(PlayActions.getPlayFailure());
   }
 }
@@ -34,10 +33,7 @@ export function* getFilteringPlayers() {
     const { data } = yield call(api.get, `search${queryParams}`);
     yield put(PlayActions.getPlaySuccess(data));
   } catch (err) {
-    Alert.alert(
-      'Falha ao carregar',
-      'Houve um erro ao carregar a lista de jogadores',
-    );
+    showMessage(notification);
     yield put(PlayActions.getPlayFailure());
   }
 }
@@ -52,7 +48,7 @@ export function* like() {
     yield call(api.post, 'likes', { likeeId: players[currentIndex].id });
     yield put(PlayActions.likeSuccess());
   } catch (err) {
-    Alert.alert('Falha no curtir', 'Houve um erro ao curtir o jogador');
+    showMessage(notification);
     yield put(PlayActions.likeFailure());
   }
 }

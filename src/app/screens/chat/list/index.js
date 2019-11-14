@@ -62,7 +62,7 @@ const List = () => {
   return (
     <ContainerList>
       <FlatList
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         data={matches}
         renderItem={({ item, index }) => (
           <Card

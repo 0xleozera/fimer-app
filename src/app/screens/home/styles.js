@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import { parsePercentageToPixels } from 'utils/dimensions';
 
-import logo from 'assets/images/brand/logo.png';
+import logo from 'assets/images/brand/logo-home.png';
 
 export const HeaderHome = styled.View`
   justify-content: center;

@@ -1,6 +1,8 @@
 import api from 'api';
 
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
+import notification from 'configs/notification';
+
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import { Creators as FilterActions, Types as FilterType } from 'ducks/filters';
@@ -10,10 +12,7 @@ export function* getAllGames() {
     const { data } = yield call(api.get, 'games');
     yield put(FilterActions.getAllGamesSuccess(data));
   } catch (err) {
-    Alert.alert(
-      'Falha ao carregar os jogos',
-      'Houve um erro ao carregar os jogos',
-    );
+    showMessage(notification);
     yield put(FilterActions.getAllGamesFailure());
   }
 }

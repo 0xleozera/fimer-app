@@ -1,6 +1,8 @@
 import api from 'api';
 
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
+import notification from 'configs/notification';
+
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import { Creators as SignUpActions, Types as SignUpTypes } from 'ducks/sign-up';
@@ -18,10 +20,7 @@ export function* store({ payload }) {
       }),
     );
   } catch (err) {
-    Alert.alert(
-      'Falha na atualização',
-      'Houve um erro na atualização do perfil, verifique seus dados',
-    );
+    showMessage(notification);
     yield put(SignUpActions.signUpFailure());
   }
 }

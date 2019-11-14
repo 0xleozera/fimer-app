@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
-import { TextField, Button } from 'components';
+import { Button } from 'components';
 
 import logo from 'assets/images/brand/logo.png';
 
@@ -23,10 +23,6 @@ export const Logo = styled.Image.attrs({ source: logo })`
 export const Form = styled.View`
   align-self: stretch;
   margin-top: 50px;
-`;
-
-export const FormInput = styled(TextField)`
-  margin-bottom: 10px;
 `;
 
 export const SubmitButton = styled(Button)`

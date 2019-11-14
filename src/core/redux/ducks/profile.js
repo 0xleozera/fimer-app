@@ -1,9 +1,20 @@
 import { createActions, createReducer } from 'reduxsauce';
 
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+
 export const { Creators, Types } = createActions({
   getProfileRequest: ['payload'],
   getProfileSuccess: ['data'],
   getProfileFailure: [],
+
+  getProfileEditRequest: ['payload'],
+  getProfileEditSuccess: ['data'],
+  getProfileEditFailure: [],
+
+  getAllGamesRequest: ['payload'],
+  getAllGamesSuccess: ['data'],
+  getAllGamesFailure: [],
 
   updateProfileRequest: ['payload'],
   updateProfileSuccess: ['data'],
@@ -28,6 +39,22 @@ const INITIAL_STATE = {
     position: [],
     rankings: [],
   },
+  edit: {
+    id: 0,
+    email: '',
+    name: '',
+    nickname: '',
+    birthDate: format(new Date(), 'dd/MM/yyyy', { locale: pt }),
+    region: '',
+    gender: '',
+    avatar: {
+      url: '',
+    },
+    games: [],
+    selectedGames: [],
+    selectedPositions: [],
+  },
+  allGames: [],
 };
 
 const getProfileRequest = (state = INITIAL_STATE) => ({
@@ -43,6 +70,38 @@ const getProfileSuccess = (state = INITIAL_STATE, action) => ({
 });
 
 const getProfileFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: false,
+});
+
+const getProfileEditRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: true,
+});
+
+const getProfileEditSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isLoading: false,
+  edit: action.data,
+});
+
+const getProfileEditFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: false,
+});
+
+const getAllGamesRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: true,
+});
+
+const getAllGamesSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isLoading: false,
+  allGames: action.data,
+});
+
+const getAllGamesFailure = (state = INITIAL_STATE) => ({
   ...state,
   isLoading: false,
 });
@@ -67,6 +126,14 @@ export default createReducer(INITIAL_STATE, {
   [Types.GET_PROFILE_REQUEST]: getProfileRequest,
   [Types.GET_PROFILE_SUCCESS]: getProfileSuccess,
   [Types.GET_PROFILE_FAILURE]: getProfileFailure,
+
+  [Types.GET_PROFILE_EDIT_REQUEST]: getProfileEditRequest,
+  [Types.GET_PROFILE_EDIT_SUCCESS]: getProfileEditSuccess,
+  [Types.GET_PROFILE_EDIT_FAILURE]: getProfileEditFailure,
+
+  [Types.GET_ALL_GAMES_REQUEST]: getAllGamesRequest,
+  [Types.GET_ALL_GAMES_SUCCESS]: getAllGamesSuccess,
+  [Types.GET_ALL_GAMES_FAILURE]: getAllGamesFailure,
 
   [Types.UPDATE_PROFILE_REQUEST]: updateProfileRequest,
   [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,

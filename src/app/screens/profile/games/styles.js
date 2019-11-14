@@ -2,18 +2,38 @@ import styled from 'styled-components/native';
 
 export const ContentUserGames = styled.View`
   flex: 1;
-  margin-vertical: 10;
+  margin-top: 10;
+  margin-bottom: 2;
   margin-horizontal: 10;
 `;
 
 export const CardGame = styled.View`
   flex: 1;
   justify-content: center;
-  align-items: center;
-  height: 100;
   margin-bottom: 10;
   border-width: 0.3;
   border-color: ${({ theme }) => theme.colors.opacity.border};
   border-radius: 4;
   background-color: ${({ theme }) => theme.colors.primary.dark};
+  padding-vertical: 15;
+  padding-horizontal: 15;
+`;
+
+export const ListPositions = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 8;
+`;
+
+export const Position = styled.View`
+  margin-right: 15;
+`;
+
+export const ContainerInformations = styled.View`
+  flex-direction: row;
+  margin-bottom: 8;
+`;
+
+export const Label = styled.View`
+  margin-right: 10;
 `;

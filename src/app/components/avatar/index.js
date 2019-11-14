@@ -1,5 +1,4 @@
 import React from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 
 import useTheme from 'hooks/use-theme';
@@ -7,13 +6,19 @@ import useTheme from 'hooks/use-theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { If } from 'components';
-import { Container, ContainerAvatar, UserImage, ContainerIcon } from './styles';
+import {
+  Button,
+  Container,
+  ContainerAvatar,
+  UserImage,
+  ContainerIcon,
+} from './styles';
 
 const Avatar = ({ onPress, avatar, uploader, size, sizeIcon, noMargin }) => {
   const theme = useTheme();
 
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <Button onPress={onPress}>
       <Container noMargin={noMargin} size={size}>
         <ContainerAvatar size={size}>
           <If test={!!avatar}>
@@ -29,7 +34,7 @@ const Avatar = ({ onPress, avatar, uploader, size, sizeIcon, noMargin }) => {
           </If>
         </ContainerAvatar>
         <If test={uploader}>
-          <ContainerIcon size={size}>
+          <ContainerIcon>
             <Icon
               name="ios-camera"
               size={15}
@@ -38,7 +43,7 @@ const Avatar = ({ onPress, avatar, uploader, size, sizeIcon, noMargin }) => {
           </ContainerIcon>
         </If>
       </Container>
-    </TouchableWithoutFeedback>
+    </Button>
   );
 };
 

@@ -1,6 +1,8 @@
 import api from 'api';
 
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
+import notification from 'configs/notification';
+
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import { Creators as AuthActions, Types as AuthTypes } from 'ducks/auth';
@@ -23,10 +25,7 @@ export function* signIn({ payload }) {
     yield put(AuthActions.signInSuccess({ token, user }));
     Navigator.navigate('Home');
   } catch (err) {
-    Alert.alert(
-      'Falha na autenticação',
-      'Houve um erro no login, verifiique seus dados',
-    );
+    showMessage(notification);
     yield put(AuthActions.signInFailure());
   }
 }

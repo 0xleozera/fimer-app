@@ -21,6 +21,7 @@ import Play from 'screens/play';
 import Chat from 'screens/chat';
 import Conversation from 'screens/chat/conversation';
 import Profile from 'screens/profile';
+import ProfileEdit from 'screens/profile-edit';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -33,7 +34,20 @@ export default (isSigned = false) =>
         App: createBottomTabNavigator(
           {
             Home: {
-              screen: Home,
+              screen: createStackNavigator({
+                Lobby: {
+                  screen: Home,
+                  navigationOptions: {
+                    header: null,
+                  },
+                },
+                ShowProfileHome: {
+                  screen: Profile,
+                  navigationOptions: {
+                    header: null,
+                  },
+                },
+              }),
               navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (
                   <IconMaterial name="home" size={30} color={tintColor} />
@@ -41,7 +55,20 @@ export default (isSigned = false) =>
               },
             },
             Play: {
-              screen: Play,
+              screen: createStackNavigator({
+                Search: {
+                  screen: Play,
+                  navigationOptions: {
+                    header: null,
+                  },
+                },
+                ShowProfilePlay: {
+                  screen: Profile,
+                  navigationOptions: {
+                    header: null,
+                  },
+                },
+              }),
               navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (
                   <IconIonicons
@@ -66,6 +93,12 @@ export default (isSigned = false) =>
                     header: null,
                   },
                 },
+                ShowProfileChat: {
+                  screen: Profile,
+                  navigationOptions: {
+                    header: null,
+                  },
+                },
               }),
               navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (
@@ -86,33 +119,9 @@ export default (isSigned = false) =>
                   },
                 },
                 EditProfile: {
-                  screen: Profile,
+                  screen: ProfileEdit,
                   navigationOptions: {
-                    title: 'Editar Perfil',
-                    headerStyle: {
-                      backgroundColor: theme.colors.primary.dark,
-                      borderColor: theme.colors.primary.dark,
-                      marginTop:
-                        Platform.OS === 'android'
-                          ? StatusBar.currentHeight
-                          : 'auto',
-                    },
-                    headerTintColor: theme.colors.primary.contrast,
-                  },
-                },
-                ShowProfile: {
-                  screen: Profile,
-                  navigationOptions: {
-                    title: 'Perfil',
-                    headerStyle: {
-                      backgroundColor: theme.colors.primary.dark,
-                      borderColor: theme.colors.primary.dark,
-                      marginTop:
-                        Platform.OS === 'android'
-                          ? StatusBar.currentHeight
-                          : 'auto',
-                    },
-                    headerTintColor: theme.colors.primary.contrast,
+                    header: null,
                   },
                 },
               }),

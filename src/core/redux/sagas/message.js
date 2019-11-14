@@ -1,6 +1,8 @@
 import api from 'api';
 
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
+import notification from 'configs/notification';
+
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import {
@@ -13,10 +15,7 @@ export function* getMessages(action) {
     const { data } = yield call(api.get, `messages/${action.payload}`);
     yield put(MessageActions.getMessagesSuccess(data));
   } catch (err) {
-    Alert.alert(
-      'Falha ao carregar as mensagens',
-      'Houve um erro ao carregar suas mensagens, verifiique seus dados',
-    );
+    showMessage(notification);
     yield put(MessageActions.getMessagesFailure());
   }
 }
@@ -26,10 +25,7 @@ export function* storeMessage(action) {
     yield call(api.post, 'messages', action.payload);
     yield put(MessageActions.storeMessageSuccess());
   } catch (err) {
-    Alert.alert(
-      'Falha ao carregar os matches',
-      'Houve um erro ao carregar seus matches, verifiique seus dados',
-    );
+    showMessage(notification);
     yield put(MessageActions.storeMessageFailure());
   }
 }

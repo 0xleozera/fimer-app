@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { FlatList, TouchableWithoutFeedback } from 'react-native';
 
 import useTheme from 'hooks/use-theme';
+import useNavigation from 'hooks/use-navigation';
 
 import { randomNumber } from 'utils/random-number';
 
@@ -22,6 +23,8 @@ import {
 const List = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const users = useSelector(state => state.home.users);
 
   // Filters
@@ -68,7 +71,10 @@ const List = () => {
         keyExtractor={item => item.id.toString()}
         data={users}
         renderItem={({ item }) => (
-          <Card onPress={() => console.log('Card triggered')}>
+          <Card
+            onPress={() =>
+              navigation.navigate('ShowProfileHome', { userId: item.id })
+            }>
             <Avatar noMargin size={50} avatar={item.avatar.url} />
             <Informations>
               <ContainerNickname>

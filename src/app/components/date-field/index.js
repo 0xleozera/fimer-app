@@ -9,9 +9,17 @@ import pt from 'date-fns/locale/pt';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { ErrorMessage } from 'components';
 import { Container, DateButton, DateText, Picker } from './styles';
 
-const DateField = ({ date, onChange, placeholder }) => {
+const DateField = ({
+  date,
+  onChange,
+  placeholder,
+  hasError,
+  errorMessage,
+  breatheBottom,
+}) => {
   const theme = useTheme();
 
   const [opened, setOpened] = useState(false);
@@ -45,6 +53,9 @@ const DateField = ({ date, onChange, placeholder }) => {
             {currentDateIsEqualToDate ? placeholder : dateFormatted}
           </DateText>
         </DateButton>
+        {hasError && currentDateIsEqualToDate && (
+          <ErrorMessage message={errorMessage} breatheBottom={breatheBottom} />
+        )}
       </Container>
 
       {opened && (
@@ -68,12 +79,18 @@ DateField.propTypes = {
   date: PropTypes.instanceOf(Date),
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  hasError: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  breatheBottom: PropTypes.bool,
 };
 
 DateField.defaultProps = {
   date: new Date(),
   onChange: () => {},
   placeholder: '',
+  hasError: false,
+  errorMessage: 'Campo obrigatório',
+  breatheBottom: false,
 };
 
 export default DateField;

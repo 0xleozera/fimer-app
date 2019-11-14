@@ -25,10 +25,6 @@ export const Form = styled.View`
   margin-top: 50px;
 `;
 
-export const FormInput = styled(TextField)`
-  margin-bottom: 10px;
-`;
-
 export const SubmitButton = styled(Button)`
   margin-top: 5px;
 `;

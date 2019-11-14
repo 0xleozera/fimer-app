@@ -64,6 +64,7 @@ const SignUp = ({ navigation }) => {
       );
 
       setHasError(false);
+      return;
     }
 
     setHasError(true);

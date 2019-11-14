@@ -3,12 +3,11 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as AuthActions } from 'ducks/auth';
 
-import { Background } from 'components';
+import { Background, TextField } from 'components';
 import {
   Container,
   Logo,
   Form,
-  FormInput,
   SubmitButton,
   SignLink,
   SignLinkText,
@@ -18,13 +17,22 @@ const SignIn = ({ navigation }) => {
   const dispatch = useDispatch();
   const passwordRef = useRef();
 
+  const [hasError, setHasError] = useState(false);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const loading = useSelector(state => state.auth.isLoading);
+  const loadingSignUp = useSelector(state => state.signUp.isLoading);
 
   function handleSubmit() {
+    if (!email && !password) {
+      setHasError(true);
+      return;
+    }
+
     dispatch(AuthActions.signInRequest({ email, password }));
+    setHasError(false);
   }
 
   return (
@@ -33,7 +41,7 @@ const SignIn = ({ navigation }) => {
         <Logo />
 
         <Form>
-          <FormInput
+          <TextField
             icon="mail-outline"
             keyboardType="email-address"
             autoCorrect={false}
@@ -43,9 +51,12 @@ const SignIn = ({ navigation }) => {
             onSubmitEditing={() => passwordRef.current.focus()}
             value={email}
             onChangeText={setEmail}
+            hasError={hasError}
+            errorMessage="Digite seu email"
+            breatheBottom
           />
 
-          <FormInput
+          <TextField
             icon="lock-outline"
             secureTextEntry
             placeholder="Digite sua senha"
@@ -54,9 +65,14 @@ const SignIn = ({ navigation }) => {
             onSubmitEditing={handleSubmit}
             value={password}
             onChangeText={setPassword}
+            hasError={hasError}
+            errorMessage="Digite sua senha"
+            breatheBottom
           />
 
-          <SubmitButton loading={loading} onPress={handleSubmit}>
+          <SubmitButton
+            loading={loading || loadingSignUp}
+            onPress={handleSubmit}>
             Acessar
           </SubmitButton>
         </Form>

@@ -19,6 +19,14 @@ export const { Creators, Types } = createActions({
   updateProfileRequest: ['payload'],
   updateProfileSuccess: ['data'],
   updateProfileFailure: [],
+
+  profileLikeRequest: ['payload'],
+  profileLikeSuccess: ['data'],
+  profileLikeFailure: [],
+
+  profileUnlikeRequest: ['payload'],
+  profileUnlikeSuccess: ['data'],
+  profileUnlikeFailure: [],
 });
 
 const INITIAL_STATE = {
@@ -122,6 +130,38 @@ const updateProfileFailure = (state = INITIAL_STATE) => ({
   isLoading: false,
 });
 
+const profileLikeRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: true,
+});
+
+const profileLikeSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isLoading: false,
+  status: 'liked',
+});
+
+const profileLikeFailure = () => ({
+  ...INITIAL_STATE,
+  isLoading: false,
+});
+
+const profileUnlikeRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isLoading: true,
+});
+
+const profileUnlikeSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isLoading: false,
+  status: 'playable',
+});
+
+const profileUnlikeFailure = () => ({
+  ...INITIAL_STATE,
+  isLoading: false,
+});
+
 export default createReducer(INITIAL_STATE, {
   [Types.GET_PROFILE_REQUEST]: getProfileRequest,
   [Types.GET_PROFILE_SUCCESS]: getProfileSuccess,
@@ -138,4 +178,12 @@ export default createReducer(INITIAL_STATE, {
   [Types.UPDATE_PROFILE_REQUEST]: updateProfileRequest,
   [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,
   [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure,
+
+  [Types.PROFILE_LIKE_REQUEST]: profileLikeRequest,
+  [Types.PROFILE_LIKE_SUCCESS]: profileLikeSuccess,
+  [Types.PROFILE_LIKE_FAILURE]: profileLikeFailure,
+
+  [Types.PROFILE_UNLIKE_REQUEST]: profileUnlikeRequest,
+  [Types.PROFILE_UNLIKE_SUCCESS]: profileUnlikeSuccess,
+  [Types.PROFILE_UNLIKE_FAILURE]: profileUnlikeFailure,
 });

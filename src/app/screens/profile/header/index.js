@@ -8,6 +8,7 @@ import useNavigation from 'hooks/use-navigation';
 
 import { useDispatch } from 'react-redux';
 import { Creators as AuthActions } from 'ducks/auth';
+import { Creators as ProfileActions } from 'ducks/profile';
 
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import IconAwesome from 'react-native-vector-icons/FontAwesome';
@@ -41,6 +42,15 @@ const Header = ({ data, status }) => {
     };
 
     return labels[status];
+  };
+
+  const handlePressButton = id => {
+    if (status === 'matched' || status === 'liked') {
+      dispatch(ProfileActions.profileUnlikeRequest(id));
+      return;
+    }
+
+    dispatch(ProfileActions.profileLikeRequest(id));
   };
 
   const getIcon = icon => {
@@ -158,7 +168,7 @@ const Header = ({ data, status }) => {
             <PlayButton
               background={theme.colors.accent.regular}
               loading={false}
-              onPress={() => {}}
+              onPress={() => handlePressButton(data.id)}
               hasIcon>
               {getButtonLabel()}
             </PlayButton>

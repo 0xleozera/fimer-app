@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { parsePercentageToPixels } from 'utils/dimensions';
+
 export const ContainerList = styled.View`
   padding-bottom: 70;
   padding-horizontal: 10;
@@ -27,4 +29,12 @@ export const LastMessage = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-top: 5;
+`;
+
+export const EmptyMatches = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: ${parsePercentageToPixels(75)};
+  margin-top: 20;
 `;

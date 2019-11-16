@@ -1,12 +1,11 @@
-import styled from 'styled-components';
-import { RectButton } from 'react-native-gesture-handler';
+import styled from 'styled-components/native';
 
-export const Container = styled(RectButton)`
+export const Container = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 55px;
-  width: 55px;
+  height: 55;
+  width: 55;
   background: ${({ background }) => background};
   border-radius: 60;
 `;

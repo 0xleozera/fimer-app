@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
 
-import { RectButton } from 'react-native-gesture-handler';
-
 import { Button } from 'components';
 
 export const ContainerUserInformations = styled.View`
@@ -48,7 +46,7 @@ export const WrapperPlayButton = styled.View`
 
 export const PlayButton = styled(Button)``;
 
-export const ConfigButton = styled(RectButton)`
+export const ConfigButton = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;

@@ -10,8 +10,14 @@ import useNavigation from 'hooks/use-navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as MatchActions } from 'ducks/match';
 
-import { Typography, Avatar } from 'components';
-import { ContainerList, Card, Informations, LastMessage } from './styles';
+import { Typography, Avatar, If } from 'components';
+import {
+  ContainerList,
+  Card,
+  Informations,
+  LastMessage,
+  EmptyMatches,
+} from './styles';
 
 const List = () => {
   const navigation = useNavigation();
@@ -61,6 +67,13 @@ const List = () => {
 
   return (
     <ContainerList>
+      <If test={matches.length === 0}>
+        <EmptyMatches>
+          <Typography font="bold" size="h6" color="contrast">
+            Não há conversas no momento 😔
+          </Typography>
+        </EmptyMatches>
+      </If>
       <FlatList
         keyExtractor={item => item.id.toString()}
         data={matches}

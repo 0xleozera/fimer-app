@@ -17,7 +17,8 @@ import List from './list';
 
 const Home = () => {
   const theme = useTheme();
-  const nickname = useSelector(state => state.auth.user.nickname);
+  const authNickname = useSelector(state => state.auth.user.nickname);
+  const profileNickname = useSelector(state => state.profile.user.nickname);
   const indications = useSelector(state => state.home.users);
   const loading = useSelector(state => state.home.isLoading);
 
@@ -32,14 +33,14 @@ const Home = () => {
       <ContainerGreet>
         <Greet>
           <Typography size="h4" font="bold" color="contrast">
-            Fala tu, {nickname}!
+            Fala tu, {profileNickname || authNickname}!
           </Typography>
         </Greet>
         <IndicationMessage>
           <Typography size="h6" font="medium" color="contrast">
             {indications.length > 0
               ? 'Encontramos alguns jogadores para jogar com você'
-              : 'No momento não encontramos nenhuma sugestão para te dar :('}
+              : 'No momento não encontramos nenhuma sugestão para te dar 😔'}
           </Typography>
         </IndicationMessage>
       </ContainerGreet>

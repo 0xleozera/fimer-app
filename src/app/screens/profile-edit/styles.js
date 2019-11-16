@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
 
-import { RectButton } from 'react-native-gesture-handler';
-
 export const Container = styled.View``;
 
 export const HeaderInformations = styled.View`
@@ -11,7 +9,7 @@ export const HeaderInformations = styled.View`
   align-items: center;
 `;
 
-export const SaveButton = styled(RectButton)`
+export const SaveButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   width: 40;

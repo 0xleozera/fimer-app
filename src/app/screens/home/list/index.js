@@ -28,9 +28,11 @@ const List = () => {
   const users = useSelector(state => state.home.users);
 
   // Filters
-  const games = useSelector(state => state.auth.user.games);
+  const authGames = useSelector(state => state.auth.user.games);
+  const profileGames = useSelector(state => state.profile.user.games);
+  const games = profileGames.length > 0 ? profileGames : authGames;
   const indexGame = randomNumber(games.length, 0);
-  const currentGame = games[indexGame].id;
+  const currentGame = games.length > 0 ? games[indexGame].id : 0;
   const region = useSelector(state => state.auth.user.region);
 
   const getHomesIndications = useCallback(() => {
@@ -42,27 +44,33 @@ const List = () => {
   }, [getHomesIndications]);
 
   const getGame = playerGames => {
-    const game = playerGames.find(
-      playerGame => playerGame.id === games[indexGame].id,
-    );
+    if (playerGames.length > 0) {
+      const game = playerGames.find(
+        playerGame => playerGame.id === currentGame,
+      );
 
-    return game.name;
+      return game.name;
+    }
   };
 
   const getPosition = playerPositions => {
-    const position = playerPositions.find(
-      playerPosition => playerPosition.gameId === games[indexGame].id,
-    );
+    if (playerPositions.length > 0) {
+      const position = playerPositions.find(
+        playerPosition => playerPosition.gameId === currentGame,
+      );
 
-    return position.description;
+      return position.description;
+    }
   };
 
   const getRanking = playerRankings => {
-    const ranking = playerRankings.find(
-      playerRanking => playerRanking.gameId === games[indexGame].id,
-    );
+    if (playerRankings.length > 0) {
+      const ranking = playerRankings.find(
+        playerRanking => playerRanking.gameId === currentGame,
+      );
 
-    return ranking.description;
+      return ranking.description;
+    }
   };
 
   return (

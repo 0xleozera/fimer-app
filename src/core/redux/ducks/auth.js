@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   isLoading: false,
   user: {
     id: 0,
+    games: [],
   },
   token: '',
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar, Platform } from 'react-native';
 
 import {
   createAppContainer,
@@ -7,8 +6,6 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
-
-import theme from 'configs/theme';
 
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -38,17 +35,20 @@ export default (isSigned = false) =>
                 Lobby: {
                   screen: Home,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
                 ShowProfileHome: {
                   screen: Profile,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
               }),
               navigationOptions: {
+                gesturesEnabled: false,
                 tabBarIcon: ({ tintColor }) => (
                   <IconMaterial name="home" size={30} color={tintColor} />
                 ),
@@ -59,17 +59,20 @@ export default (isSigned = false) =>
                 Search: {
                   screen: Play,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
                 ShowProfilePlay: {
                   screen: Profile,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
               }),
               navigationOptions: {
+                gesturesEnabled: false,
                 tabBarIcon: ({ tintColor }) => (
                   <IconIonicons
                     name="logo-game-controller-b"
@@ -84,23 +87,27 @@ export default (isSigned = false) =>
                 ListChats: {
                   screen: Chat,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
                 Conversation: {
                   screen: Conversation,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
                 ShowProfileChat: {
                   screen: Profile,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
               }),
               navigationOptions: {
+                gesturesEnabled: false,
                 tabBarIcon: ({ tintColor }) => (
                   <IconIonicons
                     name="ios-chatboxes"
@@ -115,17 +122,20 @@ export default (isSigned = false) =>
                 ShowMyProfile: {
                   screen: Profile,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
                 EditProfile: {
                   screen: ProfileEdit,
                   navigationOptions: {
+                    gesturesEnabled: false,
                     header: null,
                   },
                 },
               }),
               navigationOptions: {
+                gesturesEnabled: false,
                 tabBarIcon: ({ tintColor }) => (
                   <IconMaterial name="person" size={30} color={tintColor} />
                 ),
@@ -135,6 +145,7 @@ export default (isSigned = false) =>
           {
             resetOnBlur: true,
             defaultNavigationOptions: ({ navigation }) => ({
+              gesturesEnabled: false,
               tabBarVisible:
                 navigation.state.routeName === 'Chat' &&
                 navigation.state.routes.length === 2

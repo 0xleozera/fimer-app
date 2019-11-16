@@ -17,7 +17,8 @@ import List from './list';
 
 const Home = () => {
   const theme = useTheme();
-  const nickname = useSelector(state => state.auth.user.nickname);
+  const authNickname = useSelector(state => state.auth.user.nickname);
+  const profileNickname = useSelector(state => state.profile.user.nickname);
   const indications = useSelector(state => state.home.users);
   const loading = useSelector(state => state.home.isLoading);
 
@@ -32,7 +33,7 @@ const Home = () => {
       <ContainerGreet>
         <Greet>
           <Typography size="h4" font="bold" color="contrast">
-            Fala tu, {nickname}!
+            Fala tu, {profileNickname || authNickname}!
           </Typography>
         </Greet>
         <IndicationMessage>

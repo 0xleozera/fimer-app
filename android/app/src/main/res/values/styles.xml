@@ -2,22 +2,26 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primary</item>
         <item name="android:datePickerDialogTheme">@style/DialogDatePicker.Theme</item>
+        <item name="android:windowBackground">
+            @drawable/background_splash
+        </item>
     </style>
 
     <style name="DialogDatePicker.Theme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">#6e6eff</item>
+        <item name="colorAccent">@color/primary</item>
     </style>
 
     <style name="DefaultExplainingPermissionsTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!-- Used for the buttons -->
-        <item name="colorAccent">#6e6eff</item>
+        <item name="colorAccent">@color/primary</item>
 
         <!-- Used for the title and text -->
-        <item name="android:textColorPrimary">#6e6eff</item>
+        <item name="android:textColorPrimary">@color/primary</item>
 
         <!-- Used for the background -->
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">@color/secondary</item>
     </style>
 
 </resources>

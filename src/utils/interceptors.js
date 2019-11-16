@@ -1,4 +1,4 @@
-import { camelize, decamelize } from 'utils/changeCase';
+import { camelize, decamelize } from 'utils/change-case';
 
 const inbound = response => {
   response.data && (response.data = camelize(response.data));

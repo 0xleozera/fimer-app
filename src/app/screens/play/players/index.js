@@ -170,7 +170,7 @@ const Players = () => {
             <Typography font="bold" size="h6" color="contrast">
               {item.games.length > 0
                 ? 'Informações de jogo'
-                : 'Nenhum jogo cadastrado :('}
+                : 'Nenhum jogo cadastrado 😔'}
             </Typography>
           </HeaderTitleGameInformations>
           {getGame(item.games, choicedGame)}
@@ -186,7 +186,7 @@ const Players = () => {
       <If test={players.length === 0}>
         <EmptyPlayers>
           <Typography font="bold" size="h6" color="contrast">
-            Não encontramos jogadores com essas características :(
+            Não encontramos jogadores com essas características 😔
           </Typography>
         </EmptyPlayers>
       </If>

@@ -40,7 +40,7 @@ const Home = () => {
           <Typography size="h6" font="medium" color="contrast">
             {indications.length > 0
               ? 'Encontramos alguns jogadores para jogar com você'
-              : 'No momento não encontramos nenhuma sugestão para te dar :('}
+              : 'No momento não encontramos nenhuma sugestão para te dar 😔'}
           </Typography>
         </IndicationMessage>
       </ContainerGreet>

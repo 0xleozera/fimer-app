@@ -54,7 +54,9 @@ const setFilter = (state = INITIAL_STATE, action) => {
   if (field === 'game') {
     const positions = state.allGames.find(game => game.id === selected)
       .positions;
-    const rankings = state.allGames.find(game => game.id === selected).rankings;
+    const rankings = state.allGames
+      .find(game => game.id === selected)
+      .rankings.map(ranking => ({ ...ranking, slug: ranking.description }));
 
     return {
       ...state,

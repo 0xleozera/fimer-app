@@ -32,7 +32,13 @@ const List = () => {
 
   useEffect(() => {
     getMyMatches();
-  }, [getMyMatches]);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    navigation.addListener('willFocus', () => getMyMatches());
+    // eslint-disable-next-line
+  }, []);
 
   const getCurrentMatcherId = match => {
     return match.matcher.id !== userId ? match.matcher.id : match.matchee.id;

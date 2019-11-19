@@ -40,7 +40,6 @@ const BaseScreen = ({
           color: theme.colors.primary.contrast,
         }}
         color={theme.colors.accent.regular}
-        animation="slide"
         overlayColor="rgba(0, 0, 0, 0.5)	"
       />
 

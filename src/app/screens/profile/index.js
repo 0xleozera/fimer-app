@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 import useTheme from 'hooks/use-theme';
 
@@ -21,9 +21,19 @@ const Profile = ({ navigation }) => {
 
   const userId = navigation.getParam('userId');
 
-  useEffect(() => {
+  const getProfile = useCallback(() => {
     dispatch(ProfileActions.getProfileRequest({ id: userId || authId }));
   }, [authId, dispatch, userId]);
+
+  useEffect(() => {
+    getProfile();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    navigation.addListener('willFocus', () => getProfile());
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <BaseScreen

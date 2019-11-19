@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { FlatList } from 'react-native';
 
+import useNavigation from 'hooks/use-navigation';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Creators as MessageActions } from 'ducks/message';
 
@@ -10,6 +12,7 @@ import { Content, ContainerMessage, Spacing, Balloon } from './styles';
 const ContentConversation = ({ matchId }) => {
   const dispatch = useDispatch();
   const list = useRef(null);
+  const navigation = useNavigation();
 
   const userId = useSelector(state => state.auth.user.id);
   const messages = useSelector(state => state.message.messages);
@@ -20,7 +23,13 @@ const ContentConversation = ({ matchId }) => {
 
   useEffect(() => {
     getMessages();
-  }, [getMessages]);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    navigation.addListener('willFocus', () => getMessages());
+    // eslint-disable-next-line
+  }, []);
 
   const itsMe = send => send.id === userId;
 

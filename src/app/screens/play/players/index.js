@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 import { splitDate } from 'utils/date';
 import differenceInCalendarYears from 'date-fns/differenceInCalendarYears';
@@ -47,9 +47,19 @@ const Players = () => {
   );
   const selectedRanking = useSelector(state => state.filters.ranking.selected);
 
-  useEffect(() => {
+  const getPlayers = useCallback(() => {
     dispatch(PlayActions.getPlayRequest());
   }, [dispatch]);
+
+  useEffect(() => {
+    getPlayers();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    navigation.addListener('willFocus', () => getPlayers());
+    // eslint-disable-next-line
+  }, []);
 
   const handleBirthDate = birthDate => {
     const { day, month, years } = splitDate(birthDate);

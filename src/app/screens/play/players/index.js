@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 
 import { splitDate } from 'utils/date';
 import differenceInCalendarYears from 'date-fns/differenceInCalendarYears';
@@ -37,6 +37,7 @@ const Players = () => {
   const theme = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const list = useRef(null);
 
   const currentIndex = useSelector(state => state.play.currentIndex);
 
@@ -154,6 +155,22 @@ const Players = () => {
     );
   };
 
+  const handleRemovePlayer = () => {
+    if (players.length - 1 === currentIndex) {
+      list.current.snapToPrev();
+    }
+
+    dispatch(PlayActions.removePlayer());
+  };
+
+  const handleLikePlayer = () => {
+    if (players.length - 1 === currentIndex) {
+      list.current.snapToPrev();
+    }
+
+    dispatch(PlayActions.likeRequest());
+  };
+
   const renderItem = ({ item }) => {
     const choicedGame =
       item.games.length > 0 && !selectedGame ? item.games[0].id : 0;
@@ -202,6 +219,7 @@ const Players = () => {
       </If>
       <If test={players.length !== 0}>
         <Carousel
+          ref={list}
           layout="tinder"
           data={players}
           renderItem={renderItem}
@@ -223,7 +241,7 @@ const Players = () => {
           <PlayActionButton
             background={theme.colors.actions.red}
             forbidden
-            onPress={() => dispatch(PlayActions.removePlayer())}
+            onPress={() => handleRemovePlayer()}
           />
 
           <ProfileActionButton
@@ -238,7 +256,7 @@ const Players = () => {
 
           <PlayActionButton
             background={theme.colors.accent.regular}
-            onPress={() => dispatch(PlayActions.likeRequest())}
+            onPress={() => handleLikePlayer()}
           />
         </ContainerActionButtons>
       </If>

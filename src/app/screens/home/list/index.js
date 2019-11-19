@@ -94,7 +94,9 @@ const List = () => {
                 <TouchableWithoutFeedback>
                   <PlayButton
                     background={theme.colors.accent.regular}
-                    onPress={() => dispatch(HomeActions.likeRequest(item.id))}
+                    onPress={() =>
+                      dispatch(HomeActions.homeLikeRequest(item.id))
+                    }
                     hasIcon
                     mini>
                     Jogar

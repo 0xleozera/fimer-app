@@ -134,7 +134,7 @@ export function* listGames() {
 export function* like({ payload }) {
   try {
     yield call(api.post, 'likes', { likeeId: payload });
-    yield put(ProfileActions.ProfileLikeSuccess());
+    yield put(ProfileActions.profileLikeSuccess());
   } catch (err) {
     showMessage(notification);
     yield put(ProfileActions.profileLikeFailure());

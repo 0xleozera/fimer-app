@@ -22,7 +22,7 @@ export function* getHome(action) {
 export function* like({ payload }) {
   try {
     yield call(api.post, 'likes', { likeeId: payload });
-    yield put(HomeActions.homeLikeSuccess());
+    yield put(HomeActions.homeLikeSuccess(payload));
   } catch (err) {
     showMessage(notification);
     yield put(HomeActions.homeLikeFailure());

@@ -5,7 +5,6 @@ import FlashMessage, { showMessage } from 'react-native-flash-message';
 
 import useSocket from 'hooks/use-socket';
 import { Creators as MessageActions } from 'ducks/message';
-import { Creators as MatchActions } from 'ducks/match';
 
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -48,7 +47,7 @@ const Router = () => {
     return () => {
       AppState.removeEventListener('change', handleAppStateChange);
     };
-  }, [socket.ws, theme.colors.primary.dark]);
+  }, [theme.colors.primary.dark]);
 
   useEffect(() => {
     if (userId !== 0) {
@@ -58,9 +57,6 @@ const Router = () => {
       });
 
       const matches = socket.ws.subscribe(`matches:${userId}`);
-      matches.on('new', match => {
-        dispatch(MatchActions.setNewMatch(match));
-      });
       matches.on('match', notification => {
         showMessage({
           message: 'Bora jogar? 🎮',
@@ -81,15 +77,8 @@ const Router = () => {
         });
       });
     }
-  }, [
-    dispatch,
-    socket.ws,
-    theme.colors.accent.regular,
-    theme.colors.primary.contrast,
-    theme.fonts.bold,
-    theme.fonts.medium,
-    userId,
-  ]);
+    // eslint-disable-next-line
+  }, [userId]);
 
   return <Routes ref={ref => Navigator.setNavigator(ref)} />;
 };

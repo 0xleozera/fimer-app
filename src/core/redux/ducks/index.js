@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import { Types as AuthTypes } from 'ducks/auth';
+
 import auth from './auth';
 import filters from './filters';
 import home from './home';
@@ -9,7 +11,7 @@ import play from './play';
 import profile from './profile';
 import signUp from './sign-up';
 
-const reducers = combineReducers({
+const appReducer = combineReducers({
   auth,
   filters,
   home,
@@ -20,4 +22,12 @@ const reducers = combineReducers({
   signUp,
 });
 
-export default reducers;
+const rootReducer = (state, action) => {
+  if (action.type === AuthTypes.SIGN_OUT) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
+
+export default rootReducer;

@@ -2,7 +2,9 @@ import axios from 'axios';
 import { outbound, inbound } from 'utils/interceptors';
 
 const api = axios.create({
-  baseURL: 'https://fimer.herokuapp.com',
+  baseURL: __DEV__
+    ? 'http://192.168.0.102:3333'
+    : 'https://fimer.herokuapp.com',
 });
 
 api.interceptors.request.use(request => outbound(request));

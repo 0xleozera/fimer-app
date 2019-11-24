@@ -7,7 +7,9 @@ export const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
   const [status, setStatus] = useState(false);
-  const ws = Ws('wss://fimer.herokuapp.com');
+  const ws = Ws(
+    __DEV__ ? 'ws://192.168.0.102:3333' : 'wss://fimer.herokuapp.com',
+  );
   const token = useSelector(state => state.auth.token);
   const userId = useSelector(state => state.auth.user.id);
 

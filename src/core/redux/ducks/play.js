@@ -62,10 +62,13 @@ const setCurrentIndex = (state = INITIAL_STATE, action) => ({
 
 const removePlayer = (state = INITIAL_STATE) => ({
   ...state,
-  currentIndex: state.currentIndex - 1,
-  players: state.players.filter(
-    player => player.id !== state.players[state.currentIndex].id,
-  ),
+  //currentIndex: state.currentIndex - 1,
+  players:
+    state.players.length === 1
+      ? []
+      : state.players.filter(
+          player => player.id !== state.players[state.currentIndex].id,
+        ),
 });
 
 export default createReducer(INITIAL_STATE, {

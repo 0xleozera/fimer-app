@@ -14,16 +14,22 @@ const Profile = ({ navigation }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
+  const userId = navigation.getParam('userId');
+  const currentUserAttribute = userId ? 'userVisualization' : 'user';
+
   const authId = useSelector(state => state.auth.user.id);
   const status = useSelector(state => state.profile.status);
-  const user = useSelector(state => state.profile.user);
+  const user = useSelector(state => state.profile[currentUserAttribute]);
   const loading = useSelector(state => state.profile.isLoading);
 
-  const userId = navigation.getParam('userId');
-
   const getProfile = useCallback(() => {
-    dispatch(ProfileActions.getProfileRequest({ id: userId || authId }));
-  }, [authId, dispatch, userId]);
+    dispatch(
+      ProfileActions.getProfileRequest({
+        id: userId || authId,
+        currentUserAttribute,
+      }),
+    );
+  }, [authId, currentUserAttribute, dispatch, userId]);
 
   useEffect(() => {
     getProfile();

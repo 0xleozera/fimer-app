@@ -47,6 +47,21 @@ const INITIAL_STATE = {
     position: [],
     rankings: [],
   },
+  userVisualization: {
+    id: 0,
+    email: '',
+    name: '',
+    nickname: '',
+    birthDate: '',
+    region: '',
+    gender: '',
+    avatar: {
+      url: '',
+    },
+    games: [],
+    position: [],
+    rankings: [],
+  },
   edit: {
     id: 0,
     email: '',
@@ -73,8 +88,8 @@ const getProfileRequest = (state = INITIAL_STATE) => ({
 const getProfileSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isLoading: false,
-  status: action.data.status,
-  user: action.data.user,
+  status: action.data.informations.status,
+  [action.data.currentAttribute]: action.data.informations.user,
 });
 
 const getProfileFailure = (state = INITIAL_STATE) => ({

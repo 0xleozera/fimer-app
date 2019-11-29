@@ -29,9 +29,15 @@ const handleCreateImage = async body => {
 
 export function* show({ payload }) {
   try {
-    const response = yield call(api.get, `users/${payload.id}`);
+    const { currentUserAttribute, id } = payload;
+    const response = yield call(api.get, `users/${id}`);
 
-    yield put(ProfileActions.getProfileSuccess(response.data));
+    yield put(
+      ProfileActions.getProfileSuccess({
+        informations: response.data,
+        currentAttribute: currentUserAttribute,
+      }),
+    );
   } catch (err) {
     showMessage(notification);
     yield put(ProfileActions.getProfileFailure());
@@ -108,6 +114,8 @@ export function* update({ payload }) {
       game.positions.forEach(position => currentPositions.push(position.id));
       currentRankings.push(game.ranking.id);
     });
+
+    console.log(currentGames);
 
     const { data } = yield call(api.put, 'users', {
       ...payload,

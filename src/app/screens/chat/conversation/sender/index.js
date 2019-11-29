@@ -17,6 +17,10 @@ const SenderConversation = ({ matchId, userReceiveId }) => {
   const [message, setMessage] = useState('');
 
   const handleSendMessage = () => {
+    if (message.length === 0) {
+      return;
+    }
+
     const payload = {
       body: message,
       userReceiveId: userReceiveId,

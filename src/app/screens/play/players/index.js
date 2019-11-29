@@ -92,14 +92,17 @@ const Players = () => {
     }
 
     const game = games.find(currentGame => currentGame.id === selectedGame);
+    const currentGameName = game ? game.name : '';
+
     const randomGame = games.find(
       currentGame => currentGame.id === choicedGame,
     );
+    const currentRandomGameName = randomGame ? randomGame.name : '';
 
     return (
       <HeaderDataGameInformations>
         <Typography font="bold" size="h6">
-          {selectedGame === 0 ? randomGame.name : game.name}
+          {selectedGame === 0 ? currentRandomGameName : currentGameName}
         </Typography>
       </HeaderDataGameInformations>
     );
@@ -149,7 +152,7 @@ const Players = () => {
     return (
       <HeaderDataGameInformations>
         <Typography font="bold" size="h6">
-          {correctRanking.description}
+          {correctRanking ? correctRanking.description : ''}
         </Typography>
       </HeaderDataGameInformations>
     );

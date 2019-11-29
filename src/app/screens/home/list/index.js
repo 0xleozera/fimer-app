@@ -40,6 +40,7 @@ const List = () => {
   }, [currentGame, dispatch, region]);
 
   useEffect(() => {
+    getHomesIndications();
     navigation.addListener('willFocus', () => getHomesIndications());
     // eslint-disable-next-line
   }, [getHomesIndications]);
@@ -50,7 +51,7 @@ const List = () => {
         playerGame => playerGame.id === currentGame,
       );
 
-      return game.name;
+      return game ? game.name : '';
     }
   };
 
@@ -60,7 +61,7 @@ const List = () => {
         playerPosition => playerPosition.gameId === currentGame,
       );
 
-      return position.description;
+      return position ? position.description : '';
     }
   };
 
@@ -70,7 +71,7 @@ const List = () => {
         playerRanking => playerRanking.gameId === currentGame,
       );
 
-      return ranking.description;
+      return ranking ? ranking.description : '';
     }
   };
 

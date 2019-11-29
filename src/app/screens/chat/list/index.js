@@ -102,15 +102,6 @@ const List = () => {
                       item.messages.slice(-1)[0].send,
                     )}: ${getMessageBody(item.messages.slice(-1)[0].body)}`}
                   </Typography>
-                  <Typography size="h8" font="medium" color="regular">
-                    {formatRelative(
-                      parseISO(item.messages.slice(-1)[0].createdAt),
-                      new Date(),
-                      {
-                        locale: pt,
-                      },
-                    )}
-                  </Typography>
                 </LastMessage>
               )}
             </Informations>

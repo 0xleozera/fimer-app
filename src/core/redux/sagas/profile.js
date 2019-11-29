@@ -14,9 +14,9 @@ import Navigator from 'routes/navigator';
 
 const handleCreateImage = async body => {
   const response = await fetch(
-    !__DEV__
-      ? 'https://fimer.herokuapp.com/files'
-      : 'http://192.168.0.102:3333/files',
+    __DEV__
+      ? 'http://192.168.0.102:3333/files'
+      : 'https://fimer.herokuapp.com/files',
     {
       method: 'POST',
       body,

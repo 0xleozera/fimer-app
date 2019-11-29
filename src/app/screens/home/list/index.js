@@ -40,6 +40,7 @@ const List = () => {
   }, [currentGame, dispatch, region]);
 
   useEffect(() => {
+    getHomesIndications();
     navigation.addListener('willFocus', () => getHomesIndications());
     // eslint-disable-next-line
   }, [getHomesIndications]);
